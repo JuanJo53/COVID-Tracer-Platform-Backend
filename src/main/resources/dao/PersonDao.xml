@@ -5,7 +5,7 @@
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.PersonDao">
     <insert id="createPerson" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Person">
         INSERT INTO person VALUES (
-            null, #{firstName}, #{firstSurname}, #{secondSurname}, #{ci}, #{phone},
+            null, #{firstName}, #{firstSurname}, #{secondSurname},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>

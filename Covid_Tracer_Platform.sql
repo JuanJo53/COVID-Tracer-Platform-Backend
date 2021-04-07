@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-06 22:37:02.524
+-- Last modification date: 2021-04-07 00:36:05.822
 
 -- tables
 -- Table: confirm
@@ -50,8 +50,6 @@ CREATE TABLE person (
     first_name varchar(150) NOT NULL,
     first_surname varchar(150) NOT NULL,
     second_surname varchar(150) NULL,
-    ci varchar(45) NOT NULL,
-    phone varchar(45) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,

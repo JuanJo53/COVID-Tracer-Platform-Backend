@@ -5,8 +5,6 @@ public class Person {
     private String firstName;
     private String firstSurname;
     private String secondSurname;
-    private String ci;
-    private String phone;
     private Integer status;
     private Transaction transaction;
 
@@ -46,22 +44,6 @@ public class Person {
         this.secondSurname = secondSurname;
     }
 
-    public String getCi() {
-        return ci;
-    }
-
-    public void setCi(String ci) {
-        this.ci = ci;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -85,8 +67,6 @@ public class Person {
                 ", firstName='" + firstName + '\'' +
                 ", firstSurname='" + firstSurname + '\'' +
                 ", secondSurname='" + secondSurname + '\'' +
-                ", ci='" + ci + '\'' +
-                ", phone='" + phone + '\'' +
                 ", status=" + status +
                 ", transaction=" + transaction +
                 '}';
