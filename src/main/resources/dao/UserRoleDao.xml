@@ -13,9 +13,9 @@
     <select id="findRoleByUserId" resultMap="rolesMap">
         SELECT a.role as role
         FROM role a, user_role b
-        WHERE b.user_id = #{userId},
+        WHERE b.user_id = #{userId}
           and b.role_id = a.role_id
-          and status = 1
+          and a.status = 1
     </select>
 
     <resultMap id="rolesMap" type="java.lang.String">

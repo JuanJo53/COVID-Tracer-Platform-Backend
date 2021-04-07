@@ -16,9 +16,9 @@
                email as email,
                user_name as userName,
                password as password
-        FROM userM
+        FROM user
         WHERE
-            user_name = #{userName}
+            user_name like #{userName}
             and status = 1
     </select>
 </mapper>

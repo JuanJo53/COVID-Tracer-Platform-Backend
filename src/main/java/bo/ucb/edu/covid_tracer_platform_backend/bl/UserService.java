@@ -33,9 +33,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         UserM userM = userDao.findUserByUserName(username);
+        logger.error(username);
         if(userM != null){
+            logger.error(username);
             List<String> roles = userRoleDao.findRoleByUserId(userM.getUserId());
             List<GrantedAuthority> authorities = roles.stream()
                     .map(role -> new SimpleGrantedAuthority(role))
