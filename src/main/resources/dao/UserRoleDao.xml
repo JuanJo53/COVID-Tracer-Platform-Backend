@@ -9,4 +9,16 @@
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
+
+    <select id="findRoleByUserId" resultMap="rolesMap">
+        SELECT a.role as role
+        FROM role a, user_role b
+        WHERE b.user_id = #{userId},
+          and b.role_id = a.role_id
+          and status = 1
+    </select>
+
+    <resultMap id="rolesMap" type="java.lang.String">
+        <result column="role" property="role"/>
+    </resultMap>
 </mapper>

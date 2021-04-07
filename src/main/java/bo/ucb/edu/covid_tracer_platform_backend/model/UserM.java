@@ -1,6 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.model;
 
-public class User {
+public class UserM {
     private Integer userId;
     private Integer personId;
     private String email;
@@ -9,7 +9,7 @@ public class User {
     private Integer status;
     private Transaction transaction;
 
-    public User() {
+    public UserM() {
         transaction = new Transaction();
     }
 
