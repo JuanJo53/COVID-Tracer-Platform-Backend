@@ -109,7 +109,7 @@ CREATE TABLE transaction (
 );
 
 -- Table: userM
-CREATE TABLE userM (
+CREATE TABLE user (
     user_id int NOT NULL AUTO_INCREMENT,
     person_id int NOT NULL,
     email varchar(150) NOT NULL,
@@ -154,7 +154,7 @@ ALTER TABLE recovered ADD CONSTRAINT recovered_province FOREIGN KEY recovered_pr
     REFERENCES province (province_id);
 
 -- Reference: user_person (table: userM)
-ALTER TABLE userM ADD CONSTRAINT user_person FOREIGN KEY user_person (person_id)
+ALTER TABLE user ADD CONSTRAINT user_person FOREIGN KEY user_person (person_id)
     REFERENCES person (person_id);
 
 -- Reference: user_role_role (table: user_role)
@@ -163,7 +163,7 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_role FOREIGN KEY user_role_role (
 
 -- Reference: user_role_user (table: user_role)
 ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (user_id)
-    REFERENCES userM (user_id);
+    REFERENCES user (user_id);
 
 -- End of file.
 
