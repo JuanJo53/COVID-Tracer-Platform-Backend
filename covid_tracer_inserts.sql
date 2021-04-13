@@ -17,3 +17,7 @@ insert into transaction values(null, "127.0.0.1", 0, "2021-06-04");
 insert into transaction values(null, "127.0.0.1", 0, "2021-06-04");
 insert into transaction values(null, "127.0.0.1", 0, "2021-06-04");
 insert into transaction values(null, "127.0.0.1", 0, "2021-06-04");
+insert into transaction values(null, "127.0.0.1", 0, "2021-06-04");
+
+/*Department inserts*/
+insert into department values(null, "La Paz", -16.5, -68.5, 1, 6, "127.0.0.1", 0, "2021-06-04"); 
