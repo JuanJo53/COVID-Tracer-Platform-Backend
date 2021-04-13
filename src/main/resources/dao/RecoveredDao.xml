@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.ConfirmedDao">
-    <insert id="createConfirmed" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Confirmed">
-        INSERT INTO confirmed VALUES (
+<mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.RecoveredDao">
+    <insert id="createRecovered" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Recovered">
+        INSERT INTO recovered VALUES (
             null, #{departmentId}, #{count}, #{cumulative}, #{date},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
