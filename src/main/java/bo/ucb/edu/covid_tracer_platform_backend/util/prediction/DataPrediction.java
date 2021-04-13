@@ -1,4 +1,4 @@
-package bo.ucb.edu.covid_tracer_platform_backend.util.csv;
+package bo.ucb.edu.covid_tracer_platform_backend.util.prediction;
 
 import java.io.FileInputStream;
 import java.io.IOException;
