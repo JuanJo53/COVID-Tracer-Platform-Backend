@@ -35,12 +35,12 @@ public class DataRequestApi {
                 transactionBl.createTransaction(transaction);
                 dataRequestBl.saveData(file, department, id, transaction);
 
-                String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                /*String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                         .path("/api/csv/download/")
                         .path(file.getOriginalFilename())
-                        .toUriString();
+                        .toUriString();*/
 
-                return new ResponseEntity("Uploaded file successfully",HttpStatus.OK);
+                return new ResponseEntity("Uploaded file successfully!",HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity("Could not upload the file!", HttpStatus.EXPECTATION_FAILED);
             }

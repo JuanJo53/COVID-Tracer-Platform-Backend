@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -37,13 +39,21 @@ public class DataRequestBl {
     public void saveData(MultipartFile file, String department, Integer userId, Transaction transaction){
         try{
             Integer departmentId = departmentDao.findDepartmentIdByDepartment(department);
-            LOGGER.error(String.valueOf(departmentId));
+            //LOGGER.error(String.valueOf(departmentId));
             List<DataCsvRequest> dataCsvRequestList = CSVHelper.csvToDataCsvRequest(file.getInputStream());
             Confirmed confirmed = new Confirmed();
             Dead dead = new Dead();
             Recovered recovered = new Recovered();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+            Date lastDate = confirmedDao.lastDate(departmentId);
+
+            LOGGER.error(String.valueOf(lastDate));
+
             for(DataCsvRequest data : dataCsvRequestList){
-                confirmed.setDate(data.getDate());
+                if(lastDate.before(data.getDate())){
+                    LOGGER.error("Hola");
+                }
+                /*confirmed.setDate(data.getDate());
                 confirmed.setCount(data.getConfirmed());
                 confirmed.setCumulative(data.getCumulativeConfirmed());
                 confirmed.setDepartmentId(departmentId);
@@ -62,15 +72,16 @@ public class DataRequestBl {
                 recovered.setCumulative(data.getCumulativeRecovered());
                 recovered.setDepartmentId(departmentId);
                 recovered.setTransaction(transaction);
-                recoveredDao.createRecovered(recovered);
+                recoveredDao.createRecovered(recovered);*/
             }
-            DataRequest dataRequest = new DataRequest();
+
+            /*DataRequest dataRequest = new DataRequest();
 
             dataRequest.setDepartmentId(departmentId);
             dataRequest.setUserId(userId);
             dataRequest.setType(0);
             dataRequest.setTransaction(transaction);
-            dataRequestDao.createDataRequest(dataRequest);
+            dataRequestDao.createDataRequest(dataRequest);*/
         } catch (IOException e){
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }

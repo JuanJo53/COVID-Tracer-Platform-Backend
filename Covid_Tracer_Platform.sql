@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-12 23:32:39.537
+-- Last modification date: 2021-04-13 12:30:47.326
 
 -- tables
 -- Table: confirmed
@@ -25,9 +25,9 @@ CREATE TABLE data_request (
     type int NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
-    tx_host int NOT NULL,
+    tx_host varchar(100) NOT NULL,
     tx_user_id int NOT NULL,
-    tx_date int NOT NULL,
+    tx_date timestamp NOT NULL,
     CONSTRAINT data_request_pk PRIMARY KEY (data_request_id)
 );
 

@@ -9,4 +9,12 @@
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
+
+    <select id="lastDate" resultType="java.util.Date">
+        SELECT MAX(date)
+        FROM confirmed
+        WHERE
+            department_id = #{departmentId}
+            and status = 1
+    </select>
 </mapper>
