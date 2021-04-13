@@ -9,4 +9,12 @@
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
+
+    <select id="findDepartmentIdByDepartment" resultType="java.lang.Integer">
+        SELECT
+            department_id
+        FROM department
+        WHERE
+            department = #{department} and status = 1
+    </select>
 </mapper>

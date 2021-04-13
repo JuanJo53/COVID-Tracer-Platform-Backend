@@ -1,16 +1,22 @@
 package bo.ucb.edu.covid_tracer_platform_backend.util.csv;
 
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCsvRequest;
 import org.apache.commons.csv.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CSVHelper {
-    /*public static String TYPE = "text/csv";
-    static String[] HEADERs = { "Id", "Title", "Description", "Published" };
+    public static String TYPE = "text/csv";
+    static String[] HEADERs = { "Fecha", "Casos", "Casos_Acum", "Muertes", "Muertes_Acum", "Recuperados", "Recuperados_Acum"};
+
+    public static Logger LOGGER = LoggerFactory.getLogger(CSVHelper.class);
 
     public static boolean hasCSVFormat(MultipartFile file) {
         System.out.println(file.getContentType());
@@ -22,33 +28,36 @@ public class CSVHelper {
         return false;
     }
 
-    public static List<DeveloperTutorial> csvToTutorials(InputStream is) {
+    public static List<DataCsvRequest> csvToDataCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
 
-            List<DeveloperTutorial> developerTutorialList = new ArrayList<>();
+            List<DataCsvRequest> dataCsvRequestList = new ArrayList<>();
 
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             for (CSVRecord csvRecord : csvRecords) {
-                DeveloperTutorial developerTutorial = new DeveloperTutorial(
-                        Long.parseLong(csvRecord.get("Id")),
-                        csvRecord.get("Title"),
-                        csvRecord.get("Description"),
-                        Boolean.parseBoolean(csvRecord.get("Published"))
-                );
-
-                developerTutorialList.add(developerTutorial);
+                DataCsvRequest dataCsvRequest = new DataCsvRequest();
+                dataCsvRequest.setDate(sdf.parse(csvRecord.get("Fecha")));
+                //LOGGER.error(String.valueOf(dataCsvRequest.getDate()));
+                dataCsvRequest.setConfirmed(Integer.parseInt(csvRecord.get("Casos")));
+                dataCsvRequest.setCumulativeConfirmed(Integer.parseInt(csvRecord.get("Casos_Acum")));
+                dataCsvRequest.setDead(Integer.parseInt(csvRecord.get("Muertes")));
+                dataCsvRequest.setCumulativeDead(Integer.parseInt(csvRecord.get("Muertes_Acum")));
+                dataCsvRequest.setRecovered(Integer.parseInt(csvRecord.get("Recuperados")));
+                dataCsvRequest.setCumulativeRecovered(Integer.parseInt(csvRecord.get("Recuperados_Acum")));
+                dataCsvRequestList.add(dataCsvRequest);
             }
 
-            return developerTutorialList;
-        } catch (IOException e) {
+            return dataCsvRequestList;
+        } catch (IOException | ParseException e) {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
     }
 
-    public static ByteArrayInputStream tutorialsToCSV(List<DeveloperTutorial> developerTutorialList) {
+    /*public static ByteArrayInputStream tutorialsToCSV(List<DeveloperTutorial> developerTutorialList) {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
