@@ -23,7 +23,7 @@ public class UserBl {
     private TransactionDao transactionDao;
     private BCryptPasswordEncoder passwordEncoder;
 
-    Logger logger = LoggerFactory.getLogger(UserBl.class);
+    private static Logger logger = LoggerFactory.getLogger(UserBl.class);
 
     @Autowired
     public UserBl(PersonDao personDao, UserRoleDao userRoleDao, UserDao userDao, TransactionDao transactionDao, BCryptPasswordEncoder passwordEncoder) {

@@ -1,26 +1,42 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-07 00:36:05.822
+-- Last modification date: 2021-04-12 23:32:39.537
 
 -- tables
--- Table: confirm
-CREATE TABLE confirm (
-    confirm_id int NOT NULL AUTO_INCREMENT,
-    province_id int NOT NULL,
+-- Table: confirmed
+CREATE TABLE confirmed (
+    confirmed_id int NOT NULL AUTO_INCREMENT,
+    department_id int NOT NULL,
     count int NOT NULL,
+    cumulative int NOT NULL,
     date timestamp NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
     tx_user_id int NOT NULL,
     tx_date timestamp NOT NULL,
-    CONSTRAINT confirm_pk PRIMARY KEY (confirm_id)
+    CONSTRAINT confirmed_pk PRIMARY KEY (confirmed_id)
+);
+
+-- Table: data_request
+CREATE TABLE data_request (
+    data_request_id int NOT NULL AUTO_INCREMENT,
+    department_id int NOT NULL,
+    user_id int NOT NULL,
+    type int NOT NULL,
+    status int NOT NULL,
+    tx_id int NOT NULL,
+    tx_host int NOT NULL,
+    tx_user_id int NOT NULL,
+    tx_date int NOT NULL,
+    CONSTRAINT data_request_pk PRIMARY KEY (data_request_id)
 );
 
 -- Table: dead
 CREATE TABLE dead (
     dead_id int NOT NULL AUTO_INCREMENT,
-    province_id int NOT NULL,
+    department_id int NOT NULL,
     count int NOT NULL,
+    cumulative int NOT NULL,
     date timestamp NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
@@ -30,18 +46,18 @@ CREATE TABLE dead (
     CONSTRAINT dead_pk PRIMARY KEY (dead_id)
 );
 
--- Table: departament
-CREATE TABLE departament (
+-- Table: department
+CREATE TABLE department (
     department_id int NOT NULL AUTO_INCREMENT,
     department varchar(100) NOT NULL,
-    x real(15,6) NOT NULL,
-    y real(15,6) NOT NULL,
+    longitude real(15,6) NOT NULL,
+    latitude real(15,6) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
     tx_user_id int NOT NULL,
     tx_date timestamp NOT NULL,
-    CONSTRAINT departament_pk PRIMARY KEY (department_id)
+    CONSTRAINT department_pk PRIMARY KEY (department_id)
 );
 
 -- Table: person
@@ -61,7 +77,6 @@ CREATE TABLE person (
 -- Table: province
 CREATE TABLE province (
     province_id int NOT NULL AUTO_INCREMENT,
-    departament_id int NOT NULL,
     province varchar(100) NOT NULL,
     x real(15,6) NOT NULL,
     y real(15,6) NOT NULL,
@@ -76,8 +91,9 @@ CREATE TABLE province (
 -- Table: recovered
 CREATE TABLE recovered (
     recovered_id int NOT NULL AUTO_INCREMENT,
-    province_id int NOT NULL,
+    department_id int NOT NULL,
     count int NOT NULL,
+    cumulative int NOT NULL,
     date timestamp NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
@@ -108,7 +124,7 @@ CREATE TABLE transaction (
     CONSTRAINT transaction_pk PRIMARY KEY (tx_id)
 );
 
--- Table: userM
+-- Table: user
 CREATE TABLE user (
     user_id int NOT NULL AUTO_INCREMENT,
     person_id int NOT NULL,
@@ -137,23 +153,27 @@ CREATE TABLE user_role (
 );
 
 -- foreign keys
--- Reference: confirm_province (table: confirm)
-ALTER TABLE confirm ADD CONSTRAINT confirm_province FOREIGN KEY confirm_province (province_id)
-    REFERENCES province (province_id);
+-- Reference: confirm_departament (table: confirmed)
+ALTER TABLE confirmed ADD CONSTRAINT confirm_departament FOREIGN KEY confirm_departament (department_id)
+    REFERENCES department (department_id);
 
--- Reference: dead_province (table: dead)
-ALTER TABLE dead ADD CONSTRAINT dead_province FOREIGN KEY dead_province (province_id)
-    REFERENCES province (province_id);
+-- Reference: dead_departament (table: dead)
+ALTER TABLE dead ADD CONSTRAINT dead_departament FOREIGN KEY dead_departament (department_id)
+    REFERENCES department (department_id);
 
--- Reference: province_departament (table: province)
-ALTER TABLE province ADD CONSTRAINT province_departament FOREIGN KEY province_departament (departament_id)
-    REFERENCES departament (department_id);
+-- Reference: download_departament (table: data_request)
+ALTER TABLE data_request ADD CONSTRAINT download_departament FOREIGN KEY download_departament (department_id)
+    REFERENCES department (department_id);
 
--- Reference: recovered_province (table: recovered)
-ALTER TABLE recovered ADD CONSTRAINT recovered_province FOREIGN KEY recovered_province (province_id)
-    REFERENCES province (province_id);
+-- Reference: download_user (table: data_request)
+ALTER TABLE data_request ADD CONSTRAINT download_user FOREIGN KEY download_user (user_id)
+    REFERENCES user (user_id);
 
--- Reference: user_person (table: userM)
+-- Reference: recovered_departament (table: recovered)
+ALTER TABLE recovered ADD CONSTRAINT recovered_departament FOREIGN KEY recovered_departament (department_id)
+    REFERENCES department (department_id);
+
+-- Reference: user_person (table: user)
 ALTER TABLE user ADD CONSTRAINT user_person FOREIGN KEY user_person (person_id)
     REFERENCES person (person_id);
 

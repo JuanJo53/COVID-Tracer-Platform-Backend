@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.DepartmentDao">
+    <insert id="createDepartment" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Department">
+        INSERT INTO department VALUES (
+            null, #{department}, #{longitude}, #{latitude},
+            1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
+        )
+    </insert>
+
+    <select id="findDepartmentIdByDepartment" resultType="java.lang.Integer">
+        SELECT
+            department_id
+        FROM department
+        WHERE
+            department = #{department} and status = 1
+    </select>
+</mapper>
