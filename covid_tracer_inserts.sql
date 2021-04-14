@@ -254,5 +254,12 @@ INSERT INTO `country` VALUES (239, 'Zambia',-13.133897, 27.849332,  1, 0,"127.0.
 INSERT INTO `country` VALUES (240, 'Zimbawe', -19.015438, 29.154857,1, 0,"127.0.0.1",0,NOW());
 
 /*Department inserts*/
-insert into department values(null, "La Paz", -16.5, -68.5, 1, 0, "127.0.0.1", 0, now()); 
-
+insert into department values(null, "Chuquisaca", -19.03332, -65.26274, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null, "La Paz", -16.5, -68.15, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null, "Cochabamba", -17.3895, -66.1568, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null, "Santa Cruz", -17.78629, -63.18117, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null, "Oruro", -17.98333, -67.15, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null, "Potosí", -19.58361, -65.75306, 1, 0, "127.0.0.1", 0, now()); 
+insert into department values(null, "Tarija", -21.53549, -64.72956, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null, "Pando", -11.02671, -68.76918, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null, "Beni", -14.83333, -64.9, 1, 0, "127.0.0.1", 0, now());
