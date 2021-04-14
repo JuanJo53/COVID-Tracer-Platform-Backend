@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 public class DataRequestBl {
-    private ConfirmedDao confirmedDao;
+    /*private ConfirmedDao confirmedDao;
     private DataRequestDao dataRequestDao;
     private DeadDao deadDao;
     private DepartmentDao departmentDao;
@@ -36,7 +36,7 @@ public class DataRequestBl {
         this.transactionDao = transactionDao;
     }
 
-    public void saveData(MultipartFile file, String department, Integer userId, Transaction transaction){
+    /*public void saveData(MultipartFile file, String department, Integer userId, Transaction transaction){
         try{
             Integer departmentId = departmentDao.findDepartmentIdByDepartment(department);
             //LOGGER.error(String.valueOf(departmentId));
@@ -53,7 +53,7 @@ public class DataRequestBl {
                 if(lastDate.before(data.getDate())){
                     LOGGER.error("Hola");
                 }
-                /*confirmed.setDate(data.getDate());
+                confirmed.setDate(data.getDate());
                 confirmed.setCount(data.getConfirmed());
                 confirmed.setCumulative(data.getCumulativeConfirmed());
                 confirmed.setDepartmentId(departmentId);
@@ -72,7 +72,7 @@ public class DataRequestBl {
                 recovered.setCumulative(data.getCumulativeRecovered());
                 recovered.setDepartmentId(departmentId);
                 recovered.setTransaction(transaction);
-                recoveredDao.createRecovered(recovered);*/
+                recoveredDao.createRecovered(recovered);
             }
 
             /*DataRequest dataRequest = new DataRequest();
@@ -81,9 +81,9 @@ public class DataRequestBl {
             dataRequest.setUserId(userId);
             dataRequest.setType(0);
             dataRequest.setTransaction(transaction);
-            dataRequestDao.createDataRequest(dataRequest);*/
+            dataRequestDao.createDataRequest(dataRequest);
         } catch (IOException e){
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
-    }
+    }*/
 }

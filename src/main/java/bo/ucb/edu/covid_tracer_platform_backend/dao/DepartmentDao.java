@@ -6,6 +6,4 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DepartmentDao {
     public void createDepartment(Department department);
-    public Integer findDepartmentIdByDepartment(String department);
-
 }

@@ -5,7 +5,7 @@
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.DepartmentDao">
     <insert id="createDepartment" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Department">
         INSERT INTO department VALUES (
-            null, #{department}, #{longitude}, #{latitude},
+            null, #{country_id}, #{iso}, #{department}, #{longitude}, #{latitude},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>

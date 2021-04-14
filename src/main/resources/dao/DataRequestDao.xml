@@ -5,7 +5,7 @@
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.DataRequestDao">
     <insert id="createDataRequest" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.DataRequest">
         INSERT INTO data_request VALUES (
-            null, #{departmentId}, #{userId}, #{type},
+            null, #{userId}, #{countryId}, #{departmentId}, #{municipalityId}, #{type},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>

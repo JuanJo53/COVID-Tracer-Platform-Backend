@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.DeadDao">
-    <insert id="createDead" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Dead">
-        INSERT INTO dead VALUES (
-            null, #{departmentId}, #{count}, #{cumulative}, #{date},
+<mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.VaccineTypeDao">
+    <insert id="createVaccineType" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.VaccineType">
+        INSERT INTO vaccine_type VALUES (
+            null, #{type},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
