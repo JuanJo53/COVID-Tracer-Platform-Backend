@@ -1,25 +1,16 @@
 package bo.ucb.edu.covid_tracer_platform_backend.model;
 
-public class Department {
-    private Integer departmentId;
+public class Country {
     private Integer countryId;
     private String iso;
-    private String department;
+    private String country;
     private Double longitude;
     private Double latitude;
     private Integer status;
     private Transaction transaction;
 
-    public Department() {
+    public Country() {
         transaction = new Transaction();
-    }
-
-    public Integer getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
     }
 
     public Integer getCountryId() {
@@ -38,12 +29,12 @@ public class Department {
         this.iso = iso;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getCountry() {
+        return country;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Double getLongitude() {
@@ -80,11 +71,10 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "departmentId=" + departmentId +
-                ", countryId=" + countryId +
+        return "Country{" +
+                "countryId=" + countryId +
                 ", iso='" + iso + '\'' +
-                ", department='" + department + '\'' +
+                ", country='" + country + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 ", status=" + status +

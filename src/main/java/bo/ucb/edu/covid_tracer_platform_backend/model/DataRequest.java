@@ -2,8 +2,10 @@ package bo.ucb.edu.covid_tracer_platform_backend.model;
 
 public class DataRequest {
     private Integer dataRequestId;
-    private Integer departmentId;
     private Integer userId;
+    private Integer countryId;
+    private Integer departmentId;
+    private Integer municipalityId;
     private Integer type;
     private Integer status;
     private Transaction transaction;
@@ -20,6 +22,22 @@ public class DataRequest {
         this.dataRequestId = dataRequestId;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
+
     public Integer getDepartmentId() {
         return departmentId;
     }
@@ -28,12 +46,12 @@ public class DataRequest {
         this.departmentId = departmentId;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getMunicipalityId() {
+        return municipalityId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setMunicipalityId(Integer municipalityId) {
+        this.municipalityId = municipalityId;
     }
 
     public Integer getType() {
@@ -64,8 +82,10 @@ public class DataRequest {
     public String toString() {
         return "DataRequest{" +
                 "dataRequestId=" + dataRequestId +
-                ", departmentId=" + departmentId +
                 ", userId=" + userId +
+                ", countryId=" + countryId +
+                ", departmentId=" + departmentId +
+                ", municipalityId=" + municipalityId +
                 ", type=" + type +
                 ", status=" + status +
                 ", transaction=" + transaction +
