@@ -1,10 +1,11 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-14 16:03:47.333
+-- Last modification date: 2021-04-14 19:30:07.817
 
 -- tables
 -- Table: country
 CREATE TABLE country (
     country_id int NOT NULL AUTO_INCREMENT,
+    iso varchar(50) NOT NULL,
     country varchar(100) NOT NULL,
     longitude real(15,6) NOT NULL,
     latitude real(15,6) NOT NULL,
@@ -27,7 +28,7 @@ CREATE TABLE covid_data (
     dead int NULL,
     cumulative_dead int NOT NULL,
     recovered int NULL,
-    cumulative_recovered int NOT NULL,
+    cumulative_recovered int NULL,
     date timestamp NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
@@ -57,6 +58,7 @@ CREATE TABLE data_request (
 CREATE TABLE department (
     department_id int NOT NULL AUTO_INCREMENT,
     country_id int NOT NULL,
+    iso varchar(50) NOT NULL,
     department varchar(100) NOT NULL,
     longitude real(15,6) NOT NULL,
     latitude real(15,6) NOT NULL,
