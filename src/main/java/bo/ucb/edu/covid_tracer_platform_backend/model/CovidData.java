@@ -9,8 +9,8 @@ public class CovidData {
     private Integer municipalityId;
     private Integer confirmed;
     private Integer cumulativeConfirmed;
-    private Integer dead;
-    private Integer cumulativeDead;
+    private Integer deaths;
+    private Integer cumulativeDeaths;
     private Integer recovered;
     private Integer cumulativeRecovered;
     private Date date;
@@ -69,20 +69,20 @@ public class CovidData {
         this.cumulativeConfirmed = cumulativeConfirmed;
     }
 
-    public Integer getDead() {
-        return dead;
+    public Integer getDeaths() {
+        return deaths;
     }
 
-    public void setDead(Integer dead) {
-        this.dead = dead;
+    public void setDeaths(Integer deaths) {
+        this.deaths = deaths;
     }
 
-    public Integer getCumulativeDead() {
-        return cumulativeDead;
+    public Integer getCumulativeDeaths() {
+        return cumulativeDeaths;
     }
 
-    public void setCumulativeDead(Integer cumulativeDead) {
-        this.cumulativeDead = cumulativeDead;
+    public void setCumulativeDeaths(Integer cumulativeDeaths) {
+        this.cumulativeDeaths = cumulativeDeaths;
     }
 
     public Integer getRecovered() {
@@ -134,8 +134,8 @@ public class CovidData {
                 ", municipalityId=" + municipalityId +
                 ", confirmed=" + confirmed +
                 ", cumulativeConfirmed=" + cumulativeConfirmed +
-                ", dead=" + dead +
-                ", cumulativeDead=" + cumulativeDead +
+                ", deaths=" + deaths +
+                ", cumulativeDeaths=" + cumulativeDeaths +
                 ", recovered=" + recovered +
                 ", cumulativeRecovered=" + cumulativeRecovered +
                 ", date=" + date +

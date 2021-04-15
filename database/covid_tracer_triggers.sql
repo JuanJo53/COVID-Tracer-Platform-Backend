@@ -77,7 +77,7 @@ CREATE TRIGGER trigger_insert_h_covid_data
 AFTER INSERT ON covid_data
 FOR EACH ROW
 BEGIN
-	insert into h_covid_data values (null,new.covid_data_id,new.country_id,new.department_id,new.municipality_id,new.confirmed,new.cumulative_confirmed,new.dead,new.cumulative_dead,new.recovered,new.cumulative_recovered,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
+	insert into h_covid_data values (null,new.covid_data_id,new.country_id,new.department_id,new.municipality_id,new.confirmed,new.cumulative_confirmed,new.deaths,new.cumulative_deaths,new.recovered,new.cumulative_recovered,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
 END;
 |
 DELIMITER ;
@@ -87,7 +87,7 @@ CREATE TRIGGER trigger_update_h_covid_data
 AFTER UPDATE ON covid_data
 FOR EACH ROW
 BEGIN
-	insert into h_covid_data values (null,new.covid_data_id,new.country_id,new.department_id,new.municipality_id,new.confirmed,new.cumulative_confirmed,new.dead,new.cumulative_dead,new.recovered,new.cumulative_recovered,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
+	insert into h_covid_data values (null,new.covid_data_id,new.country_id,new.department_id,new.municipality_id,new.confirmed,new.cumulative_confirmed,new.deaths,new.cumulative_deaths,new.recovered,new.cumulative_recovered,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
 END;
 |
 DELIMITER ;

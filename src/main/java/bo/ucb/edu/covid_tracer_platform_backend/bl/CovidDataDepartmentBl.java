@@ -65,9 +65,9 @@ public class CovidDataDepartmentBl {
                     //LOGGER.error("Confirmed: "+String.valueOf(covidData.getConfirmed()));
                     covidData.setCumulativeConfirmed(data.getCumulativeConfirmed());
                     //LOGGER.error(String.valueOf(covidData.getCumulativeConfirmed()));
-                    covidData.setDead(data.getDead());
+                    covidData.setDeaths(data.getDeaths());
                     //LOGGER.error("Dead: "+String.valueOf(covidData.getDead()));
-                    covidData.setCumulativeDead(data.getCumulativeDead());
+                    covidData.setCumulativeDeaths(data.getCumulativeDeaths());
                     //LOGGER.error(String.valueOf(covidData.getCumulativeDead()));
                     covidData.setRecovered(data.getRecovered());
                     //LOGGER.error("Recovered: "+String.valueOf(covidData.getRecovered()));

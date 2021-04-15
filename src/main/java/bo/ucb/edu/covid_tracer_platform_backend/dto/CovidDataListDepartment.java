@@ -6,7 +6,7 @@ public class CovidDataListDepartment {
     private Integer id;
     private Date date;
     private Integer confirmed;
-    private Integer dead;
+    private Integer deaths;
     private Integer recovered;
 
     public CovidDataListDepartment() {
@@ -36,12 +36,12 @@ public class CovidDataListDepartment {
         this.confirmed = confirmed;
     }
 
-    public Integer getDead() {
-        return dead;
+    public Integer getDeaths() {
+        return deaths;
     }
 
-    public void setDead(Integer dead) {
-        this.dead = dead;
+    public void setDeaths(Integer deaths) {
+        this.deaths = deaths;
     }
 
     public Integer getRecovered() {
@@ -58,7 +58,7 @@ public class CovidDataListDepartment {
                 "id=" + id +
                 ", date=" + date +
                 ", confirmed=" + confirmed +
-                ", dead=" + dead +
+                ", deaths=" + deaths +
                 ", recovered=" + recovered +
                 '}';
     }

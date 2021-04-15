@@ -44,8 +44,8 @@ public class CSVHelper {
                 //LOGGER.error(String.valueOf(dataCsvRequest.getDate()));
                 dataDepartmentCsvRequest.setConfirmed(Integer.parseInt(csvRecord.get("Casos")));
                 dataDepartmentCsvRequest.setCumulativeConfirmed(Integer.parseInt(csvRecord.get("Casos_Acum")));
-                dataDepartmentCsvRequest.setDead(Integer.parseInt(csvRecord.get("Muertes")));
-                dataDepartmentCsvRequest.setCumulativeDead(Integer.parseInt(csvRecord.get("Muertes_Acum")));
+                dataDepartmentCsvRequest.setDeaths(Integer.parseInt(csvRecord.get("Muertes")));
+                dataDepartmentCsvRequest.setCumulativeDeaths(Integer.parseInt(csvRecord.get("Muertes_Acum")));
                 dataDepartmentCsvRequest.setRecovered(Integer.parseInt(csvRecord.get("Recuperados")));
                 dataDepartmentCsvRequest.setCumulativeRecovered(Integer.parseInt(csvRecord.get("Recuperados_Acum")));
                 dataDepartmentCsvRequestList.add(dataDepartmentCsvRequest);

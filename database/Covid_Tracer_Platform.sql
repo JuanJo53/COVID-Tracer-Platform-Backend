@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-15 05:38:22.835
+-- Last modification date: 2021-04-15 21:29:47.623
 
 -- tables
 -- Table: country
@@ -25,8 +25,8 @@ CREATE TABLE covid_data (
     municipality_id int NULL,
     confirmed int NULL,
     cumulative_confirmed int NOT NULL,
-    dead int NULL,
-    cumulative_dead int NOT NULL,
+    deaths int NULL,
+    cumulative_deaths int NOT NULL,
     recovered int NULL,
     cumulative_recovered int NULL,
     date timestamp NOT NULL,
@@ -62,6 +62,7 @@ CREATE TABLE department (
     department varchar(100) NOT NULL,
     longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    zoom real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
@@ -79,8 +80,8 @@ CREATE TABLE h_covid_data (
     municipality_id int NULL,
     confirmed int NULL,
     cumulative_confirmed int NOT NULL,
-    dead int NULL,
-    cumulative_dead int NOT NULL,
+    deaths int NULL,
+    cumulative_deaths int NOT NULL,
     recovered int NULL,
     cumulative_recovered int NOT NULL,
     date timestamp NOT NULL,
