@@ -217,12 +217,12 @@ INSERT INTO `country` VALUES (null,'MNE', 'Montenegro', 42.708678, 19.37439,1, 0
 
 
 /*Department inserts*/
-insert into department values(null,25, "BO-H", "Chuquisaca", -19.03332, -65.26274, 1, 0, "127.0.0.1", 0, now());
-insert into department values(null,25, "BO-L", "La Paz", -16.5, -68.15, 1, 0, "127.0.0.1", 0, now());
-insert into department values(null,25, "BO-C", "Cochabamba", -17.3895, -66.1568, 1, 0, "127.0.0.1", 0, now());
-insert into department values(null,25, "BO-S", "Santa Cruz", -17.78629, -63.18117, 1, 0, "127.0.0.1", 0, now());
-insert into department values(null,25, "BO-O", "Oruro", -17.98333, -67.15, 1, 0, "127.0.0.1", 0, now());
-insert into department values(null,25, "BO-P", "Potosí", -19.58361, -65.75306, 1, 0, "127.0.0.1", 0, now()); 
-insert into department values(null,25, "BO-T", "Tarija", -21.53549, -64.72956, 1, 0, "127.0.0.1", 0, now());
-insert into department values(null,25, "BO-N", "Pando", -11.02671, -68.76918, 1, 0, "127.0.0.1", 0, now());
-insert into department values(null,25, "BO-B", "Beni", -14.83333, -64.9, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-H", "Chuquisaca", -19.7915578, -64.030858, 8.5, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-L", "La Paz", -15.1277648, -67.3182591, 8, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-C", "Cochabamba", -17.0653827, -65.5062222, 8.75, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-S", "Santa Cruz", -17.0148376, -61.5580529, 7.75, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-O", "Oruro", -18.1998846, -67.8253777, 9, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-P", "Potosí", -20.0880834, -66.300821, 8.25, 1, 0, "127.0.0.1", 0, now()); 
+insert into department values(null,25, "BO-T", "Tarija", -21.5915756, -63.91808, 9, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-N", "Pando", -11.1673451, -67.2601429, 8.5, 1, 0, "127.0.0.1", 0, now());
+insert into department values(null,25, "BO-B", "Beni", -13.4951348, -64.8929298, 8, 1, 0, "127.0.0.1", 0, now());

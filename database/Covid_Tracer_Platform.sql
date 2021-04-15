@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-15 21:00:03.876
+-- Last modification date: 2021-04-15 21:29:47.623
 
 -- tables
 -- Table: country
@@ -62,6 +62,7 @@ CREATE TABLE department (
     department varchar(100) NOT NULL,
     longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    zoom real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
