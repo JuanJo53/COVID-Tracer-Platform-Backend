@@ -10,11 +10,19 @@
         )
     </insert>
 
-    <select id="findDepartmentIdByDepartment" resultType="java.lang.Integer">
+    <select id="findDepartmentIdByIso" resultType="java.lang.Integer">
         SELECT
             department_id
         FROM department
         WHERE
-            department = #{department} and status = 1
+            iso = #{isoDepartment} and status = 1
+    </select>
+
+    <select id="findCountryIdByDepartmentId" resultType="java.lang.Integer">
+        SELECT
+            country_id
+        FROM department
+        WHERE
+            department_id = #{departmentId} and status = 1
     </select>
 </mapper>

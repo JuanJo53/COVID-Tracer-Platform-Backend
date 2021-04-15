@@ -1,6 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.util.csv;
 
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCsvRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
 import org.apache.commons.csv.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,30 +28,30 @@ public class CSVHelper {
         return false;
     }
 
-    public static List<DataCsvRequest> csvToDataCsvRequest(InputStream is) {
+    public static List<DataDepartmentCsvRequest> csvToDataCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
 
-            List<DataCsvRequest> dataCsvRequestList = new ArrayList<>();
+            List<DataDepartmentCsvRequest> dataDepartmentCsvRequestList = new ArrayList<>();
 
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             for (CSVRecord csvRecord : csvRecords) {
-                DataCsvRequest dataCsvRequest = new DataCsvRequest();
-                dataCsvRequest.setDate(sdf.parse(csvRecord.get("Fecha")));
+                DataDepartmentCsvRequest dataDepartmentCsvRequest = new DataDepartmentCsvRequest();
+                dataDepartmentCsvRequest.setDate(sdf.parse(csvRecord.get("Fecha")));
                 //LOGGER.error(String.valueOf(dataCsvRequest.getDate()));
-                dataCsvRequest.setConfirmed(Integer.parseInt(csvRecord.get("Casos")));
-                dataCsvRequest.setCumulativeConfirmed(Integer.parseInt(csvRecord.get("Casos_Acum")));
-                dataCsvRequest.setDead(Integer.parseInt(csvRecord.get("Muertes")));
-                dataCsvRequest.setCumulativeDead(Integer.parseInt(csvRecord.get("Muertes_Acum")));
-                dataCsvRequest.setRecovered(Integer.parseInt(csvRecord.get("Recuperados")));
-                dataCsvRequest.setCumulativeRecovered(Integer.parseInt(csvRecord.get("Recuperados_Acum")));
-                dataCsvRequestList.add(dataCsvRequest);
+                dataDepartmentCsvRequest.setConfirmed(Integer.parseInt(csvRecord.get("Casos")));
+                dataDepartmentCsvRequest.setCumulativeConfirmed(Integer.parseInt(csvRecord.get("Casos_Acum")));
+                dataDepartmentCsvRequest.setDead(Integer.parseInt(csvRecord.get("Muertes")));
+                dataDepartmentCsvRequest.setCumulativeDead(Integer.parseInt(csvRecord.get("Muertes_Acum")));
+                dataDepartmentCsvRequest.setRecovered(Integer.parseInt(csvRecord.get("Recuperados")));
+                dataDepartmentCsvRequest.setCumulativeRecovered(Integer.parseInt(csvRecord.get("Recuperados_Acum")));
+                dataDepartmentCsvRequestList.add(dataDepartmentCsvRequest);
             }
 
-            return dataCsvRequestList;
+            return dataDepartmentCsvRequestList;
         } catch (IOException | ParseException e) {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }

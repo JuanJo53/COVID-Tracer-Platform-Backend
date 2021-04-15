@@ -4,10 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.CovidDataDao">
     <insert id="createCovidData" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.CovidData">
-        INSERT INTO covid_data VALUES (
-            null, #{countryId}, #{departmentId}, #{municipalityId}, #{confirmed}, #{cumulativeConfirmed},
-            #{dead}, #{cumulativeDead}, #{recovered}, #{cumulativeRecovered}, #{date},
-            1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
-        )
+        INSERT INTO `covid_data`(`covid_data_id`, `country_id`, `department_id`, `municipality_id`, `confirmed`, `cumulative_confirmed`, `dead`, `cumulative_dead`, `recovered`, `cumulative_recovered`, `date`, `status`, `tx_id`, `tx_host`, `tx_user_id`, `tx_date`)
+                         VALUES (null,#{countryId},#{departmentId},#{municipalityId},#{confirmed},#{cumulativeConfirmed},#{dead},#{cumulativeDead},#{recovered},#{cumulativeRecovered},#{date},1,#{transaction.txId},#{transaction.txHost},#{transaction.txUserId},#{transaction.txDate})
     </insert>
+
+    <select id="lastDateDepartment" resultType="java.util.Date">
+        SELECT MAX(date)
+        FROM covid_data
+        WHERE
+            department_id = #{departmentId}
+            and municipality_id is NULL
+            and status = 1
+    </select>
 </mapper>
