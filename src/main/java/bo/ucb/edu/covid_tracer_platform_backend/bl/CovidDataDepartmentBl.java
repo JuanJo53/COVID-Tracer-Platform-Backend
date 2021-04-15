@@ -52,33 +52,33 @@ public class CovidDataDepartmentBl {
 
 
             for(DataDepartmentCsvRequest data : dataDepartmentCsvRequestList){
-                LOGGER.error("entra");
+                //LOGGER.error("entra");
                 if(lastDate.before(data.getDate())){
                     //LOGGER.error(String.valueOf(data.getDate()));
                     covidData.setCountryId(countryId);
-                    LOGGER.error("Country: "+String.valueOf(covidData.getCountryId()));
+                    //LOGGER.error("Country: "+String.valueOf(covidData.getCountryId()));
                     covidData.setDepartmentId(departmentId);
-                    LOGGER.error("Department: "+String.valueOf(covidData.getDepartmentId()));
+                    //LOGGER.error("Department: "+String.valueOf(covidData.getDepartmentId()));
                     covidData.setConfirmed(data.getConfirmed());
-                    LOGGER.error("Confirmed: "+String.valueOf(covidData.getConfirmed()));
+                    //LOGGER.error("Confirmed: "+String.valueOf(covidData.getConfirmed()));
                     covidData.setCumulativeConfirmed(data.getCumulativeConfirmed());
-                    LOGGER.error(String.valueOf(covidData.getCumulativeConfirmed()));
+                    //LOGGER.error(String.valueOf(covidData.getCumulativeConfirmed()));
                     covidData.setDead(data.getDead());
-                    LOGGER.error("Dead: "+String.valueOf(covidData.getDead()));
+                    //LOGGER.error("Dead: "+String.valueOf(covidData.getDead()));
                     covidData.setCumulativeDead(data.getCumulativeDead());
-                    LOGGER.error(String.valueOf(covidData.getCumulativeDead()));
+                    //LOGGER.error(String.valueOf(covidData.getCumulativeDead()));
                     covidData.setRecovered(data.getRecovered());
-                    LOGGER.error("Recovered: "+String.valueOf(covidData.getRecovered()));
+                    //LOGGER.error("Recovered: "+String.valueOf(covidData.getRecovered()));
                     covidData.setCumulativeRecovered(data.getCumulativeRecovered());
-                    LOGGER.error(String.valueOf(covidData.getCumulativeRecovered()));
+                    //LOGGER.error(String.valueOf(covidData.getCumulativeRecovered()));
                     covidData.setDate(data.getDate());
-                    LOGGER.error("Date: "+String.valueOf(covidData.getDate()));
+                    //LOGGER.error("Date: "+String.valueOf(covidData.getDate()));
                     covidData.setTransaction(transaction);
-                    LOGGER.error("Sale dao");
+                    //LOGGER.error("Sale dao");
                     covidDataDao.createCovidData(covidData);
-                    LOGGER.error("Despues dao");
+                    //LOGGER.error("Despues dao");
                 }
-                LOGGER.error("sale");
+                //LOGGER.error("sale");
 
             }
             DataRequest dataRequest = new DataRequest();
