@@ -16,4 +16,51 @@
             and municipality_id is NULL
             and status = 1
     </select>
+
+    <select id="getCovidDataTotalByDepartment" resultType="java.lang.Integer">
+        select COUNT(covid_data_id)
+        from covid_data
+        where
+            department_id = #{departmentId}
+            and municipality_id is NULL
+            and status = 1
+    </select>
+
+    <select id="covidDataHistoricListByDepartment" resultMap="covidDataMap">
+        SELECT
+            covid_data_id as id,
+            date as date,
+            confirmed as confirmed,
+            dead as dead,
+            recovered as recovered
+        FROM covid_data
+        WHERE
+            department_id = #{departmentId}
+            and municipality_id is NULL
+            and status = 1
+        LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <select id="covidDataCumulativeListByDepartment" resultMap="covidDataMap">
+        SELECT
+            covid_data_id as id,
+            date as date,
+            cumulative_confirmed as confirmed,
+            cumulative_dead as dead,
+            cumulative_recovered as recovered
+        FROM covid_data
+        WHERE
+            department_id = #{departmentId}
+          and municipality_id is NULL
+          and status = 1
+            LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment">
+        <result column="id" property="id"/>
+        <result column="date" property="date"/>
+        <result column="confirmed" property="confirmed"/>
+        <result column="dead" property="dead"/>
+        <result column="recovered" property="recovered"/>
+    </resultMap>
 </mapper>

@@ -1,6 +1,7 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.*;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -93,5 +95,23 @@ public class CovidDataDepartmentBl {
         } catch (IOException | ParseException e){
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
+    }
+
+    public Integer getCovidDataTotalByDepartment(String isoDepartment){
+        Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
+        Integer total = covidDataDao.getCovidDataTotalByDepartment(departmentId);
+        return total;
+    }
+
+    public List<CovidDataListDepartment> covidDataListDepartment(String isoDepartment, String list, Integer page, Integer size){
+        Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
+        List<CovidDataListDepartment> data = new ArrayList<>();
+        if(list.equals("historic")){
+            data = covidDataDao.covidDataHistoricListByDepartment(departmentId, page, size);
+        }
+        if(list.equals("cumulative")){
+            data = covidDataDao.covidDataCumulativeListByDepartment(departmentId, page, size);
+        }
+        return data;
     }
 }
