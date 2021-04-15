@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.CovidDataDao">
     <insert id="createCovidData" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.CovidData">
-        INSERT INTO `covid_data`(`covid_data_id`, `country_id`, `department_id`, `municipality_id`, `confirmed`, `cumulative_confirmed`, `dead`, `cumulative_dead`, `recovered`, `cumulative_recovered`, `date`, `status`, `tx_id`, `tx_host`, `tx_user_id`, `tx_date`)
-                         VALUES (null,#{countryId},#{departmentId},#{municipalityId},#{confirmed},#{cumulativeConfirmed},#{dead},#{cumulativeDead},#{recovered},#{cumulativeRecovered},#{date},1,#{transaction.txId},#{transaction.txHost},#{transaction.txUserId},#{transaction.txDate})
+        INSERT INTO `covid_data`(`covid_data_id`, `country_id`, `department_id`, `municipality_id`, `confirmed`, `cumulative_confirmed`, `deaths`, `cumulative_deaths`, `recovered`, `cumulative_recovered`, `date`, `status`, `tx_id`, `tx_host`, `tx_user_id`, `tx_date`)
+                         VALUES (null,#{countryId},#{departmentId},#{municipalityId},#{confirmed},#{cumulativeConfirmed},#{deaths},#{cumulativeDeaths},#{recovered},#{cumulativeRecovered},#{date},1,#{transaction.txId},#{transaction.txHost},#{transaction.txUserId},#{transaction.txDate})
     </insert>
 
     <select id="lastDateDepartment" resultType="java.util.Date">
@@ -31,7 +31,7 @@
             covid_data_id as id,
             date as date,
             confirmed as confirmed,
-            dead as dead,
+            deaths as deaths,
             recovered as recovered
         FROM covid_data
         WHERE
@@ -46,7 +46,7 @@
             covid_data_id as id,
             date as date,
             cumulative_confirmed as confirmed,
-            cumulative_dead as dead,
+            cumulative_deaths as deaths,
             cumulative_recovered as recovered
         FROM covid_data
         WHERE
@@ -60,7 +60,7 @@
         <result column="id" property="id"/>
         <result column="date" property="date"/>
         <result column="confirmed" property="confirmed"/>
-        <result column="dead" property="dead"/>
+        <result column="deaths" property="deaths"/>
         <result column="recovered" property="recovered"/>
     </resultMap>
 </mapper>
