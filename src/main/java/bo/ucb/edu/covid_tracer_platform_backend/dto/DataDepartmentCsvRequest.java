@@ -2,16 +2,16 @@ package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
 import java.util.Date;
 
-public class DataCsvRequest {
+public class DataDepartmentCsvRequest {
     private Date date;
     private Integer confirmed;
     private Integer cumulativeConfirmed;
-    private Integer dead;
-    private Integer cumulativeDead;
+    private Integer deaths;
+    private Integer cumulativeDeaths;
     private Integer recovered;
     private Integer cumulativeRecovered;
 
-    public DataCsvRequest() {
+    public DataDepartmentCsvRequest() {
     }
 
     public Date getDate() {
@@ -38,20 +38,20 @@ public class DataCsvRequest {
         this.cumulativeConfirmed = cumulativeConfirmed;
     }
 
-    public Integer getDead() {
-        return dead;
+    public Integer getDeaths() {
+        return deaths;
     }
 
-    public void setDead(Integer dead) {
-        this.dead = dead;
+    public void setDeaths(Integer deaths) {
+        this.deaths = deaths;
     }
 
-    public Integer getCumulativeDead() {
-        return cumulativeDead;
+    public Integer getCumulativeDeaths() {
+        return cumulativeDeaths;
     }
 
-    public void setCumulativeDead(Integer cumulativeDead) {
-        this.cumulativeDead = cumulativeDead;
+    public void setCumulativeDeaths(Integer cumulativeDeaths) {
+        this.cumulativeDeaths = cumulativeDeaths;
     }
 
     public Integer getRecovered() {
@@ -68,18 +68,5 @@ public class DataCsvRequest {
 
     public void setCumulativeRecovered(Integer cumulativeRecovered) {
         this.cumulativeRecovered = cumulativeRecovered;
-    }
-
-    @Override
-    public String toString() {
-        return "CsvRequest{" +
-                "date=" + date +
-                ", confirmed=" + confirmed +
-                ", cumulativeConfirmed=" + cumulativeConfirmed +
-                ", dead=" + dead +
-                ", cumulativeDead=" + cumulativeDead +
-                ", recovered=" + recovered +
-                ", cumulativeRecovered=" + cumulativeRecovered +
-                '}';
     }
 }

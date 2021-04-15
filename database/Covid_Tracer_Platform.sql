@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-14 19:30:07.817
+-- Last modification date: 2021-04-15 21:29:47.623
 
 -- tables
 -- Table: country
@@ -7,8 +7,8 @@ CREATE TABLE country (
     country_id int NOT NULL AUTO_INCREMENT,
     iso varchar(50) NOT NULL,
     country varchar(100) NOT NULL,
-    longitude real(15,6) NOT NULL,
-    latitude real(15,6) NOT NULL,
+    longitude real(21,12) NOT NULL,
+    latitude real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
@@ -25,8 +25,8 @@ CREATE TABLE covid_data (
     municipality_id int NULL,
     confirmed int NULL,
     cumulative_confirmed int NOT NULL,
-    dead int NULL,
-    cumulative_dead int NOT NULL,
+    deaths int NULL,
+    cumulative_deaths int NOT NULL,
     recovered int NULL,
     cumulative_recovered int NULL,
     date timestamp NOT NULL,
@@ -60,8 +60,9 @@ CREATE TABLE department (
     country_id int NOT NULL,
     iso varchar(50) NOT NULL,
     department varchar(100) NOT NULL,
-    longitude real(15,6) NOT NULL,
-    latitude real(15,6) NOT NULL,
+    longitude real(21,12) NOT NULL,
+    latitude real(21,12) NOT NULL,
+    zoom real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
@@ -79,8 +80,8 @@ CREATE TABLE h_covid_data (
     municipality_id int NULL,
     confirmed int NULL,
     cumulative_confirmed int NOT NULL,
-    dead int NULL,
-    cumulative_dead int NOT NULL,
+    deaths int NULL,
+    cumulative_deaths int NOT NULL,
     recovered int NULL,
     cumulative_recovered int NOT NULL,
     date timestamp NOT NULL,
@@ -148,8 +149,8 @@ CREATE TABLE municipality (
     municipality_id int NOT NULL AUTO_INCREMENT,
     department_id int NOT NULL,
     municipality varchar(100) NOT NULL,
-    longitude real(15,6) NOT NULL,
-    latitude real(15,6) NOT NULL,
+    longitude real(21,12) NOT NULL,
+    latitude real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
@@ -275,13 +276,13 @@ ALTER TABLE data_request ADD CONSTRAINT data_request_department FOREIGN KEY data
 ALTER TABLE data_request ADD CONSTRAINT data_request_municipality FOREIGN KEY data_request_municipality (municipality_id)
     REFERENCES municipality (municipality_id);
 
+-- Reference: data_request_user (table: data_request)
+ALTER TABLE data_request ADD CONSTRAINT data_request_user FOREIGN KEY data_request_user (user_id)
+    REFERENCES user (user_id);
+
 -- Reference: department_country (table: department)
 ALTER TABLE department ADD CONSTRAINT department_country FOREIGN KEY department_country (country_id)
     REFERENCES country (country_id);
-
--- Reference: download_user (table: data_request)
-ALTER TABLE data_request ADD CONSTRAINT download_user FOREIGN KEY download_user (user_id)
-    REFERENCES user (user_id);
 
 -- Reference: municipality_department (table: municipality)
 ALTER TABLE municipality ADD CONSTRAINT municipality_department FOREIGN KEY municipality_department (department_id)

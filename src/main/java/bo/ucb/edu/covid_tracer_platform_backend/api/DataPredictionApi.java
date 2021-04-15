@@ -13,11 +13,11 @@ public class DataPredictionApi {
     private TransactionBl transactionBl;
 
 
-    @Autowired
+    /*@Autowired
     public DataPredictionApi(DataPredictionBl dataPredictionBl, TransactionBl transactionBl) {
         this.dataPredictionBl = dataPredictionBl;
         this.transactionBl = transactionBl;
-    }
+    }*/
 
 
 }
