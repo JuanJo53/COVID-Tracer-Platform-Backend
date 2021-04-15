@@ -1,17 +1,24 @@
 package bo.ucb.edu.covid_tracer_platform_backend.model;
 
-public class Department {
+public class Municipality {
+    private Integer municipalityId;
     private Integer departmentId;
-    private Integer countryId;
-    private String iso;
-    private String department;
+    private String municipality;
     private Double longitude;
     private Double latitude;
     private Integer status;
     private Transaction transaction;
 
-    public Department() {
+    public Municipality() {
         transaction = new Transaction();
+    }
+
+    public Integer getMunicipalityId() {
+        return municipalityId;
+    }
+
+    public void setMunicipalityId(Integer municipalityId) {
+        this.municipalityId = municipalityId;
     }
 
     public Integer getDepartmentId() {
@@ -22,28 +29,12 @@ public class Department {
         this.departmentId = departmentId;
     }
 
-    public Integer getCountryId() {
-        return countryId;
+    public String getMunicipality() {
+        return municipality;
     }
 
-    public void setCountryId(Integer countryId) {
-        this.countryId = countryId;
-    }
-
-    public String getIso() {
-        return iso;
-    }
-
-    public void setIso(String iso) {
-        this.iso = iso;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
 
     public Double getLongitude() {
@@ -80,11 +71,10 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" +
-                "departmentId=" + departmentId +
-                ", countryId=" + countryId +
-                ", iso='" + iso + '\'' +
-                ", department='" + department + '\'' +
+        return "Municipality{" +
+                "municipalityId=" + municipalityId +
+                ", departmentId=" + departmentId +
+                ", municipality='" + municipality + '\'' +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 ", status=" + status +

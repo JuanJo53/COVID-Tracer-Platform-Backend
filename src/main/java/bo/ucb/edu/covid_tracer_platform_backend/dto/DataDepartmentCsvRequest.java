@@ -2,7 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
 import java.util.Date;
 
-public class DataCsvRequest {
+public class DataDepartmentCsvRequest {
     private Date date;
     private Integer confirmed;
     private Integer cumulativeConfirmed;
@@ -11,7 +11,7 @@ public class DataCsvRequest {
     private Integer recovered;
     private Integer cumulativeRecovered;
 
-    public DataCsvRequest() {
+    public DataDepartmentCsvRequest() {
     }
 
     public Date getDate() {

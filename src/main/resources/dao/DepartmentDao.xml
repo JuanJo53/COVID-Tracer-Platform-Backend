@@ -5,16 +5,24 @@
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.DepartmentDao">
     <insert id="createDepartment" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Department">
         INSERT INTO department VALUES (
-            null, #{department}, #{longitude}, #{latitude},
+            null, #{country_id}, #{iso}, #{department}, #{longitude}, #{latitude},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
 
-    <select id="findDepartmentIdByDepartment" resultType="java.lang.Integer">
+    <select id="findDepartmentIdByIso" resultType="java.lang.Integer">
         SELECT
             department_id
         FROM department
         WHERE
-            department = #{department} and status = 1
+            iso = #{isoDepartment} and status = 1
+    </select>
+
+    <select id="findCountryIdByDepartmentId" resultType="java.lang.Integer">
+        SELECT
+            country_id
+        FROM department
+        WHERE
+            department_id = #{departmentId} and status = 1
     </select>
 </mapper>

@@ -14,9 +14,9 @@ public class TransactionUtil {
     public static Transaction createTransaction(HttpServletRequest request) {
         Transaction transaction = new Transaction();
         transaction.setTxDate(new Date());
-        LOGGER.error(String.valueOf(new Date()));
+        //LOGGER.error(String.valueOf(new Date()));
         transaction.setTxHost(request.getRemoteHost());
-        // transaction.setTxUserId(request.getUserPrincipal().getName()); TODO fix username instead of userId
+        //transaction.setTxUserId(request.getUserPrincipal().getName()); TODO fix username instead of userId
         transaction.setTxUserId(0);
         return transaction;
     }
