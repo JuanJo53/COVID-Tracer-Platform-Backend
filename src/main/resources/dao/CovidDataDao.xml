@@ -72,9 +72,9 @@
             b.department_id as departmentId,
             b.iso as iso,
             b.department as department,
-            SUM(a.confirmed) as confirmed,
-            SUM(a.deaths) as deaths,
-            SUM(a.recovered) as recovered,
+            MAX(a.cumulative_confirmed) as confirmed,
+            MAX(a.cumulative_deaths) as deaths,
+            MAX(a.cumulative_recovered) as recovered,
             b.longitude as longitude,
             b.latitude as latitude
         FROM covid_data a, department b, country c
@@ -106,9 +106,9 @@
             b.department_id as departmentId,
             b.iso as iso,
             b.department as department,
-            SUM(a.confirmed) as confirmed,
-            SUM(a.deaths) as deaths,
-            SUM(a.recovered) as recovered,
+            MAX(a.cumulative_confirmed) as confirmed,
+            MAX(a.cumulative_deaths) as deaths,
+            MAX(a.cumulative_recovered) as recovered,
             b.longitude as longitude,
             b.latitude as latitude
         FROM covid_data a, department b, country c
