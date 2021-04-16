@@ -75,5 +75,9 @@ public class CovidDataDepartmentApi {
         List<DepartmentListRequest> data = covidDataDepartmentBl.listDepartment(countryISO);
         return data;
     }
-
+    @GetMapping(path="/{countryISO}/{departmentISO}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public DepartmentListRequest getDepartment(@PathVariable String countryISO,@PathVariable String departmentISO){
+        DepartmentListRequest data = covidDataDepartmentBl.getDepartment(countryISO,departmentISO);
+        return data;
+    }
 }

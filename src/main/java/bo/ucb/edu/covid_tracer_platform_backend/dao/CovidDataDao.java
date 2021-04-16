@@ -17,4 +17,6 @@ public interface CovidDataDao {
     public List<CovidDataListDepartment> covidDataHistoricListByDepartment(Integer departmentId, Integer page, Integer size);
     public List<CovidDataListDepartment> covidDataCumulativeListByDepartment(Integer departmentId, Integer page, Integer size);
     public List<DepartmentListRequest> listDepartament(String countryISO);
+
+    public DepartmentListRequest getDepartament(String countryISO, String isoDepartment);
 }
