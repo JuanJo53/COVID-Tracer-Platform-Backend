@@ -3,6 +3,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataDepartmentBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
@@ -65,6 +66,18 @@ public class CovidDataDepartmentApi {
     public List<CovidDataListDepartment> covidDataListDepartment(@PathVariable String isoDepartment, @PathVariable String list,
                                                                  @RequestParam Integer page, @RequestParam Integer size){
         List<CovidDataListDepartment> data = covidDataDepartmentBl.covidDataListDepartment(isoDepartment, list, page, size);
+        return data;
+    }
+
+
+    @GetMapping(path="/{countryISO}/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DepartmentListRequest> listDepartment(@PathVariable String countryISO){
+        List<DepartmentListRequest> data = covidDataDepartmentBl.listDepartment(countryISO);
+        return data;
+    }
+    @GetMapping(path="/{countryISO}/{departmentISO}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public DepartmentListRequest getDepartment(@PathVariable String countryISO,@PathVariable String departmentISO){
+        DepartmentListRequest data = covidDataDepartmentBl.getDepartment(countryISO,departmentISO);
         return data;
     }
 }

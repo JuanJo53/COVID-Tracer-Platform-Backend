@@ -3,6 +3,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.bl;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.*;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
 import org.slf4j.Logger;
@@ -112,6 +113,20 @@ public class CovidDataDepartmentBl {
         if(list.equals("cumulative")){
             data = covidDataDao.covidDataCumulativeListByDepartment(departmentId, page, size);
         }
+        return data;
+    }
+
+
+    public List<DepartmentListRequest> listDepartment(String countryISO) {
+        List<DepartmentListRequest> data = new ArrayList<>();
+        data = covidDataDao.listDepartament(countryISO);
+        return data;
+    }
+
+    public DepartmentListRequest getDepartment(String countryISO, String isoDepartment) {
+        DepartmentListRequest data = new DepartmentListRequest();
+        System.out.print("entre");
+        data = covidDataDao.getDepartament(countryISO,isoDepartment);
         return data;
     }
 }

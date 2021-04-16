@@ -9,3 +9,16 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjpbIlJPTEVfQ
 Accept: application/json
 
 ###
+
+
+
+GET http://localhost:8080/api/v1/data/department/BOL/list
+Accept: application/json
+
+###
+
+
+GET http://localhost:8080/api/v1/data/department/BOL/BO-L
+Accept: application/json
+
+###
