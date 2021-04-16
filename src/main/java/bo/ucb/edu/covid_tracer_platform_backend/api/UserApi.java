@@ -2,6 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.UserBl;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.UserPasswordRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.UserRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,4 +40,22 @@ public class UserApi {
             return new ResponseEntity("User already exists", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
+    public HttpStatus updatePasswordUser(@RequestBody UserPasswordRequest userPasswordRequest, HttpServletRequest request, BindingResult result){
+        if(!result.hasErrors()){
+            Transaction transaction = TransactionUtil.createTransaction(request);
+            transactionBl.createTransaction(transaction);
+            UserPasswordRequest userPasswordReques1 = userBl.updatepasswordUser(userPasswordRequest, transaction);
+            if (userPasswordReques1!=null){
+                return HttpStatus.OK;
+            }else{
+                return HttpStatus.BAD_REQUEST;
+            }
+        } else{
+            return HttpStatus.BAD_REQUEST;
+        }
+    }
+
+
 }

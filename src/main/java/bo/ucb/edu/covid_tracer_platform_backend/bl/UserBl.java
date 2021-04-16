@@ -4,6 +4,7 @@ import bo.ucb.edu.covid_tracer_platform_backend.dao.PersonDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.TransactionDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.UserDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.UserRoleDao;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.UserPasswordRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.UserRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Person;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
@@ -93,5 +94,19 @@ public class UserBl {
         userRoleDao.createUserRole(userRole);
 
         return userRequest;*/
+    }
+
+    public UserPasswordRequest updatepasswordUser(UserPasswordRequest userPasswordRequest, Transaction transaction) {
+        String passwordClient = userDao.passwordUser(userPasswordRequest.getUserId());
+        System.out.println("Dale");
+        if (passwordEncoder.matches(userPasswordRequest.getPasswordCurrent(),passwordClient)){
+            String passwordNew = passwordEncoder.encode(userPasswordRequest.getPasswordNew());
+            userPasswordRequest.setPasswordNew(passwordNew);
+            userDao.passwordNewUser(userPasswordRequest);
+            return userPasswordRequest;
+        }
+        else{
+            return null;
+        }
     }
 }
