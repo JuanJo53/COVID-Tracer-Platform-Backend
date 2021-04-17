@@ -17,6 +17,15 @@
             and status = 1
     </select>
 
+    <select id="lastDateCountry" resultType="java.util.Date">
+        SELECT MAX(date)
+        FROM covid_data
+        WHERE
+            country_id = #{countryId}
+          and department_id is NULL
+          and municipality_id is NULL
+          and status = 1
+    </select>
     <select id="lastDateMunicipality" resultType="java.util.Date">
         SELECT MAX(a.date)
         FROM covid_data a, municipality b

@@ -42,7 +42,7 @@ public class CovidDataDepartmentBl {
             Integer countryId = departmentDao.findCountryIdByDepartmentId(departmentId);
             LOGGER.error(String.valueOf(departmentId));
             LOGGER.error(String.valueOf(countryId));
-            List<DataDepartmentCsvRequest> dataDepartmentCsvRequestList = CSVHelper.csvToDataCsvRequest(file.getInputStream());
+            List<DataDepartmentCsvRequest> dataDepartmentCsvRequestList = CSVHelper.csvToDataDepartmentCsvRequest(file.getInputStream());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             Date lastDate = covidDataDao.lastDateDepartment(departmentId);
             LOGGER.error("Last: "+String.valueOf(lastDate));
@@ -86,6 +86,7 @@ public class CovidDataDepartmentBl {
             }
             DataRequest dataRequest = new DataRequest();
 
+            dataRequest.setCountryId(countryId);
             dataRequest.setDepartmentId(departmentId);
             dataRequest.setUserId(userId);
             dataRequest.setType(0);
