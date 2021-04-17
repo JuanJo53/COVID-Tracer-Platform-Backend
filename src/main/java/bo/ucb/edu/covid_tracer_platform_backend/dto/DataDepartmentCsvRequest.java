@@ -10,6 +10,8 @@ public class DataDepartmentCsvRequest {
     private Integer cumulativeDeaths;
     private Integer recovered;
     private Integer cumulativeRecovered;
+    private Integer firstVaccine;
+    private Integer secondVaccine;
 
     public DataDepartmentCsvRequest() {
     }
@@ -68,5 +70,21 @@ public class DataDepartmentCsvRequest {
 
     public void setCumulativeRecovered(Integer cumulativeRecovered) {
         this.cumulativeRecovered = cumulativeRecovered;
+    }
+
+    public Integer getFirstVaccine() {
+        return firstVaccine;
+    }
+
+    public void setFirstVaccine(Integer firstVaccine) {
+        this.firstVaccine = firstVaccine;
+    }
+
+    public Integer getSecondVaccine() {
+        return secondVaccine;
+    }
+
+    public void setSecondVaccine(Integer secondVaccine) {
+        this.secondVaccine = secondVaccine;
     }
 }
