@@ -125,7 +125,6 @@ public class CovidDataDepartmentBl {
 
     public DepartmentListRequest getDepartment(String countryISO, String isoDepartment) {
         DepartmentListRequest data = new DepartmentListRequest();
-        System.out.print("entre");
         data = covidDataDao.getDepartament(countryISO,isoDepartment);
         return data;
     }

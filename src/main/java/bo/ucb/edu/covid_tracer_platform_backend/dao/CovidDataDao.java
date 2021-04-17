@@ -19,4 +19,6 @@ public interface CovidDataDao {
     public List<DepartmentListRequest> listDepartament(String countryISO);
 
     public DepartmentListRequest getDepartament(String countryISO, String isoDepartment);
+
+    public Date lastDateMunicipality(String  municipality);
 }

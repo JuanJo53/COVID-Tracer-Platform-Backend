@@ -9,4 +9,26 @@
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
+
+    <select id="municipalityList" resultMap="MunicipalityDataMap">
+        SELECT
+            a.municipality as departmentList
+        FROM municipality a
+        WHERE
+            a.department_id = #{departmentId}
+    </select>
+
+    <resultMap id="MunicipalityDataMap" type="java.lang.String">
+        <result column="departmentList" property="departmentList"/>
+    </resultMap>
+
+    <select id="findMunicipalityIdByMunicipality" resultType="java.lang.Integer">
+        SELECT a.municipality_id as municipalityId
+        FROM municipality a
+        WHERE
+            a.municipality = #{municipality}
+            and a.department_id = #{departmentId}
+            and a.status = 1
+    </select>
+
 </mapper>

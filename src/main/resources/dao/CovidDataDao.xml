@@ -17,6 +17,16 @@
             and status = 1
     </select>
 
+    <select id="lastDateMunicipality" resultType="java.util.Date">
+        SELECT MAX(a.date)
+        FROM covid_data a, municipality b
+        WHERE
+            b.municipality = #{municipality}
+            and b.municipality_id = a.municipality_id
+            and b.department_id = a.department_id
+            and a.status = 1
+    </select>
+
     <select id="getCovidDataTotalByDepartment" resultType="java.lang.Integer">
         select COUNT(covid_data_id)
         from covid_data
