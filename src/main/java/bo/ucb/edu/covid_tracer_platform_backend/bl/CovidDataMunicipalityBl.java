@@ -1,11 +1,10 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataMunicipalityCvsRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequet;
 import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
 import bo.ucb.edu.covid_tracer_platform_backend.model.DataRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.model.Municipality;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
 import org.slf4j.Logger;
@@ -102,5 +101,9 @@ public class CovidDataMunicipalityBl {
         } catch (IOException | ParseException e){
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
+    }
+
+    public List<MunicipalityListRequet> getMunicipality(String countryISO, String departmentISO) {
+        return covidDataDao.listMunicipality(countryISO,departmentISO);
     }
 }

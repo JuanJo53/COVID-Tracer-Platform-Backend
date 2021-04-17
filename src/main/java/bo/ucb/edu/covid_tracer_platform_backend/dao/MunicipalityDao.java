@@ -1,5 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dao;
 
+import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequet;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Municipality;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,4 +13,5 @@ public interface MunicipalityDao {
     public List<String> municipalityList(Integer departmentId);
 
     public Integer findMunicipalityIdByMunicipality(String municipality, Integer departmentId);
+
 }

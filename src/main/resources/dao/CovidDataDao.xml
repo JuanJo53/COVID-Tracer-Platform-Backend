@@ -130,4 +130,32 @@
           and b.status = 1
           GROUP BY b.department;
     </select>
+
+
+    <select id="listMunicipality" resultMap="MunicipalityDataMap">
+          SELECT
+            b.municipality as municipality,
+            a.cumulative_confirmed as confirmed,
+            a.cumulative_deaths as deaths,
+            a.cumulative_recovered as recovered,
+            b.longitude as longitude,
+            b.latitude as latitude
+        FROM covid_data a, municipality b, country c, department d
+        WHERE
+            c.iso =  #{countryISO}
+            and d.iso=#{isoDepartment}
+            AND b.municipality_id=a.municipality_id
+          and c.country_id=d.country_id
+          and d.department_id=a.department_id
+          and d.status = 1
+    </select>
+
+    <resultMap id="MunicipalityDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequet">
+        <result column="municipality" property="municipality"/>
+        <result column="confirmed" property="confirmed"/>
+        <result column="deaths" property="deaths"/>
+        <result column="recovered" property="recovered"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+    </resultMap>
 </mapper>
