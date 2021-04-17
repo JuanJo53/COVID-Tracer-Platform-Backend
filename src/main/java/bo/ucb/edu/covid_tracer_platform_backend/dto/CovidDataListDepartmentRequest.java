@@ -8,6 +8,8 @@ public class CovidDataListDepartmentRequest {
     private Integer confirmed;
     private Integer deaths;
     private Integer recovered;
+    private Integer firstVaccine;
+    private Integer secondVaccine;
 
     public CovidDataListDepartmentRequest() {
     }
@@ -52,14 +54,32 @@ public class CovidDataListDepartmentRequest {
         this.recovered = recovered;
     }
 
+    public Integer getFirstVaccine() {
+        return firstVaccine;
+    }
+
+    public void setFirstVaccine(Integer firstVaccine) {
+        this.firstVaccine = firstVaccine;
+    }
+
+    public Integer getSecondVaccine() {
+        return secondVaccine;
+    }
+
+    public void setSecondVaccine(Integer secondVaccine) {
+        this.secondVaccine = secondVaccine;
+    }
+
     @Override
     public String toString() {
-        return "CovidDataListDepartment{" +
+        return "CovidDataListDepartmentRequest{" +
                 "id=" + id +
                 ", date=" + date +
                 ", confirmed=" + confirmed +
                 ", deaths=" + deaths +
                 ", recovered=" + recovered +
+                ", firstVaccine=" + firstVaccine +
+                ", secondVaccine=" + secondVaccine +
                 '}';
     }
 }

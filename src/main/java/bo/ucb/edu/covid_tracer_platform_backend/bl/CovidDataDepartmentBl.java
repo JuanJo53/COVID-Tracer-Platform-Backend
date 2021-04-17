@@ -23,17 +23,19 @@ import java.util.List;
 public class CovidDataDepartmentBl {
     private DataRequestDao dataRequestDao;
     private DepartmentDao departmentDao;
-    private TransactionDao transactionDao;
+    private VaccineDao vaccineDao;
     private CovidDataDao covidDataDao;
+    private TransactionDao transactionDao;
 
     private static Logger LOGGER = LoggerFactory.getLogger(CovidDataDepartmentBl.class);
 
     @Autowired
-    public CovidDataDepartmentBl(DataRequestDao dataRequestDao, DepartmentDao departmentDao, TransactionDao transactionDao, CovidDataDao covidDataDao) {
+    public CovidDataDepartmentBl(DataRequestDao dataRequestDao, DepartmentDao departmentDao, VaccineDao vaccineDao, CovidDataDao covidDataDao, TransactionDao transactionDao) {
         this.dataRequestDao = dataRequestDao;
         this.departmentDao = departmentDao;
-        this.transactionDao = transactionDao;
+        this.vaccineDao = vaccineDao;
         this.covidDataDao = covidDataDao;
+        this.transactionDao = transactionDao;
     }
 
     public void saveData(MultipartFile file, String isoDepartment, Integer userId, Transaction transaction){
@@ -44,44 +46,44 @@ public class CovidDataDepartmentBl {
             LOGGER.error(String.valueOf(countryId));
             List<DataDepartmentCsvRequest> dataDepartmentCsvRequestList = CSVHelper.csvToDataDepartmentCsvRequest(file.getInputStream());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date lastDate = covidDataDao.lastDateDepartment(departmentId);
-            LOGGER.error("Last: "+String.valueOf(lastDate));
-            if(lastDate == null){
+            Date lastDateCovid = covidDataDao.lastDateDepartment(departmentId);
+            Date lastDateVaccine = vaccineDao.lastDateDepartment(departmentId);
+            LOGGER.error("Last: "+String.valueOf(lastDateCovid));
+            LOGGER.error("Last Vaccine: "+String.valueOf(lastDateVaccine));
+            if(lastDateCovid == null){
                 String aux = "1970-01-01";
-                lastDate = sdf.parse(aux);
+                lastDateCovid = sdf.parse(aux);
+            }
+            if(lastDateVaccine == null){
+                String aux = "1970-01-01";
+                lastDateVaccine = sdf.parse(aux);
             }
 
             CovidData covidData = new CovidData();
-
+            Vaccine vaccine = new Vaccine();
 
             for(DataDepartmentCsvRequest data : dataDepartmentCsvRequestList){
-                //LOGGER.error("entra");
-                if(lastDate.before(data.getDate())){
-                    //LOGGER.error(String.valueOf(data.getDate()));
+                if(lastDateCovid.before(data.getDate())){
                     covidData.setCountryId(countryId);
-                    //LOGGER.error("Country: "+String.valueOf(covidData.getCountryId()));
                     covidData.setDepartmentId(departmentId);
-                    //LOGGER.error("Department: "+String.valueOf(covidData.getDepartmentId()));
                     covidData.setConfirmed(data.getConfirmed());
-                    //LOGGER.error("Confirmed: "+String.valueOf(covidData.getConfirmed()));
                     covidData.setCumulativeConfirmed(data.getCumulativeConfirmed());
-                    //LOGGER.error(String.valueOf(covidData.getCumulativeConfirmed()));
                     covidData.setDeaths(data.getDeaths());
-                    //LOGGER.error("Dead: "+String.valueOf(covidData.getDead()));
                     covidData.setCumulativeDeaths(data.getCumulativeDeaths());
-                    //LOGGER.error(String.valueOf(covidData.getCumulativeDead()));
                     covidData.setRecovered(data.getRecovered());
-                    //LOGGER.error("Recovered: "+String.valueOf(covidData.getRecovered()));
                     covidData.setCumulativeRecovered(data.getCumulativeRecovered());
-                    //LOGGER.error(String.valueOf(covidData.getCumulativeRecovered()));
                     covidData.setDate(data.getDate());
-                    //LOGGER.error("Date: "+String.valueOf(covidData.getDate()));
                     covidData.setTransaction(transaction);
-                    //LOGGER.error("Sale dao");
                     covidDataDao.createCovidData(covidData);
-                    //LOGGER.error("Despues dao");
                 }
-                //LOGGER.error("sale");
+                if(lastDateVaccine.before(data.getDate())){
+                    vaccine.setDepartmentId(departmentId);
+                    vaccine.setFirstVaccine(data.getFirstVaccine());
+                    vaccine.setSecondVaccine(data.getSecondVaccine());
+                    vaccine.setDate(data.getDate());
+                    vaccine.setTransaction(transaction);
+                    vaccineDao.createVaccine(vaccine);
+                }
 
             }
             DataRequest dataRequest = new DataRequest();

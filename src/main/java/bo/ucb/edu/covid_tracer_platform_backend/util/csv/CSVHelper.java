@@ -50,6 +50,8 @@ public class CSVHelper {
                 dataDepartmentCsvRequest.setCumulativeDeaths(Integer.parseInt(csvRecord.get("Muertes_Acum")));
                 dataDepartmentCsvRequest.setRecovered(Integer.parseInt(csvRecord.get("Recuperados")));
                 dataDepartmentCsvRequest.setCumulativeRecovered(Integer.parseInt(csvRecord.get("Recuperados_Acum")));
+                dataDepartmentCsvRequest.setFirstVaccine(Integer.parseInt(csvRecord.get("Vacunados_Prim")));
+                dataDepartmentCsvRequest.setSecondVaccine(Integer.parseInt(csvRecord.get("Vacunados_Seg")));
                 dataDepartmentCsvRequestList.add(dataDepartmentCsvRequest);
             }
 
