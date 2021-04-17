@@ -64,7 +64,7 @@ public class CovidDataCountryBl {
                 String pastDate = "2021-03-28";
                 Date pastDateAux = sdf.parse(pastDate);
                 for(DataCountryCsvRequest data: filter){
-                    if(pastDateAux.after(data.getDate())){
+                    if(pastDateAux.after(data.getDate()) && lastDate.before(data.getDate())){
                     //if(lastDate.before(data.getDate())){
                         covidData.setCountryId(countryId);
                         covidData.setConfirmed(data.getConfirmed());

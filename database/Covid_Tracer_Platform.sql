@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-17 03:48:40.886
+-- Last modification date: 2021-04-17 14:29:12.835
 
 -- tables
 -- Table: country
@@ -7,8 +7,8 @@ CREATE TABLE country (
     country_id int NOT NULL AUTO_INCREMENT,
     iso varchar(50) NOT NULL,
     country varchar(100) NOT NULL,
-    longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    longitude real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
@@ -60,8 +60,8 @@ CREATE TABLE department (
     country_id int NOT NULL,
     iso varchar(50) NOT NULL,
     department varchar(100) NOT NULL,
-    longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    longitude real(21,12) NOT NULL,
     zoom real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
@@ -149,8 +149,8 @@ CREATE TABLE municipality (
     municipality_id int NOT NULL AUTO_INCREMENT,
     department_id int NOT NULL,
     municipality varchar(100) NOT NULL,
-    longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    longitude real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
