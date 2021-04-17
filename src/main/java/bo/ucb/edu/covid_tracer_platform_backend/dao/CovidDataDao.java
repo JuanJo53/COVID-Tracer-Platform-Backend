@@ -1,10 +1,10 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dao;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentHistoricRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequet;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
-import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -24,5 +24,7 @@ public interface CovidDataDao {
 
     public Date lastDateMunicipality(String  municipality);
 
-    public List<MunicipalityListRequet> listMunicipality(String countryISO, String isoDepartment);
+    public List<MunicipalityListRequest> listMunicipality(String countryISO, String isoDepartment);
+
+    public List<DepartmentHistoricRequest> getDepartmentHistoric(String countryIso, String departmentIso);
 }

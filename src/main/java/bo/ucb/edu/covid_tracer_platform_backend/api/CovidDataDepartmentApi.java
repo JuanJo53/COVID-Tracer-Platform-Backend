@@ -3,6 +3,8 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataDepartmentBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentHistoricRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListHistoricRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
@@ -78,6 +80,19 @@ public class CovidDataDepartmentApi {
     @GetMapping(path="/{countryISO}/{departmentISO}", produces = MediaType.APPLICATION_JSON_VALUE)
     public DepartmentListRequest getDepartment(@PathVariable String countryISO,@PathVariable String departmentISO){
         DepartmentListRequest data = covidDataDepartmentBl.getDepartment(countryISO,departmentISO);
+        return data;
+    }
+
+
+    @GetMapping(path="/{countryISO}/{departmentISO}/historic", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DepartmentHistoricRequest> getDepartmentHistoric(@PathVariable String countryISO, @PathVariable String departmentISO){
+        List<DepartmentHistoricRequest>  data = covidDataDepartmentBl.getDepartmentHistoric(countryISO,departmentISO);
+        return data;
+    }
+
+    @GetMapping(path="/{countryISO}/list/historic", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DepartmentListHistoricRequest> getDepartmentListHistoric(@PathVariable String countryISO){
+        List<DepartmentListHistoricRequest>  data = covidDataDepartmentBl.getDepartmentListHistoric(countryISO);
         return data;
     }
 }

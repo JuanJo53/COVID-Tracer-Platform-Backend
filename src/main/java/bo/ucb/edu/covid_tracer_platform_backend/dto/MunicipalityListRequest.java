@@ -1,6 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
-public class MunicipalityListRequet {
+public class MunicipalityListRequest {
     private String municipality;
     private Integer confirmed;
     private Integer deaths;
@@ -8,7 +8,7 @@ public class MunicipalityListRequet {
     private Double longitude;
     private Double latitude;
 
-    public MunicipalityListRequet() {
+    public MunicipalityListRequest() {
     }
 
 
