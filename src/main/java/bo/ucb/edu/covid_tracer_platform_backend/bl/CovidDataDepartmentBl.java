@@ -1,7 +1,7 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.*;
@@ -105,9 +105,9 @@ public class CovidDataDepartmentBl {
         return total;
     }
 
-    public List<CovidDataListDepartment> covidDataListDepartment(String isoDepartment, String list, Integer page, Integer size){
+    public List<CovidDataListDepartmentRequest> covidDataListDepartment(String isoDepartment, String list, Integer page, Integer size){
         Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
-        List<CovidDataListDepartment> data = new ArrayList<>();
+        List<CovidDataListDepartmentRequest> data = new ArrayList<>();
         if(list.equals("historic")){
             data = covidDataDao.covidDataHistoricListByDepartment(departmentId, page, size);
         }

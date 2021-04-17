@@ -75,7 +75,7 @@
             LIMIT #{size} OFFSET #{page}
     </select>
 
-    <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment">
+    <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest">
         <result column="id" property="id"/>
         <result column="date" property="date"/>
         <result column="confirmed" property="confirmed"/>
@@ -197,4 +197,16 @@
         <result column="longitude" property="longitude"/>
         <result column="latitude" property="latitude"/>
     </resultMap>
+
+    <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest">
+        SELECT
+            SUM(confirmed) as totalConfirmed,
+            SUM(deaths) as totalDeaths,
+            MAX(date) as date
+        FROM covid_data
+        WHERE
+            department_id is null
+            and municipality_id is null
+            and status = 1
+    </select>
 </mapper>
