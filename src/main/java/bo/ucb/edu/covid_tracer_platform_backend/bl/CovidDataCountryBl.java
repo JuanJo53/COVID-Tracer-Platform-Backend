@@ -4,6 +4,7 @@ import bo.ucb.edu.covid_tracer_platform_backend.dao.CountryDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.CovidDataDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.DataRequestDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.TransactionDao;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCountryCsvRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
 import bo.ucb.edu.covid_tracer_platform_backend.model.DataRequest;
@@ -89,6 +90,12 @@ public class CovidDataCountryBl {
         } catch (IOException | ParseException e){
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
+    }
+
+    public List<CountryListRequest> listCountry(){
+        List<CountryListRequest> countries = covidDataDao.listCountry();
+        LOGGER.error(String.valueOf(countries.size()));
+        return countries;
     }
 
 }
