@@ -2,14 +2,14 @@ package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
 import java.util.Date;
 
-public class CovidDataListDepartment {
+public class CovidDataListDepartmentRequest {
     private Integer id;
     private Date date;
     private Integer confirmed;
     private Integer deaths;
     private Integer recovered;
 
-    public CovidDataListDepartment() {
+    public CovidDataListDepartmentRequest() {
     }
 
     public Integer getId() {

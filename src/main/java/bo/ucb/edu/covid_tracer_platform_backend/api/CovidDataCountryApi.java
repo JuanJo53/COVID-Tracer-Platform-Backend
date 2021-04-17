@@ -3,6 +3,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataCountryBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
@@ -59,6 +60,11 @@ public class CovidDataCountryApi {
     @GetMapping(path="/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CountryListRequest> listCountry(){
         List<CountryListRequest> data = covidDataCountryBl.listCountry();
+        return data;
+    }
+    @GetMapping(path="/total", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TotalWorldRequest getTotalWorld(){
+        TotalWorldRequest data = covidDataCountryBl.getTotalWorld();
         return data;
     }
 }

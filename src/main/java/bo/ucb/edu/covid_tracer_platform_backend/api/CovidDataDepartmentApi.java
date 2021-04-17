@@ -2,7 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataDepartmentBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
@@ -63,9 +63,9 @@ public class CovidDataDepartmentApi {
     }
 
     @GetMapping(path="/{isoDepartment}/{list}/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CovidDataListDepartment> covidDataListDepartment(@PathVariable String isoDepartment, @PathVariable String list,
-                                                                 @RequestParam Integer page, @RequestParam Integer size){
-        List<CovidDataListDepartment> data = covidDataDepartmentBl.covidDataListDepartment(isoDepartment, list, page, size);
+    public List<CovidDataListDepartmentRequest> covidDataListDepartment(@PathVariable String isoDepartment, @PathVariable String list,
+                                                                        @RequestParam Integer page, @RequestParam Integer size){
+        List<CovidDataListDepartmentRequest> data = covidDataDepartmentBl.covidDataListDepartment(isoDepartment, list, page, size);
         return data;
     }
 

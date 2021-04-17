@@ -6,6 +6,7 @@ import bo.ucb.edu.covid_tracer_platform_backend.dao.DataRequestDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.TransactionDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCountryCsvRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
 import bo.ucb.edu.covid_tracer_platform_backend.model.DataRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
@@ -94,8 +95,17 @@ public class CovidDataCountryBl {
 
     public List<CountryListRequest> listCountry(){
         List<CountryListRequest> countries = covidDataDao.listCountry();
-        LOGGER.error(String.valueOf(countries.size()));
+        Integer total = 0;
+        for(int i=0; i<countries.size();i++){
+            total += countries.get(i).getCumulativeConfirmed();
+        }
+        LOGGER.error(String.valueOf(total));
         return countries;
+    }
+
+    public TotalWorldRequest getTotalWorld(){
+        TotalWorldRequest total = covidDataDao.getTotalWorld();
+        return total;
     }
 
 }
