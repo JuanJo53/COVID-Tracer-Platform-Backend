@@ -56,7 +56,7 @@ CREATE TRIGGER trigger_insert_h_vaccine
 AFTER INSERT ON vaccine
 FOR EACH ROW
 BEGIN
-	insert into h_vaccine values (null,new.vaccine_id,new.vaccine_type_id,new.country_id,new.department_id,new.vaccinated,new.cumulative_vaccinated,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
+	insert into h_vaccine values (null,new.vaccine_id,new.department_id,new.first_vaccine,new.second_vaccine,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
 END;
 |
 DELIMITER ;
@@ -66,7 +66,7 @@ CREATE TRIGGER trigger_update_h_vaccine
 AFTER UPDATE ON vaccine
 FOR EACH ROW
 BEGIN
-	insert into h_vaccine values (null,new.vaccine_id,new.vaccine_type_id,new.country_id,new.department_id,new.vaccinated,new.cumulative_vaccinated,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
+		insert into h_vaccine values (null,new.vaccine_id,new.department_id,new.first_vaccine,new.second_vaccine,new.date,new.status,new.tx_id,new.tx_host,new.tx_user_id,new.tx_date);
 END;
 |
 DELIMITER ;
