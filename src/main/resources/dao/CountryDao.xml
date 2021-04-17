@@ -9,4 +9,24 @@
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
+
+    <select id="getIsoList" resultMap="isoMap">
+        SELECT
+            iso
+        FROM country
+        WHERE
+            status = 1
+    </select>
+
+    <resultMap id="isoMap" type="java.lang.String">
+        <result column="iso" property="iso"/>
+    </resultMap>
+
+    <select id="findCountryIdByIso" resultType="java.lang.Integer">
+        SELECT
+            country_id
+        FROM country
+        WHERE
+            iso = #{isoCountry} and status = 1
+    </select>
 </mapper>

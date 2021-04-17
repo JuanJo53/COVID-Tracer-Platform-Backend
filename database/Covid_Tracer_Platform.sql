@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-15 21:29:47.623
+-- Last modification date: 2021-04-17 03:48:40.886
 
 -- tables
 -- Table: country
@@ -83,7 +83,7 @@ CREATE TABLE h_covid_data (
     deaths int NULL,
     cumulative_deaths int NOT NULL,
     recovered int NULL,
-    cumulative_recovered int NOT NULL,
+    cumulative_recovered int NULL,
     date timestamp NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,

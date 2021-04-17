@@ -21,4 +21,24 @@
             user_name like #{userName}
             and status = 1
     </select>
+
+
+    <select id="passwordUser" resultType="java.lang.String">
+        SELECT
+            password
+        FROM user
+        WHERE
+            user_id = #{userId}
+            and status = 1
+    </select>
+
+    <update id="passwordNewUser" parameterType="bo.ucb.edu.covid_tracer_platform_backend.dto.UserPasswordRequest">
+        UPDATE user set
+            password=#{passwordNew}
+        WHERE
+        user_id=#{userId} and
+        status=1
+    </update>
+
+
 </mapper>

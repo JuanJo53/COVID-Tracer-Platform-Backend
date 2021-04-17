@@ -1,4 +1,10 @@
-GET http://localhost:8080/api/v1/data/department/BO-C/total
+POST http://localhost:8080/api/v1/data/department/BO-L/admin/1
+Accept: application/json
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/api/v1/data/department/BO-L/total
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjpbIlJPTEVfQURNSU4iXSwidXNlcl9uYW1lIjoianVhbnJvY2hhIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTYxODU1MzY0OSwidXNlck5hbWUiOiJqdWFucm9jaGEiLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiN2Y1MWZkNzAtMTE3YS00YjJiLWJhNmYtYTZmYmYzOGY4YzM1IiwiY2xpZW50X2lkIjoiY292aWR0cmFjZXJhcHAifQ.gnyZM7ZM-uFtvsE6YJF4OG3p1cbad9HCocGxaJGB_Sg
 

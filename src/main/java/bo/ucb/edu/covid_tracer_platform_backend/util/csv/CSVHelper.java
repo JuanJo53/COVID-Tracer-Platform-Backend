@@ -1,6 +1,8 @@
 package bo.ucb.edu.covid_tracer_platform_backend.util.csv;
 
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCountryCsvRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DataMunicipalityCvsRequest;
 import org.apache.commons.csv.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +30,7 @@ public class CSVHelper {
         return false;
     }
 
-    public static List<DataDepartmentCsvRequest> csvToDataCsvRequest(InputStream is) {
+    public static List<DataDepartmentCsvRequest> csvToDataDepartmentCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
@@ -57,6 +59,34 @@ public class CSVHelper {
         }
     }
 
+    public static List<DataCountryCsvRequest> csvToDataCountryCsvRequest(InputStream is) {
+        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+             CSVParser csvParser = new CSVParser(fileReader,
+                     CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
+
+            List<DataCountryCsvRequest> dataCountryCsvRequestList = new ArrayList<>();
+
+            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            for (CSVRecord csvRecord : csvRecords) {
+                DataCountryCsvRequest dataCountryCsvRequest = new DataCountryCsvRequest();
+                dataCountryCsvRequest.setIso(csvRecord.get("iso_code"));
+                dataCountryCsvRequest.setDate(sdf.parse(csvRecord.get("date")));
+                dataCountryCsvRequest.setCumulativeConfirmed(Integer.parseInt(csvRecord.get("total_cases")));
+                dataCountryCsvRequest.setConfirmed(Integer.parseInt(csvRecord.get("new_cases")));
+                dataCountryCsvRequest.setCumulativeDeaths(Integer.parseInt(csvRecord.get("total_deaths")));
+                dataCountryCsvRequest.setDeaths(Integer.parseInt(csvRecord.get("new_deaths")));
+                //LOGGER.error(String.valueOf(dataCsvRequest.getDate()));
+                dataCountryCsvRequestList.add(dataCountryCsvRequest);
+            }
+
+            return dataCountryCsvRequestList;
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
+        }
+    }
+
     /*public static ByteArrayInputStream tutorialsToCSV(List<DeveloperTutorial> developerTutorialList) {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
@@ -79,4 +109,33 @@ public class CSVHelper {
             throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
         }
     }*/
+
+    public static List<DataMunicipalityCvsRequest> csvMunDataCsvRequest(InputStream is) {
+        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+             CSVParser csvParser = new CSVParser(fileReader,
+                     CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
+
+            List<DataMunicipalityCvsRequest> dataMunicipalityCvsRequestList = new ArrayList<>();
+
+            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            for (CSVRecord csvRecord : csvRecords) {
+
+                DataMunicipalityCvsRequest dataMunicipalityCvsRequest = new DataMunicipalityCvsRequest();
+                //dataMunicipalityCvsRequest.setDate(sdf.parse(csvRecord.get("Fecha")));
+                dataMunicipalityCvsRequest.setMunicipality(csvRecord.get("Municipio"));
+                dataMunicipalityCvsRequest.setDate(sdf.parse(csvRecord.get("Fecha")));
+                dataMunicipalityCvsRequest.setTotalconfirmed(Integer.parseInt(csvRecord.get("Total_confirmados")));
+                dataMunicipalityCvsRequest.setTotalassets(Integer.parseInt(csvRecord.get("Total_activos")));
+                dataMunicipalityCvsRequest.setTotalrecovered(Integer.parseInt(csvRecord.get("Total_recuperado")));
+                dataMunicipalityCvsRequest.setTotalDeceased(Integer.parseInt(csvRecord.get("Total_fallecido")));
+                dataMunicipalityCvsRequestList.add(dataMunicipalityCvsRequest);
+
+            }
+            return dataMunicipalityCvsRequestList;
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
+        }
+    }
 }

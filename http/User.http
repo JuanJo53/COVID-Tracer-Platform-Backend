@@ -11,3 +11,17 @@ Content-Type: application/json
   "password": "juan123",
   "role": 2
 }
+
+###
+
+PUT http://localhost:8080/api/v1/user
+Accept: application/json
+Content-Type: application/json
+
+{
+"userId": 1,
+"passwordCurrent": "abc123456",
+"passwordNew": "abc123455"
+}
+
+###
