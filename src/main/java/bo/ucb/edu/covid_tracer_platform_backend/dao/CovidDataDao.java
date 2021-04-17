@@ -13,6 +13,7 @@ import java.util.List;
 public interface CovidDataDao {
     public void createCovidData(CovidData covidData);
     public Date lastDateDepartment(Integer departmentId);
+    public Date lastDateCountry(Integer countryId);
     public Integer getCovidDataTotalByDepartment(Integer departmentId);
     public List<CovidDataListDepartment> covidDataHistoricListByDepartment(Integer departmentId, Integer page, Integer size);
     public List<CovidDataListDepartment> covidDataCumulativeListByDepartment(Integer departmentId, Integer page, Integer size);

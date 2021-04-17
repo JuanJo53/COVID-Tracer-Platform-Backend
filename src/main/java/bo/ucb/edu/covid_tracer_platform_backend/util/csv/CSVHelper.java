@@ -1,5 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.util.csv;
 
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCountryCsvRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
 import org.apache.commons.csv.*;
 import org.slf4j.Logger;
@@ -28,7 +29,7 @@ public class CSVHelper {
         return false;
     }
 
-    public static List<DataDepartmentCsvRequest> csvToDataCsvRequest(InputStream is) {
+    public static List<DataDepartmentCsvRequest> csvToDataDepartmentCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
@@ -52,6 +53,34 @@ public class CSVHelper {
             }
 
             return dataDepartmentCsvRequestList;
+        } catch (IOException | ParseException e) {
+            throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
+        }
+    }
+
+    public static List<DataCountryCsvRequest> csvToDataCountryCsvRequest(InputStream is) {
+        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+             CSVParser csvParser = new CSVParser(fileReader,
+                     CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
+
+            List<DataCountryCsvRequest> dataCountryCsvRequestList = new ArrayList<>();
+
+            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            for (CSVRecord csvRecord : csvRecords) {
+                DataCountryCsvRequest dataCountryCsvRequest = new DataCountryCsvRequest();
+                dataCountryCsvRequest.setIso(csvRecord.get("iso_code"));
+                dataCountryCsvRequest.setDate(sdf.parse(csvRecord.get("date")));
+                dataCountryCsvRequest.setCumulativeConfirmed(Integer.parseInt(csvRecord.get("total_cases")));
+                dataCountryCsvRequest.setConfirmed(Integer.parseInt(csvRecord.get("new_cases")));
+                dataCountryCsvRequest.setCumulativeDeaths(Integer.parseInt(csvRecord.get("total_deaths")));
+                dataCountryCsvRequest.setDeaths(Integer.parseInt(csvRecord.get("new_deaths")));
+                //LOGGER.error(String.valueOf(dataCsvRequest.getDate()));
+                dataCountryCsvRequestList.add(dataCountryCsvRequest);
+            }
+
+            return dataCountryCsvRequestList;
         } catch (IOException | ParseException e) {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
