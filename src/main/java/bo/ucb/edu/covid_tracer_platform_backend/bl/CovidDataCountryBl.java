@@ -109,7 +109,7 @@ public class CovidDataCountryBl {
 
     public List<CountryListHistoricRequest> countryListHistoric(String isoCountry) {
         List<CountryListHistoricRequest> data = new ArrayList<>();
-        data = covidDataDao.getCountryHistoric(isoCountry);
+        data = covidDataDao.getCountryListHistoric(isoCountry);
 
         return data;
     }
@@ -119,5 +119,16 @@ public class CovidDataCountryBl {
         data = covidDataDao.getCountryHistoricVaccine(isoCountry);
 
         return data;
+    }
+
+    public CountryHistoricRequest countryHistoric(String isoCountry) {
+        CountryHistoricRequest countryHistoricRequest =new CountryHistoricRequest();
+        String dateCountry = covidDataDao.getDateCovidData();
+        System.out.println(dateCountry);
+        countryHistoricRequest = covidDataDao.getCountryHistoric(isoCountry,dateCountry);
+        CountryListHistoricVaccineRequest covi = covidDataDao.getCountryHistoricVa(isoCountry,dateCountry);
+        countryHistoricRequest.setFirstVaccine(covi.getFirstVaccine());
+        countryHistoricRequest.setSecondVaccine(covi.getSecondVaccine());
+        return countryHistoricRequest;
     }
 }

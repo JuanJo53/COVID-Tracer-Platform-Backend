@@ -298,7 +298,7 @@
 
 
 
-    <select id="getCountryHistoric" resultMap="ListCountryHistoric">
+    <select id="getCountryListHistoric" resultMap="ListCountryHistoric">
           SELECT a.date as dateCountry,
                 SUM(a.confirmed) as confirmed,
                 SUM(a.cumulative_confirmed) as totalconfirmed,
@@ -345,4 +345,38 @@
         <result column="firstVaccine" property="firstVaccine"/>
         <result column="secondVaccine" property="secondVaccine"/>
     </resultMap>
+
+    <select id="getCountryHistoric" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryHistoricRequest">
+        SELECT
+            a.date as dateCountry,
+            SUM(a.cumulative_confirmed) as totalconfirmed,
+            SUM(a.cumulative_deaths) as totalDeaths,
+            SUM(a.cumulative_recovered) as totalrecovered,
+            b.longitude as longitude,
+            b.latitude as latitude
+        FROM covid_data a, country b
+        WHERE
+            b.iso =#{isoCountry}
+            and a.date = #{dateCountry}
+            and a.municipality_id is NULL
+            and b.country_id = a.country_id
+            and a.status = 1
+    </select>
+    <select id="getDateCovidData" resultType="java.lang.String">
+        SELECT
+            MAX(date)
+        FROM covid_data
+        WHERE
+            status = 1
+    </select>
+    <select id="getCountryHistoricVa" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricVaccineRequest">
+        SELECT
+            SUM(a.first_vaccine) as firstVaccine,
+            SUM(a.second_vaccine) as secondVaccine
+        FROM vaccine a
+        WHERE
+            a.status = 1
+            and a.date = #{dateCountry}
+    </select>
+
 </mapper>
