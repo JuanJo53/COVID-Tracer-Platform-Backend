@@ -5,8 +5,16 @@
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.VaccineDao">
     <insert id="createVaccine" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Vaccine">
         INSERT INTO vaccine VALUES (
-            null, #{vaccineTypeId}, #{countryId}, #{departmentId}, #{vaccinated}, #{cumulativeVaccinated}, #{date},
+            null, #{departmentId}, #{firstVaccine}, #{secondVaccine}, #{date},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
+
+    <select id="lastDateDepartment" resultType="java.util.Date">
+        SELECT MAX(date)
+        FROM vaccine
+        WHERE
+            department_id = #{departmentId}
+          and status = 1
+    </select>
 </mapper>

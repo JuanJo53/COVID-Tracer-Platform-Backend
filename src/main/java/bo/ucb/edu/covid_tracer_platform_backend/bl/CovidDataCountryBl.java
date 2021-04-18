@@ -4,7 +4,9 @@ import bo.ucb.edu.covid_tracer_platform_backend.dao.CountryDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.CovidDataDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.DataRequestDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.TransactionDao;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCountryCsvRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
 import bo.ucb.edu.covid_tracer_platform_backend.model.DataRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
@@ -64,7 +66,7 @@ public class CovidDataCountryBl {
                 String pastDate = "2021-03-28";
                 Date pastDateAux = sdf.parse(pastDate);
                 for(DataCountryCsvRequest data: filter){
-                    if(pastDateAux.after(data.getDate())){
+                    if(pastDateAux.after(data.getDate()) && lastDate.before(data.getDate())){
                     //if(lastDate.before(data.getDate())){
                         covidData.setCountryId(countryId);
                         covidData.setConfirmed(data.getConfirmed());
@@ -89,6 +91,21 @@ public class CovidDataCountryBl {
         } catch (IOException | ParseException e){
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
+    }
+
+    public List<CountryListRequest> listCountry(){
+        List<CountryListRequest> countries = covidDataDao.listCountry();
+        Integer total = 0;
+        for(int i=0; i<countries.size();i++){
+            total += countries.get(i).getCumulativeConfirmed();
+        }
+        LOGGER.error(String.valueOf(total));
+        return countries;
+    }
+
+    public TotalWorldRequest getTotalWorld(){
+        TotalWorldRequest total = covidDataDao.getTotalWorld();
+        return total;
     }
 
 }

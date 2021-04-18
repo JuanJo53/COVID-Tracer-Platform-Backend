@@ -4,11 +4,9 @@ import java.util.Date;
 
 public class Vaccine {
     private Integer vaccineId;
-    private Integer vaccineTypeId;
-    private Integer countryId;
     private Integer departmentId;
-    private Integer vaccinated;
-    private Integer cumulativeVaccinated;
+    private Integer firstVaccine;
+    private Integer secondVaccine;
     private Date date;
     private Integer status;
     private Transaction transaction;
@@ -25,22 +23,6 @@ public class Vaccine {
         this.vaccineId = vaccineId;
     }
 
-    public Integer getVaccineTypeId() {
-        return vaccineTypeId;
-    }
-
-    public void setVaccineTypeId(Integer vaccineTypeId) {
-        this.vaccineTypeId = vaccineTypeId;
-    }
-
-    public Integer getCountryId() {
-        return countryId;
-    }
-
-    public void setCountryId(Integer countryId) {
-        this.countryId = countryId;
-    }
-
     public Integer getDepartmentId() {
         return departmentId;
     }
@@ -49,20 +31,20 @@ public class Vaccine {
         this.departmentId = departmentId;
     }
 
-    public Integer getVaccinated() {
-        return vaccinated;
+    public Integer getFirstVaccine() {
+        return firstVaccine;
     }
 
-    public void setVaccinated(Integer vaccinated) {
-        this.vaccinated = vaccinated;
+    public void setFirstVaccine(Integer firstVaccine) {
+        this.firstVaccine = firstVaccine;
     }
 
-    public Integer getCumulativeVaccinated() {
-        return cumulativeVaccinated;
+    public Integer getSecondVaccine() {
+        return secondVaccine;
     }
 
-    public void setCumulativeVaccinated(Integer cumulativeVaccinated) {
-        this.cumulativeVaccinated = cumulativeVaccinated;
+    public void setSecondVaccine(Integer secondVaccine) {
+        this.secondVaccine = secondVaccine;
     }
 
     public Date getDate() {
@@ -93,11 +75,9 @@ public class Vaccine {
     public String toString() {
         return "Vaccine{" +
                 "vaccineId=" + vaccineId +
-                ", vaccineTypeId=" + vaccineTypeId +
-                ", countryId=" + countryId +
                 ", departmentId=" + departmentId +
-                ", vaccinated=" + vaccinated +
-                ", cumulativeVaccinated=" + cumulativeVaccinated +
+                ", firstVaccine=" + firstVaccine +
+                ", secondVaccine=" + secondVaccine +
                 ", date=" + date +
                 ", status=" + status +
                 ", transaction=" + transaction +

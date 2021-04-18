@@ -47,40 +47,52 @@
 
     <select id="covidDataHistoricListByDepartment" resultMap="covidDataMap">
         SELECT
-            covid_data_id as id,
-            date as date,
-            confirmed as confirmed,
-            deaths as deaths,
-            recovered as recovered
-        FROM covid_data
+            a.covid_data_id as id,
+            a.date as date,
+            a.confirmed as confirmed,
+            a.deaths as deaths,
+            a.recovered as recovered,
+            b.first_vaccine as firstVaccine,
+            b.second_vaccine as secondVaccine
+        FROM covid_data a, vaccine b
         WHERE
-            department_id = #{departmentId}
-            and municipality_id is NULL
-            and status = 1
+            a.department_id = #{departmentId}
+            and b.department_id = a.department_id
+            and a.date = b.date
+            and a.municipality_id is NULL
+            and a.status = 1
+            and b.status = 1
         LIMIT #{size} OFFSET #{page}
     </select>
 
     <select id="covidDataCumulativeListByDepartment" resultMap="covidDataMap">
         SELECT
-            covid_data_id as id,
-            date as date,
-            cumulative_confirmed as confirmed,
-            cumulative_deaths as deaths,
-            cumulative_recovered as recovered
-        FROM covid_data
+            a.covid_data_id as id,
+            a.date as date,
+            a.cumulative_confirmed as confirmed,
+            a.cumulative_deaths as deaths,
+            a.cumulative_recovered as recovered,
+            b.first_vaccine as firstVaccine,
+            b.second_vaccine as secondVaccine
+        FROM covid_data a, vaccine b
         WHERE
-            department_id = #{departmentId}
-          and municipality_id is NULL
-          and status = 1
-            LIMIT #{size} OFFSET #{page}
+            a.department_id = #{departmentId}
+            and b.department_id = a.department_id
+            and a.date = b.date
+            and a.municipality_id is NULL
+            and a.status = 1
+            and b.status = 1
+        LIMIT #{size} OFFSET #{page}
     </select>
 
-    <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment">
+    <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest">
         <result column="id" property="id"/>
         <result column="date" property="date"/>
         <result column="confirmed" property="confirmed"/>
         <result column="deaths" property="deaths"/>
         <result column="recovered" property="recovered"/>
+        <result column="firstVaccine" property="firstVaccine"/>
+        <result column="secondVaccine" property="secondVaccine"/>
     </resultMap>
 
 
@@ -104,6 +116,7 @@
             c.iso = #{countryISO}
           and c.country_id=b.country_id
           and b.department_id=a.department_id
+          and a.municipality_id is NULL
           and b.status = 1
           GROUP BY b.department;
     </select>
@@ -120,7 +133,35 @@
     </resultMap>
 
 
+    <select id="listCountry" resultMap="CountryDataMap">
+        SELECT
+            b.country_id as countryId,
+            b.iso as iso,
+            b.country as country,
+            MAX(a.cumulative_confirmed) as cumulativeConfirmed,
+            MAX(a.cumulative_deaths) as cumulativeDeaths,
+            MAX(a.date) as date,
+            b.latitude as latitude,
+            b.longitude as longitude
+        FROM covid_data a, country b
+        WHERE
+            a.country_id=b.country_id
+            and a.department_id is null
+            and a.municipality_id is null
+            and a.status = 1
+        GROUP BY b.country;
+    </select>
 
+    <resultMap id="CountryDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest">
+        <result column="countryId" property="countryId"/>
+        <result column="iso" property="iso"/>
+        <result column="country" property="country"/>
+        <result column="cumulativeConfirmed" property="cumulativeConfirmed"/>
+        <result column="cumulativeDeaths" property="cumulativeDeaths"/>
+        <result column="date" property="date"/>
+        <result column="latitude" property="latitude"/>
+        <result column="longitude" property="longitude"/>
+    </resultMap>
 
 
     <select id="getDepartament" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest">
@@ -139,6 +180,7 @@
             and b.iso=#{isoDepartment}
           and c.country_id=b.country_id
           and b.department_id=a.department_id
+          and a.municipality_id is NULL
           and b.status = 1
           GROUP BY b.department;
     </select>
@@ -171,6 +213,7 @@
         <result column="latitude" property="latitude"/>
     </resultMap>
 
+<<<<<<< HEAD
     <select id="getDepartmentHistoric" resultMap="DepartmentHisMap">
           SELECT a.date as date1,
 		    d.department as department,
@@ -199,4 +242,17 @@
         <result column="recovered" property="recovered"/>
         <result column="totalrecovered" property="totalrecovered"/>
     </resultMap>
+=======
+    <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest">
+        SELECT
+            SUM(confirmed) as totalConfirmed,
+            SUM(deaths) as totalDeaths,
+            MAX(date) as date
+        FROM covid_data
+        WHERE
+            department_id is null
+            and municipality_id is null
+            and status = 1
+    </select>
+>>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 </mapper>

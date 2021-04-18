@@ -1,5 +1,5 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2021-04-17 03:48:40.886
+-- Last modification date: 2021-04-17 20:54:23.702
 
 -- tables
 -- Table: country
@@ -7,8 +7,8 @@ CREATE TABLE country (
     country_id int NOT NULL AUTO_INCREMENT,
     iso varchar(50) NOT NULL,
     country varchar(100) NOT NULL,
-    longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    longitude real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
@@ -60,8 +60,8 @@ CREATE TABLE department (
     country_id int NOT NULL,
     iso varchar(50) NOT NULL,
     department varchar(100) NOT NULL,
-    longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    longitude real(21,12) NOT NULL,
     zoom real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
@@ -130,11 +130,9 @@ CREATE TABLE h_user (
 CREATE TABLE h_vaccine (
     h_vaccine_id int NOT NULL AUTO_INCREMENT,
     vaccine_id int NOT NULL,
-    vaccine_type_id int NOT NULL,
-    country_id int NOT NULL,
-    department_id int NULL,
-    vaccinated int NULL,
-    cumulative_vaccinated int NOT NULL,
+    department_id int NOT NULL,
+    first_vaccine int NOT NULL,
+    second_vaccine int NOT NULL,
     date timestamp NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
@@ -149,8 +147,8 @@ CREATE TABLE municipality (
     municipality_id int NOT NULL AUTO_INCREMENT,
     department_id int NOT NULL,
     municipality varchar(100) NOT NULL,
-    longitude real(21,12) NOT NULL,
     latitude real(21,12) NOT NULL,
+    longitude real(21,12) NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
     tx_host varchar(100) NOT NULL,
@@ -225,11 +223,9 @@ CREATE TABLE user_role (
 -- Table: vaccine
 CREATE TABLE vaccine (
     vaccine_id int NOT NULL AUTO_INCREMENT,
-    vaccine_type_id int NOT NULL,
-    country_id int NOT NULL,
-    department_id int NULL,
-    vaccinated int NULL,
-    cumulative_vaccinated int NOT NULL,
+    department_id int NOT NULL,
+    first_vaccine int NOT NULL,
+    second_vaccine int NOT NULL,
     date timestamp NOT NULL,
     status int NOT NULL,
     tx_id int NOT NULL,
@@ -237,18 +233,6 @@ CREATE TABLE vaccine (
     tx_user_id int NOT NULL,
     tx_date timestamp NOT NULL,
     CONSTRAINT vaccine_pk PRIMARY KEY (vaccine_id)
-);
-
--- Table: vaccine_type
-CREATE TABLE vaccine_type (
-    vaccine_type_id int NOT NULL AUTO_INCREMENT,
-    type int NOT NULL,
-    status int NOT NULL,
-    tx_id int NOT NULL,
-    tx_host varchar(100) NOT NULL,
-    tx_user_id int NOT NULL,
-    tx_date timestamp NOT NULL,
-    CONSTRAINT vaccine_type_pk PRIMARY KEY (vaccine_type_id)
 );
 
 -- foreign keys
@@ -300,17 +284,9 @@ ALTER TABLE user_role ADD CONSTRAINT user_role_role FOREIGN KEY user_role_role (
 ALTER TABLE user_role ADD CONSTRAINT user_role_user FOREIGN KEY user_role_user (user_id)
     REFERENCES user (user_id);
 
--- Reference: vaccine_country (table: vaccine)
-ALTER TABLE vaccine ADD CONSTRAINT vaccine_country FOREIGN KEY vaccine_country (country_id)
-    REFERENCES country (country_id);
-
 -- Reference: vaccine_department (table: vaccine)
 ALTER TABLE vaccine ADD CONSTRAINT vaccine_department FOREIGN KEY vaccine_department (department_id)
     REFERENCES department (department_id);
-
--- Reference: vaccine_vaccine_type (table: vaccine)
-ALTER TABLE vaccine ADD CONSTRAINT vaccine_vaccine_type FOREIGN KEY vaccine_vaccine_type (vaccine_type_id)
-    REFERENCES vaccine_type (vaccine_type_id);
 
 -- End of file.
 

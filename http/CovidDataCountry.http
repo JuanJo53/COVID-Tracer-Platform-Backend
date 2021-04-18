@@ -1,5 +1,15 @@
+<<<<<<< HEAD
 GET http://localhost:8080/api/v1/data/country/BOL/listhistoric
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjpbIlJPTEVfQURNSU4iXSwidXNlcl9uYW1lIjoianVhbnJvY2hhIiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl0sImV4cCI6MTYxODcyODkwMCwidXNlck5hbWUiOiJqdWFucm9jaGEiLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiOTM0NjkzZWMtYzkzZC00NmU1LTk0YTktYWJjMzgwYjQ4YzUzIiwiY2xpZW50X2lkIjoiY292aWR0cmFjZXJhcHAifQ.cneSPYOeuCa5APQR622ZPPKCzcPadvo7jKz6qsoIN4I
+=======
+GET localhost:8080/api/v1/data/country/list
+Accept: application/json
+
+###
+
+GET localhost:8080/api/v1/data/country/total
+Accept: application/json
+>>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 
 ###

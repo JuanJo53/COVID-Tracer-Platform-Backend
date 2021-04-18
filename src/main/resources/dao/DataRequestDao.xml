@@ -9,4 +9,45 @@
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}
         )
     </insert>
+
+    <select id="dataRequestWorldList" resultMap="dataRequestMap">
+        SELECT
+            a.data_request_id as id,
+            b.user_name as username,
+            c.country as region,
+            a.tx_date as date
+        FROM data_request a, user b, country c
+        WHERE
+            a.user_id = b.user_id
+            and a.country_id = c.country_id
+            and a.country_id != 25
+            and a.status = 1
+            and b.status = 1
+            and c.status = 1
+        LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <select id="dataRequestDepartmentList" resultMap="dataRequestMap">
+        SELECT
+            a.data_request_id as id,
+            b.user_name as username,
+            c.department as region,
+            a.tx_date as date
+        FROM data_request a, user b, department c
+        WHERE
+            a.user_id = b.user_id
+            and a.department_id = c.department_id
+            and a.country_id = 25
+            and a.status = 1
+            and b.status = 1
+            and c.status = 1
+        LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <resultMap id="dataRequestMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.DataRequestList">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="region" property="region"/>
+        <result column="date" property="date"/>
+    </resultMap>
 </mapper>
