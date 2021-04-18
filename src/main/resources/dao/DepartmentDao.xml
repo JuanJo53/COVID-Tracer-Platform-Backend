@@ -25,4 +25,18 @@
         WHERE
             department_id = #{departmentId} and status = 1
     </select>
+
+
+    <select id="departmentList" resultMap="DepartmentDataMap">
+        SELECT
+            a.iso as listIso
+        FROM department a, country b
+        WHERE
+            b.iso = #{countryISO}
+            and a.country_id=b.country_id
+    </select>
+
+    <resultMap id="DepartmentDataMap" type="java.lang.String">
+        <result column="listIso" property="listIso"/>
+    </resultMap>
 </mapper>

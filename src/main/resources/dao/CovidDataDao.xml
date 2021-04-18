@@ -98,6 +98,9 @@
 
 
 
+
+
+
     <select id="listDepartament" resultMap="DepartamentDataMap">
         SELECT
             b.department_id as departmentId,
@@ -211,7 +214,7 @@
           and d.status = 1
     </select>
 
-    <resultMap id="MunicipalityDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequet">
+    <resultMap id="MunicipalityDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequest">
         <result column="municipality" property="municipality"/>
         <result column="confirmed" property="confirmed"/>
         <result column="deaths" property="deaths"/>
@@ -220,6 +223,36 @@
         <result column="latitude" property="latitude"/>
     </resultMap>
 
+<<<<<<< HEAD
+    <select id="getDepartmentHistoric" resultMap="DepartmentHisMap">
+          SELECT a.date as date1,
+		    d.department as department,
+            a.confirmed as confirmed,
+            a.cumulative_confirmed as totalconfirmed,
+            a.deaths as deaths,
+            a.cumulative_deaths as totalDeaths,
+            a.recovered as recovered,
+            a.cumulative_recovered as totalrecovered
+        FROM covid_data a, country c, department d
+        WHERE c.iso = #{countryIso}
+	        and d.iso=#{departmentIso}
+            and a.municipality_id is NULL
+            and c.country_id=a.country_id
+            and d.department_id=a.department_id
+            and a.status = 1
+    </select>
+
+    <resultMap id="DepartmentHisMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentHistoricRequest">
+        <result column="date1" property="date1"/>
+        <result column="department" property="department"/>
+        <result column="confirmed" property="confirmed"/>
+        <result column="totalconfirmed" property="totalconfirmed"/>
+        <result column="deaths" property="deaths"/>
+        <result column="totalDeaths" property="totalDeaths"/>
+        <result column="recovered" property="recovered"/>
+        <result column="totalrecovered" property="totalrecovered"/>
+    </resultMap>
+=======
     <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest">
         SELECT
             SUM(confirmed) as totalConfirmed,
@@ -231,4 +264,5 @@
             and municipality_id is null
             and status = 1
     </select>
+>>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 </mapper>
