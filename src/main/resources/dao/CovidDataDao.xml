@@ -222,10 +222,6 @@
         <result column="latitude" property="latitude"/>
     </resultMap>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 1b7ad5209ed0d0d5070ed51a8f521d9f6fca391b
     <select id="getDepartmentHistoric" resultMap="DepartmentHisMap">
           SELECT a.date as date1,
 		    d.department as department,
