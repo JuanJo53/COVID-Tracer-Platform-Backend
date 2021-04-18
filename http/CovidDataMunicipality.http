@@ -1,4 +1,4 @@
-GET http://localhost:8080/api/v1/data/municipality/BOL/BO-B/list
+GET http://localhost:8080/api/v1/data/municipality/BOL/BO-L/list
 Accept: application/json
 
 ###
