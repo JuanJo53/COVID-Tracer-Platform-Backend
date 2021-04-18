@@ -102,8 +102,8 @@ public class CovidDataCountryBl {
         return countries;
     }
 
-    public TotalWorldRequest getTotalWorld(){
-        TotalWorldRequest total = covidDataDao.getTotalWorld();
+    public WorldRequest getTotalWorld(){
+        WorldRequest total = covidDataDao.getTotalWorld();
         return total;
     }
 
@@ -149,5 +149,21 @@ public class CovidDataCountryBl {
 
         }
         return dataFinal;
+    }
+
+    public List<WorldRequest> covidDataListWorld(String list, Integer page, Integer size){
+        List<WorldRequest> data = new ArrayList<>();
+        if(list.equals("historic")){
+            data = covidDataDao.covidDataHistoricWorldList(page, size);
+        }
+        if(list.equals("cumulative")){
+            data = covidDataDao.covidDataCumulativeWorldList(page, size);
+        }
+        return data;
+    }
+
+    public Integer worldTotal(){
+        Integer total = covidDataDao.worldTotal().size();
+        return total;
     }
 }
