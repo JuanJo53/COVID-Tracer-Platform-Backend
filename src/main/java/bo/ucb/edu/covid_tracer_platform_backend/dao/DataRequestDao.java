@@ -11,4 +11,6 @@ public interface DataRequestDao {
     public void createDataRequest(DataRequest dataRequest);
     public List<DataRequestList> dataRequestWorldList(Integer page, Integer size);
     public List<DataRequestList> dataRequestDepartmentList(Integer page, Integer size);
+    public Integer getDataRequestTotalWorld();
+    public Integer getDataRequestTotalDepartment();
 }

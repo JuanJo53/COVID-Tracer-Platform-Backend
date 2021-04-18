@@ -3,6 +3,8 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataCountryBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;

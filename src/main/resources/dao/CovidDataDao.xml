@@ -109,12 +109,16 @@
             MAX(a.cumulative_confirmed) as confirmed,
             MAX(a.cumulative_deaths) as deaths,
             MAX(a.cumulative_recovered) as recovered,
+            MAX(d.first_vaccine) as firstVaccine,
+            MAX(d.second_vaccine) as secondVaccine,
+            b.zoom as zoom,
             b.longitude as longitude,
             b.latitude as latitude
-        FROM covid_data a, department b, country c
+        FROM covid_data a, department b, country c, vaccine d
         WHERE
             c.iso = #{countryISO}
           and c.country_id=b.country_id
+          and d.department_id = b.department_id
           and b.department_id=a.department_id
           and a.municipality_id is NULL
           and b.status = 1
@@ -128,6 +132,9 @@
         <result column="confirmed" property="confirmed"/>
         <result column="deaths" property="deaths"/>
         <result column="recovered" property="recovered"/>
+        <result column="firstVaccine" property="firstVaccine"/>
+        <result column="secondVaccine" property="secondVaccine"/>
+        <result column="zoom" property="zoom"/>
         <result column="longitude" property="longitude"/>
         <result column="latitude" property="latitude"/>
     </resultMap>
@@ -172,17 +179,20 @@
             MAX(a.cumulative_confirmed) as confirmed,
             MAX(a.cumulative_deaths) as deaths,
             MAX(a.cumulative_recovered) as recovered,
+            MAX(d.first_vaccine) as firstVaccine,
+            MAX(d.second_vaccine) as secondVaccine,
+            b.zoom as zoom,
             b.longitude as longitude,
             b.latitude as latitude
-        FROM covid_data a, department b, country c
+        FROM covid_data a, department b, country c, vaccine d
         WHERE
             c.iso = #{countryISO}
-            and b.iso=#{isoDepartment}
           and c.country_id=b.country_id
+          and d.department_id = b.department_id
           and b.department_id=a.department_id
           and a.municipality_id is NULL
           and b.status = 1
-          GROUP BY b.department;
+        GROUP BY b.department;
     </select>
 
 

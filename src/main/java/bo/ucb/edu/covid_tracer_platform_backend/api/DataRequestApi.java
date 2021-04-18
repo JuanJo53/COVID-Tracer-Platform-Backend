@@ -32,4 +32,17 @@ public class DataRequestApi {
         List<DataRequestList> list = dataRequestBl.dataRequestDepartmentList(page, size);
         return list;
     }
+
+    @GetMapping(path="/world/total", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Integer getDataRequestTotalWorld(){
+        Integer total = dataRequestBl.getDataRequestTotalWorld();
+        return total;
+    }
+
+    @GetMapping(path="/department/total", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Integer getDataRequestTotalDepartment(){
+        Integer total = dataRequestBl.getDataRequestTotalDepartment();
+        return total;
+    }
+
 }
