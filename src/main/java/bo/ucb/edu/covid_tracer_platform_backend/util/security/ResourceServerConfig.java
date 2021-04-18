@@ -24,9 +24,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/v1/user").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/data/country/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/v1/data/department//{isoDepartment}/download").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.GET, "/api/v1/data/department/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/v1/data/municipality/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/v1/data/department//{isoDepartment}/download").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/api/v1/data/country/admin/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/v1/data/department/{isoDepartment}/admin/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/v1/data/municipality/{isoDepartment}/admin/{id}").hasRole("ADMIN")
@@ -44,7 +44,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowCredentials(true);
-        config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+        config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization", "responseType", "Content-Disposition", "ContenDisposition"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
