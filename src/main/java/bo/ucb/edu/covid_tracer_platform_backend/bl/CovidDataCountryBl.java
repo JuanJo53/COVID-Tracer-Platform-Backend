@@ -163,8 +163,9 @@ public class CovidDataCountryBl {
         return total;
     }
     public ByteArrayInputStream load(String isoCountry){
-        List<CountryListHistoricRequest> c1 = countryListEveryDay(isoCountry);
-        List<CountryListHistoricEveryDayRequest> c2 = countryListHistoric(isoCountry);
+        Integer cant = 1000;
+        List<CountryListHistoricRequest> c1 = countryListEveryDay(isoCountry,0, cant);
+        List<CountryListHistoricEveryDayRequest> c2 = countryListHistoric(isoCountry,0, cant);
 
         ByteArrayInputStream in = CSVHelper.covidDataCountryToCSV(c2, c1);
         return in;
