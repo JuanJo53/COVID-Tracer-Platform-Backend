@@ -7,6 +7,9 @@ public class DepartmentListRequest {
     private Integer confirmed;
     private Integer deaths;
     private Integer recovered;
+    private Integer firstVaccine;
+    private Integer secondVaccine;
+    private Double zoom;
     private Double longitude;
     private Double latitude;
 
@@ -61,6 +64,30 @@ public class DepartmentListRequest {
         this.recovered = recovered;
     }
 
+    public Integer getFirstVaccine() {
+        return firstVaccine;
+    }
+
+    public void setFirstVaccine(Integer firstVaccine) {
+        this.firstVaccine = firstVaccine;
+    }
+
+    public Integer getSecondVaccine() {
+        return secondVaccine;
+    }
+
+    public void setSecondVaccine(Integer secondVaccine) {
+        this.secondVaccine = secondVaccine;
+    }
+
+    public Double getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(Double zoom) {
+        this.zoom = zoom;
+    }
+
     public Double getLongitude() {
         return longitude;
     }
@@ -86,6 +113,9 @@ public class DepartmentListRequest {
                 ", confirmed=" + confirmed +
                 ", deaths=" + deaths +
                 ", recovered=" + recovered +
+                ", firstVaccine=" + firstVaccine +
+                ", secondVaccine=" + secondVaccine +
+                ", zoom=" + zoom +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 '}';

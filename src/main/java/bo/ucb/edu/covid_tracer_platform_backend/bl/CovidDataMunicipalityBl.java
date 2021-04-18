@@ -2,7 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataMunicipalityCvsRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequet;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
 import bo.ucb.edu.covid_tracer_platform_backend.model.DataRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
@@ -103,7 +103,7 @@ public class CovidDataMunicipalityBl {
         }
     }
 
-    public List<MunicipalityListRequet> getMunicipality(String countryISO, String departmentISO) {
+    public List<MunicipalityListRequest> getMunicipality(String countryISO, String departmentISO) {
         return covidDataDao.listMunicipality(countryISO,departmentISO);
     }
 }

@@ -2,7 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataMunicipalityBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequet;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
@@ -54,8 +54,8 @@ public class CovidDataMunicipalityApi {
     }
 
     @GetMapping(path="/{countryISO}/{departmentISO}/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MunicipalityListRequet> getMunicipality(@PathVariable String countryISO, @PathVariable String departmentISO){
-        List<MunicipalityListRequet> data = covidDataMunicipalityBl.getMunicipality(countryISO,departmentISO);
+    public List<MunicipalityListRequest> getMunicipality(@PathVariable String countryISO, @PathVariable String departmentISO){
+        List<MunicipalityListRequest> data = covidDataMunicipalityBl.getMunicipality(countryISO,departmentISO);
         return data;
     }
 }
