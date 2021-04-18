@@ -69,15 +69,15 @@ public class CovidDataCountryApi {
         return data;
     }
 
-    @GetMapping(path="/{isoCountry}/listhistoric", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CountryListHistoricRequest> countryListHistoric(@PathVariable String isoCountry){
-        List<CountryListHistoricRequest> data = covidDataCountryBl.countryListHistoric(isoCountry);
+    @GetMapping(path="/{isoCountry}/listhistoric/everyDay", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CountryListHistoricEveryDayRequest> countryListHistoric(@PathVariable String isoCountry){
+        List<CountryListHistoricEveryDayRequest> data = covidDataCountryBl.countryListHistoric(isoCountry);
         return data;
     }
 
-    @GetMapping(path="/{isoCountry}/listhistoric/vaccine", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CountryListHistoricVaccineRequest> countryListHistoricVaccine(@PathVariable String isoCountry){
-        List<CountryListHistoricVaccineRequest> data = covidDataCountryBl.countryListHistoricVaccine(isoCountry);
+    @GetMapping(path="/{isoCountry}/list/everyDay", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CountryListHistoricRequest> countryListEveryDay(@PathVariable String isoCountry){
+        List<CountryListHistoricRequest> data = covidDataCountryBl.countryListEveryDay(isoCountry);
         return data;
     }
 
