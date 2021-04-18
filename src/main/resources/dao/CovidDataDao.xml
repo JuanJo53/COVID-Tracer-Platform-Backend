@@ -312,6 +312,7 @@
                 and b.department_id = d.department_id
                 and a.status = 1
             GROUP BY b.date
+            LIMIT #{size} OFFSET #{page}
     </select>
 
     <resultMap id="ListCountryHistoricVaccine" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricVaccineRequest">
@@ -371,6 +372,7 @@
                 and d.department_id=a.department_id
                 and a.status = 1
             GROUP BY a.date
+            LIMIT #{size} OFFSET #{page}
     </select>
 
     <resultMap id="ListCountryHistoric" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricEveryDayRequest">
@@ -395,6 +397,7 @@
                 and d.department_id=a.department_id
                 and a.status = 1
             GROUP BY a.date
+            LIMIT #{size} OFFSET #{page}
     </select>
 
     <resultMap id="ListCountryCumulative" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricRequest">

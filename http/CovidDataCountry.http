@@ -8,12 +8,12 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/api/v1/data/country/BOL/historic
+GET http://localhost:8080/api/v1/data/country/BOL/historicList?page=375&size=10
 Accept: application/json
 
 ###
 
-GET http://localhost:8080/api/v1/data/country/BOL/listeveryDay
+GET http://localhost:8080/api/v1/data/country/BOL/listeveryDay?page=375&size=10
 Accept: application/json
 
 ###
