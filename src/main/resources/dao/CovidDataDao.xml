@@ -222,6 +222,10 @@
         <result column="latitude" property="latitude"/>
     </resultMap>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1b7ad5209ed0d0d5070ed51a8f521d9f6fca391b
     <select id="getDepartmentHistoric" resultMap="DepartmentHisMap">
           SELECT a.date as date1,
 		    d.department as department,
@@ -292,6 +296,56 @@
         <result column="cumulativeDeaths" property="cumulativeDeaths"/>
         <result column="recovered" property="recovered"/>
         <result column="cumulativeRecovered" property="cumulativeRecovered"/>
+        <result column="firstVaccine" property="firstVaccine"/>
+        <result column="secondVaccine" property="secondVaccine"/>
+    </resultMap>
+
+
+
+    <select id="getCountryHistoric" resultMap="ListCountryHistoric">
+          SELECT a.date as date1,
+                SUM(a.confirmed) as confirmed,
+                SUM(a.cumulative_confirmed) as totalconfirmed,
+                SUM(a.deaths) as deaths,
+                SUM(a.cumulative_deaths) as totalDeaths,
+                SUM(a.recovered) as recovered,
+                SUM(a.cumulative_recovered) as totalrecovered
+            FROM covid_data a,country c, department d
+            WHERE c.iso = #{isoCountry}
+                and a.municipality_id is NULL
+                and c.country_id=a.country_id
+                and d.department_id=a.department_id
+                and a.status = 1
+            GROUP BY a.date
+    </select>
+
+    <resultMap id="ListCountryHistoric" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricRequest">
+        <result column="date1" property="date1"/>
+        <result column="confirmed" property="confirmed"/>
+        <result column="totalconfirmed" property="totalconfirmed"/>
+        <result column="deaths" property="deaths"/>
+        <result column="totalDeaths" property="totalDeaths"/>
+        <result column="recovered" property="recovered"/>
+        <result column="totalrecovered" property="totalrecovered"/>
+
+    </resultMap>
+
+
+
+    <select id="getCountryHistoricVaccine" resultMap="ListCountryHistoricVaccine">
+            SELECT b.date as date1,
+                SUM(b.first_vaccine) as firstVaccine,
+                SUM(b.second_vaccine) as secondVaccine
+            FROM vaccine b, department d, country a
+            WHERE a.iso =#{isoCountry}
+                and d.country_id=a.country_id
+                and b.department_id = d.department_id
+                and a.status = 1
+            GROUP BY b.date
+    </select>
+
+    <resultMap id="ListCountryHistoricVaccine" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricVaccineRequest">
+        <result column="date1" property="date1"/>
         <result column="firstVaccine" property="firstVaccine"/>
         <result column="secondVaccine" property="secondVaccine"/>
     </resultMap>
