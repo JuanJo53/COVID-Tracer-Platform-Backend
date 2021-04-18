@@ -383,9 +383,9 @@
 
     <select id="getCountryCumulativeEveryDayList" resultMap="ListCountryCumulative">
           SELECT a.date as dateCountry,
-                SUM(a.cumulative_confirmed) as totalconfirmed,
-                SUM(a.cumulative_deaths) as totalDeaths,
-                SUM(a.cumulative_recovered) as totalrecovered
+                SUM(a.cumulative_confirmed) as confirmed,
+                SUM(a.cumulative_deaths) as Deaths,
+                SUM(a.cumulative_recovered) as recovered
             FROM covid_data a,country c, department d
             WHERE c.iso = #{isoCountry}
                 and a.municipality_id is NULL
@@ -398,9 +398,9 @@
 
     <resultMap id="ListCountryCumulative" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricRequest">
         <result column="dateCountry" property="dateCountry"/>
-        <result column="totalconfirmed" property="totalconfirmed"/>
-        <result column="totalDeaths" property="totalDeaths"/>
-        <result column="totalrecovered" property="totalrecovered"/>
+        <result column="confirmed" property="confirmed"/>
+        <result column="Deaths" property="Deaths"/>
+        <result column="recovered" property="recovered"/>
     </resultMap>
 
     <select id="covidDataCumulativeWorldList" resultMap="covidDataWorldMap">
@@ -449,4 +449,7 @@
         <result column="deaths" property="deaths"/>
         <result column="date" property="date"/>
     </resultMap>
+
+
+
 </mapper>

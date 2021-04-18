@@ -13,4 +13,5 @@ public interface CountryDao {
     public Integer findCountryIdByIso(String isoCountry);
 
 
+    public Integer quantityCasesCountry(String isoCountry);
 }

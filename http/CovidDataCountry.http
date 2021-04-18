@@ -13,7 +13,7 @@ Accept: application/json
 
 ###
 
-GET http://localhost:8080/api/v1/data/country/BOL/listeveryDay?page=375&size=10
+GET http://localhost:8080/api/v1/data/country/BOL/CumulativeEveryDay?page=375&size=10
 Accept: application/json
 
 ###
@@ -33,3 +33,8 @@ Accept: application/json
 
 ###
 
+
+GET http://localhost:8080/api/v1/data/country/BOL/totalCases
+Accept: application/json
+
+###
