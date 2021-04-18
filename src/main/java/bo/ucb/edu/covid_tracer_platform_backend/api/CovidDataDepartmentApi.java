@@ -2,13 +2,9 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataDepartmentBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
-<<<<<<< HEAD
-import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartment;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentHistoricRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListHistoricRequest;
-=======
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest;
->>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;

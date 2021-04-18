@@ -1,13 +1,10 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
-<<<<<<< HEAD
 import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
-=======
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
->>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 import bo.ucb.edu.covid_tracer_platform_backend.model.*;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
 import org.slf4j.Logger;
