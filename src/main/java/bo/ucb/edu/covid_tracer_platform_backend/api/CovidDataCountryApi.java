@@ -11,6 +11,9 @@ import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -100,5 +103,15 @@ public class CovidDataCountryApi {
     public Integer getCovidDataTotalByDepartment(){
         Integer total = covidDataCountryBl.worldTotal();
         return total;
+    }
+
+    @GetMapping(path="/{isoCountry}/download")
+    public ResponseEntity<Resource> getFile(@PathVariable String isoCountry){
+        String filename = "data.csv";
+        InputStreamResource file = new InputStreamResource(covidDataCountryBl.load(isoCountry));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/csv"))
+                .body(file);
     }
 }
