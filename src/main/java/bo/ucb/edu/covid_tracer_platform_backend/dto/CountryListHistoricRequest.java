@@ -1,7 +1,7 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
 public class CountryListHistoricRequest {
-    private String date1;
+    private String dateCountry;
     private Integer confirmed;
     private Integer totalconfirmed;
     private Integer deaths;
@@ -14,15 +14,13 @@ public class CountryListHistoricRequest {
     }
 
 
-
-    public String getDate1() {
-        return date1;
+    public String getDateCountry() {
+        return dateCountry;
     }
 
-    public void setDate1(String date1) {
-        this.date1 = date1;
+    public void setDateCountry(String dateCountry) {
+        this.dateCountry = dateCountry;
     }
-
 
     public Integer getConfirmed() {
         return confirmed;
@@ -75,7 +73,7 @@ public class CountryListHistoricRequest {
     @Override
     public String toString() {
         return "CountryListHistoricRequest{" +
-                "date1='" + date1 + '\'' +
+                "date1='" + dateCountry + '\'' +
                 ", confirmed=" + confirmed +
                 ", totalconfirmed=" + totalconfirmed +
                 ", deaths=" + deaths +
