@@ -126,7 +126,7 @@ public class CovidDataCountryBl {
         String dateCountry = covidDataDao.getDateCovidData();
         System.out.println(dateCountry);
         countryHistoricRequest = covidDataDao.getCountryHistoric(isoCountry,dateCountry);
-        CountryListHistoricVaccineRequest covi = covidDataDao.getCountryHistoricVa(isoCountry);
+        CountryListHistoricVaccineRequest covi = covidDataDao.getCountryHistoricVa(isoCountry,dateCountry);
         countryHistoricRequest.setFirstVaccine(covi.getFirstVaccine());
         countryHistoricRequest.setSecondVaccine(covi.getSecondVaccine());
         return countryHistoricRequest;

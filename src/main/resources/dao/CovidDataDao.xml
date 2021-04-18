@@ -376,6 +376,7 @@
         FROM vaccine a
         WHERE
             a.status = 1
+            and a.date = #{dateCountry}
     </select>
 
 </mapper>

@@ -40,5 +40,5 @@ public interface CovidDataDao {
 
     public String getDateCovidData();
 
-    public CountryListHistoricVaccineRequest getCountryHistoricVa(String isoCountry);
+    public CountryListHistoricVaccineRequest getCountryHistoricVa(String isoCountry,String dateCountry);
 }
