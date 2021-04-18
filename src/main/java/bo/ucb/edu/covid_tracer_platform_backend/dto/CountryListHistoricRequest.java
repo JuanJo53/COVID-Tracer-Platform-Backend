@@ -1,21 +1,30 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
+import java.util.Date;
+
 public class CountryListHistoricRequest {
+<<<<<<< HEAD
     private String dateCountry;
     private Integer confirmed;
     private Integer Deaths;
     private Integer recovered;
+=======
+    private Date dateCountry;
+    private Integer totalconfirmed;
+    private Integer totalDeaths;
+    private Integer totalrecovered;
+>>>>>>> 5b327f01b5fb89153bbce386537c9605e3e0c156
     private Integer firstVaccine;
     private Integer secondVaccine;
 
     public CountryListHistoricRequest() {
     }
 
-    public String getDateCountry() {
+    public Date getDateCountry() {
         return dateCountry;
     }
 
-    public void setDateCountry(String dateCountry) {
+    public void setDateCountry(Date dateCountry) {
         this.dateCountry = dateCountry;
     }
 

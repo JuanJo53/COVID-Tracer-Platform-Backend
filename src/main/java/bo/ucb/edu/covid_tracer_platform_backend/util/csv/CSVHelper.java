@@ -1,8 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.util.csv;
 
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCountryCsvRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataMunicipalityCvsRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
 import org.apache.commons.csv.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,6 +107,39 @@ public class CSVHelper {
                         String.valueOf(dataC.getCumulativeRecovered()),
                         String.valueOf(dataC.getFirstVaccine()),
                         String.valueOf(dataC.getSecondVaccine())
+                );
+                csvPrinter.printRecord(data);
+            }
+
+            csvPrinter.flush();
+            return new ByteArrayInputStream(out.toByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
+        }
+    }
+
+    public static ByteArrayInputStream covidDataCountryToCSV(List<CountryListHistoricEveryDayRequest> countryListHistoricEveryDayRequests, List<CountryListHistoricRequest> countryListHistoricRequests) {
+        final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
+
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream();
+             CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
+            List<String> headers = Arrays.asList("Fecha", "Casos", "Casos_Acum", "Muertes", "Muertes_Acum", "Recuperados", "Recuperados_Acum", "Vacunados_Prim", "Vacunados_Seg");
+            csvPrinter.printRecord(headers);
+            for (int i=0; i<countryListHistoricEveryDayRequests.size(); i++) {
+                CountryListHistoricEveryDayRequest dataC = countryListHistoricEveryDayRequests.get(i);
+                CountryListHistoricRequest dataB = countryListHistoricRequests.get(i);
+
+                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+                List<String> data = Arrays.asList(
+                        date.format(dataC.getDateCountry()),
+                        String.valueOf(dataC.getConfirmed()),
+                        String.valueOf(dataB.getTotalconfirmed()),
+                        String.valueOf(dataC.getDeaths()),
+                        String.valueOf(dataB.getTotalDeaths()),
+                        String.valueOf(dataC.getRecovered()),
+                        String.valueOf(dataB.getTotalrecovered()),
+                        String.valueOf(dataB.getFirstVaccine()),
+                        String.valueOf(dataB.getSecondVaccine())
                 );
                 csvPrinter.printRecord(data);
             }
