@@ -162,19 +162,18 @@ public class CovidDataCountryBl {
         Integer total = covidDataDao.worldTotal().size();
         return total;
     }
-<<<<<<< HEAD
 
     public Integer QuantityCasesCountry(String isoCountry) {
         Integer quantity = countryDao.quantityCasesCountry(isoCountry);
         return quantity;
-=======
-    public ByteArrayInputStream load(String isoCountry){
+    }
+
+        public ByteArrayInputStream load(String isoCountry){
         Integer cant = 1000;
         List<CountryListHistoricRequest> c1 = countryListEveryDay(isoCountry,0, cant);
         List<CountryListHistoricEveryDayRequest> c2 = countryListHistoric(isoCountry,0, cant);
 
         ByteArrayInputStream in = CSVHelper.covidDataCountryToCSV(c2, c1);
         return in;
->>>>>>> 5b327f01b5fb89153bbce386537c9605e3e0c156
     }
 }
