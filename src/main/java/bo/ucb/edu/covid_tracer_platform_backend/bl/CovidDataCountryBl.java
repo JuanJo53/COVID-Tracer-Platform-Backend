@@ -161,4 +161,9 @@ public class CovidDataCountryBl {
         Integer total = covidDataDao.worldTotal().size();
         return total;
     }
+
+    public Integer QuantityCasesCountry(String isoCountry) {
+        Integer quantity = countryDao.quantityCasesCountry(isoCountry);
+        return quantity;
+    }
 }
