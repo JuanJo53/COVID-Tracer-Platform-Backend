@@ -80,4 +80,10 @@ public class CovidDataCountryApi {
         List<CountryListHistoricVaccineRequest> data = covidDataCountryBl.countryListHistoricVaccine(isoCountry);
         return data;
     }
+
+    @GetMapping(path="/{isoCountry}/historic", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CountryHistoricRequest countryHistoric(@PathVariable String isoCountry){
+        CountryHistoricRequest data = covidDataCountryBl.countryHistoric(isoCountry);
+        return data;
+    }
 }

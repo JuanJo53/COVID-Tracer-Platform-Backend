@@ -13,8 +13,12 @@ Accept: application/json
 
 ###
 
-
 GET http://localhost:8080/api/v1/data/country/BOL/listhistoric/vaccine
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/v1/data/country/BOL/historic
 Accept: application/json
 
 ###
