@@ -30,14 +30,18 @@
             iso = #{isoCountry} and status = 1
     </select>
 
-    <select id="quantityCasesCountry" resultType="java.lang.Integer">
-          SELECT COUNT(a.covid_data_id) as quantity
+    <select id="quantityCasesCountry" resultMap="listCountCountry">
+          SELECT COUNT(a.department_id) as quantity
             FROM covid_data a,country c
-            WHERE c.iso = #{isoCountry}
+            WHERE c.iso = "BOL"
                 and a.municipality_id is NULL
                 and c.country_id=a.country_id
                 and a.status = 1
-                and a.department_id = 1
+                GROUP BY  a.date
     </select>
+
+    <resultMap id="listCountCountry" type="java.lang.Integer">
+        <result column="quantity" property="quantity"/>
+    </resultMap>
 
 </mapper>

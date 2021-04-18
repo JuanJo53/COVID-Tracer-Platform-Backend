@@ -164,7 +164,7 @@ public class CovidDataCountryBl {
     }
 
     public Integer QuantityCasesCountry(String isoCountry) {
-        Integer quantity = countryDao.quantityCasesCountry(isoCountry);
+        Integer quantity = countryDao.quantityCasesCountry(isoCountry).size();
         return quantity;
     }
 
