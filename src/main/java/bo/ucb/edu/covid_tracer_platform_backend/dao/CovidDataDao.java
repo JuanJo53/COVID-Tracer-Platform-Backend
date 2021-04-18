@@ -16,10 +16,12 @@ public interface CovidDataDao {
     public List<CovidDataListDepartmentRequest> covidDataHistoricListByDepartment(Integer departmentId, Integer page, Integer size);
     public List<CovidDataListDepartmentRequest> covidDataCumulativeListByDepartment(Integer departmentId, Integer page, Integer size);
     public List<CountryListRequest> listCountry();
-    public List<DepartmentListRequest> listDepartament(String countryISO);
+    public List<DepartmentListRequest> listDepartment(String countryISO);
     public TotalWorldRequest getTotalWorld();
 
-    public DepartmentListRequest getDepartament(String countryISO, String isoDepartment);
+    public List<DataDepartmentCsvRequest> getCovidData(Integer departmentId);
+
+    public DepartmentListRequest getDepartment(String countryISO, String isoDepartment);
 
     public Date lastDateMunicipality(String  municipality);
 

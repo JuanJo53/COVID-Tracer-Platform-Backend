@@ -21,6 +21,7 @@
             a.user_id = b.user_id
             and a.country_id = c.country_id
             and a.country_id != 25
+            and a.type = 0
             and a.status = 1
             and b.status = 1
             and c.status = 1
@@ -38,6 +39,7 @@
             a.user_id = b.user_id
             and a.department_id = c.department_id
             and a.country_id = 25
+            and a.type = 0
             and a.status = 1
             and b.status = 1
             and c.status = 1
@@ -57,6 +59,7 @@
         where
           country_id != 25
           and status = 1
+          and type = 0
     </select>
 
     <select id="getDataRequestTotalDepartment" resultType="java.lang.Integer">
@@ -64,6 +67,7 @@
         from data_request
         where
             country_id = 25
+          and type = 0
           and status = 1
     </select>
 </mapper>
