@@ -32,8 +32,13 @@ public interface CovidDataDao {
 
     public List<DepartmentHistoricRequest> getDepartmentHistoric(String countryIso, String departmentIso);
 
-    public List<CountryListHistoricRequest> getCountryHistoric(String isoCountry);
+    public List<CountryListHistoricRequest> getCountryListHistoric(String isoCountry);
 
     public List<CountryListHistoricVaccineRequest> getCountryHistoricVaccine(String isoCountry);
 
+    public CountryHistoricRequest getCountryHistoric(String isoCountry,String dateCountry);
+
+    public String getDateCovidData();
+
+    public CountryListHistoricVaccineRequest getCountryHistoricVa(String isoCountry);
 }
