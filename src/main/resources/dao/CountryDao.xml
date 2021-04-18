@@ -37,7 +37,7 @@
                 and a.municipality_id is NULL
                 and c.country_id=a.country_id
                 and a.status = 1
-                and a.department_id = 1
+                and a.department_id = 2
     </select>
 
 </mapper>

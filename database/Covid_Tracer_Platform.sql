@@ -3,6 +3,10 @@
 
 -- tables
 -- Table: country
+drop database covid_tracer;
+create database covid_tracer;
+USE covid_tracer;
+
 CREATE TABLE country (
     country_id int NOT NULL AUTO_INCREMENT,
     iso varchar(50) NOT NULL,

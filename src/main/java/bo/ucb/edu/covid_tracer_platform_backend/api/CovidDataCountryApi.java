@@ -105,12 +105,11 @@ public class CovidDataCountryApi {
         return total;
     }
 
-<<<<<<< HEAD
     @GetMapping(path="/{isoCountry}/totalCases", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Integer worldList(@PathVariable String isoCountry){
+    public Integer worldList(@PathVariable String isoCountry) {
         Integer data = covidDataCountryBl.QuantityCasesCountry(isoCountry);
         return data;
-=======
+    }
     @GetMapping(path="/{isoCountry}/download")
     public ResponseEntity<Resource> getFile(@PathVariable String isoCountry){
         String filename = "data.csv";
@@ -119,6 +118,5 @@ public class CovidDataCountryApi {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
                 .contentType(MediaType.parseMediaType("application/csv"))
                 .body(file);
->>>>>>> 5b327f01b5fb89153bbce386537c9605e3e0c156
     }
 }
