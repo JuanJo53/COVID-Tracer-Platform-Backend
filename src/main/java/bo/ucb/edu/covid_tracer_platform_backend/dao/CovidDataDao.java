@@ -32,7 +32,7 @@ public interface CovidDataDao {
 
     public List<DepartmentHistoricRequest> getDepartmentHistoric(String countryIso, String departmentIso);
 
-    public List<CountryListHistoricRequest> getCountryListHistoric(String isoCountry);
+    public List<CountryListHistoricEveryDayRequest> getCountryListHistoric(String isoCountry);
 
     public List<CountryListHistoricVaccineRequest> getCountryHistoricVaccine(String isoCountry);
 
@@ -41,4 +41,6 @@ public interface CovidDataDao {
     public String getDateCovidData();
 
     public CountryListHistoricVaccineRequest getCountryHistoricVa(String isoCountry,String dateCountry);
+
+    public List<CountryListHistoricRequest> getCountryCumulativeEveryDayList(String isoCountry);
 }

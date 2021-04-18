@@ -107,8 +107,8 @@ public class CovidDataCountryBl {
         return total;
     }
 
-    public List<CountryListHistoricRequest> countryListHistoric(String isoCountry) {
-        List<CountryListHistoricRequest> data = new ArrayList<>();
+    public List<CountryListHistoricEveryDayRequest> countryListHistoric(String isoCountry) {
+        List<CountryListHistoricEveryDayRequest> data = new ArrayList<>();
         data = covidDataDao.getCountryListHistoric(isoCountry);
 
         return data;
@@ -130,5 +130,24 @@ public class CovidDataCountryBl {
         countryHistoricRequest.setFirstVaccine(covi.getFirstVaccine());
         countryHistoricRequest.setSecondVaccine(covi.getSecondVaccine());
         return countryHistoricRequest;
+    }
+
+    public List<CountryListHistoricRequest> countryListEveryDay(String isoCountry) {
+        List<CountryListHistoricRequest> data = new ArrayList<>();
+        data = covidDataDao.getCountryCumulativeEveryDayList(isoCountry);
+        List<CountryListHistoricVaccineRequest> countryListHistoricVaccineRequest = new ArrayList<>();
+        countryListHistoricVaccineRequest = covidDataDao.getCountryHistoricVaccine(isoCountry);
+        List<CountryListHistoricRequest> dataFinal = new ArrayList<>();
+        for(int i=0;i<data.size();i++){
+            CountryListHistoricRequest countryListHistoricRequest = new CountryListHistoricRequest();
+            countryListHistoricRequest=data.get(i);
+            CountryListHistoricVaccineRequest countryListHistoricVaccineRequest1=new CountryListHistoricVaccineRequest();
+            countryListHistoricVaccineRequest1=countryListHistoricVaccineRequest.get(i);
+            countryListHistoricRequest.setFirstVaccine(countryListHistoricVaccineRequest1.getFirstVaccine());
+            countryListHistoricRequest.setSecondVaccine(countryListHistoricVaccineRequest1.getSecondVaccine());
+            dataFinal.add(countryListHistoricRequest);
+
+        }
+        return dataFinal;
     }
 }
