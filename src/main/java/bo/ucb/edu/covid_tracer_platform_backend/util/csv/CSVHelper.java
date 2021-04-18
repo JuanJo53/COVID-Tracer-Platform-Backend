@@ -133,11 +133,11 @@ public class CSVHelper {
                 List<String> data = Arrays.asList(
                         date.format(dataC.getDateCountry()),
                         String.valueOf(dataC.getConfirmed()),
-                        String.valueOf(dataB.getTotalconfirmed()),
+                        String.valueOf(dataB.getConfirmed()),
                         String.valueOf(dataC.getDeaths()),
-                        String.valueOf(dataB.getTotalDeaths()),
+                        String.valueOf(dataB.getDeaths()),
                         String.valueOf(dataC.getRecovered()),
-                        String.valueOf(dataB.getTotalrecovered()),
+                        String.valueOf(dataB.getRecovered()),
                         String.valueOf(dataB.getFirstVaccine()),
                         String.valueOf(dataB.getSecondVaccine())
                 );

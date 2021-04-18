@@ -80,7 +80,7 @@ public class CovidDataCountryApi {
     }
 
 
-    @GetMapping(path="/{isoCountry}/listeveryDay", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/{isoCountry}/CumulativeEveryDay", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CountryListHistoricRequest> countryListEveryDay(@PathVariable String isoCountry,
                                                                 @RequestParam Integer page, @RequestParam Integer size){
         List<CountryListHistoricRequest> data = covidDataCountryBl.countryListEveryDay(isoCountry,page,size);
@@ -104,7 +104,11 @@ public class CovidDataCountryApi {
         Integer total = covidDataCountryBl.worldTotal();
         return total;
     }
-
+    @GetMapping(path="/{isoCountry}/totalCases", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Integer worldList(@PathVariable String isoCountry) {
+        Integer data = covidDataCountryBl.QuantityCasesCountry(isoCountry);
+        return data;
+    }
     @GetMapping(path="/{isoCountry}/download")
     public ResponseEntity<Resource> getFile(@PathVariable String isoCountry){
         String filename = "data.csv";
