@@ -22,3 +22,14 @@ GET http://localhost:8080/api/v1/data/country/BOL/general
 Accept: application/json
 
 ###
+
+GET http://localhost:8080/api/v1/data/country/cumulative/list?page=430&size=50
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/v1/data/country/world/total
+Accept: application/json
+
+###
+

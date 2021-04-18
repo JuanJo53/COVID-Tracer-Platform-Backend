@@ -95,12 +95,6 @@
         <result column="secondVaccine" property="secondVaccine"/>
     </resultMap>
 
-
-
-
-
-
-
     <select id="listDepartment" resultMap="DepartamentDataMap">
         SELECT
             b.department_id as departmentId,
@@ -251,15 +245,16 @@
         <result column="totalrecovered" property="totalrecovered"/>
     </resultMap>
 
-    <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest">
+    <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.WorldRequest">
         SELECT
-            SUM(confirmed) as totalConfirmed,
-            SUM(deaths) as totalDeaths,
+            SUM(cumulative_confirmed) as confirmed,
+            SUM(cumulative_deaths) as deaths,
             MAX(date) as date
         FROM covid_data
         WHERE
             department_id is null
             and municipality_id is null
+            and date = (SELECT MAX(date) FROM covid_data)
             and status = 1
     </select>
 
@@ -406,6 +401,52 @@
         <result column="totalconfirmed" property="totalconfirmed"/>
         <result column="totalDeaths" property="totalDeaths"/>
         <result column="totalrecovered" property="totalrecovered"/>
+    </resultMap>
 
+    <select id="covidDataCumulativeWorldList" resultMap="covidDataWorldMap">
+        SELECT
+            SUM(cumulative_confirmed) as confirmed,
+            SUM(cumulative_deaths) as deaths,
+            date as date
+        FROM covid_data
+        WHERE
+            department_id is null
+            and municipality_id is null
+        GROUP BY date
+        ORDER BY date ASC
+        LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <select id="covidDataHistoricWorldList" resultMap="covidDataWorldMap">
+        SELECT
+            SUM(confirmed) as confirmed,
+            SUM(deaths) as deaths,
+            date as date
+        FROM covid_data
+        WHERE
+            department_id is null
+          and municipality_id is null
+        GROUP BY date
+        ORDER BY date ASC
+            LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <select id="worldTotal" resultMap="covidDataWorldMap">
+        SELECT
+            SUM(confirmed) as confirmed,
+            SUM(deaths) as deaths,
+            date as date
+        FROM covid_data
+        WHERE
+            department_id is null
+          and municipality_id is null
+        GROUP BY date
+        ORDER BY date ASC
+    </select>
+
+    <resultMap id="covidDataWorldMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.WorldRequest">
+        <result column="confirmed" property="confirmed"/>
+        <result column="deaths" property="deaths"/>
+        <result column="date" property="date"/>
     </resultMap>
 </mapper>

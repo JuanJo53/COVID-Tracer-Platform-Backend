@@ -13,14 +13,28 @@ import java.util.List;
 @Mapper
 public interface CovidDataDao {
     public void createCovidData(CovidData covidData);
+
     public Date lastDateDepartment(Integer departmentId);
+
     public Date lastDateCountry(Integer countryId);
+
     public Integer getCovidDataTotalByDepartment(Integer departmentId);
+
     public List<CovidDataListDepartmentRequest> covidDataHistoricListByDepartment(Integer departmentId, Integer page, Integer size);
+
     public List<CovidDataListDepartmentRequest> covidDataCumulativeListByDepartment(Integer departmentId, Integer page, Integer size);
+
+    public List<WorldRequest> covidDataHistoricWorldList(Integer page, Integer size);
+
+    public List<WorldRequest> covidDataCumulativeWorldList(Integer page, Integer size);
+
+    public List<WorldRequest> worldTotal();
+
     public List<CountryListRequest> listCountry();
+
     public List<DepartmentListRequest> listDepartment(String countryISO);
-    public TotalWorldRequest getTotalWorld();
+
+    public WorldRequest getTotalWorld();
 
     public List<DataDepartmentCsvRequest> getCovidData(Integer departmentId);
 

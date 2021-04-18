@@ -4,7 +4,7 @@ import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataCountryBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.WorldRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
@@ -64,8 +64,8 @@ public class CovidDataCountryApi {
         return data;
     }
     @GetMapping(path="/total", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TotalWorldRequest getTotalWorld(){
-        TotalWorldRequest data = covidDataCountryBl.getTotalWorld();
+    public WorldRequest getTotalWorld(){
+        WorldRequest data = covidDataCountryBl.getTotalWorld();
         return data;
     }
 
@@ -88,5 +88,17 @@ public class CovidDataCountryApi {
     public CountryHistoricRequest countryHistoric(@PathVariable String isoCountry){
         CountryHistoricRequest data = covidDataCountryBl.countryHistoric(isoCountry);
         return data;
+    }
+
+    @GetMapping(path="/{list}/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<WorldRequest> worldList(@PathVariable String list, @RequestParam Integer page, @RequestParam Integer size){
+        List<WorldRequest> data = covidDataCountryBl.covidDataListWorld(list, page, size);
+        return data;
+    }
+
+    @GetMapping(path="/world/total", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Integer getCovidDataTotalByDepartment(){
+        Integer total = covidDataCountryBl.worldTotal();
+        return total;
     }
 }
