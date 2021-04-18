@@ -80,4 +80,6 @@ public class CovidDataDepartmentApi {
         DepartmentListRequest data = covidDataDepartmentBl.getDepartment(countryISO,departmentISO);
         return data;
     }
+
+
 }
