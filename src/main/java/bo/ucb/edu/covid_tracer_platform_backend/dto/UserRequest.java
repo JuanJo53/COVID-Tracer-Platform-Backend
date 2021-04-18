@@ -1,10 +1,21 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UserRequest {
+    @NotEmpty
+    @Size(min = 3, max = 25)
     private String firstName;
+    @Size(min = 3, max = 25)
     private String firstSurname;
     private String secondSurname;
+    @Email
+    @Size(min = 6, max = 50)
     private String email;
+    @NotEmpty
+    @Size(min = 6, max = 20)
     private String userName;
     private String password;
     private Integer role;
