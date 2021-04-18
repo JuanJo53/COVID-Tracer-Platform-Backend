@@ -7,3 +7,13 @@ GET http://localhost:8080/api/v1/data/department?page=0&size=10
 Accept: application/json
 
 ###
+
+GET http://localhost:8080/api/v1/data/world/total
+Accept: application/json
+
+###
+
+GET http://localhost:8080/api/v1/data/department/total
+Accept: application/json
+
+###

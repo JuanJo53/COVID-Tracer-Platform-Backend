@@ -50,4 +50,20 @@
         <result column="region" property="region"/>
         <result column="date" property="date"/>
     </resultMap>
+
+    <select id="getDataRequestTotalWorld" resultType="java.lang.Integer">
+        select COUNT(data_request_id)
+        from data_request
+        where
+          country_id != 25
+          and status = 1
+    </select>
+
+    <select id="getDataRequestTotalDepartment" resultType="java.lang.Integer">
+        select COUNT(data_request_id)
+        from data_request
+        where
+            country_id = 25
+          and status = 1
+    </select>
 </mapper>
