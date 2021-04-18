@@ -2,19 +2,19 @@ package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
 public class CountryListHistoricVaccineRequest {
 
-    private String date1;
+    private String dateCountry;
     private Integer firstVaccine;
     private Integer secondVaccine;
 
     public CountryListHistoricVaccineRequest() {
     }
 
-    public String getDate1() {
-        return date1;
+    public String getDateCountry() {
+        return dateCountry;
     }
 
-    public void setDate1(String date1) {
-        this.date1 = date1;
+    public void setDateCountry(String dateCountry) {
+        this.dateCountry = dateCountry;
     }
 
     public Integer getFirstVaccine() {
@@ -36,7 +36,7 @@ public class CountryListHistoricVaccineRequest {
     @Override
     public String toString() {
         return "CountryListHistoricVaccineRequest{" +
-                "date1='" + date1 + '\'' +
+                "date1='" + dateCountry + '\'' +
                 ", firstVaccine=" + firstVaccine +
                 ", secondVaccine=" + secondVaccine +
                 '}';

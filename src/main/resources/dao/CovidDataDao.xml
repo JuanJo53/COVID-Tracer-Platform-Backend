@@ -299,7 +299,7 @@
 
 
     <select id="getCountryHistoric" resultMap="ListCountryHistoric">
-          SELECT a.date as date1,
+          SELECT a.date as dateCountry,
                 SUM(a.confirmed) as confirmed,
                 SUM(a.cumulative_confirmed) as totalconfirmed,
                 SUM(a.deaths) as deaths,
@@ -316,7 +316,7 @@
     </select>
 
     <resultMap id="ListCountryHistoric" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricRequest">
-        <result column="date1" property="date1"/>
+        <result column="dateCountry" property="dateCountry"/>
         <result column="confirmed" property="confirmed"/>
         <result column="totalconfirmed" property="totalconfirmed"/>
         <result column="deaths" property="deaths"/>
@@ -329,7 +329,7 @@
 
 
     <select id="getCountryHistoricVaccine" resultMap="ListCountryHistoricVaccine">
-            SELECT b.date as date1,
+            SELECT b.date as dateCountry,
                 SUM(b.first_vaccine) as firstVaccine,
                 SUM(b.second_vaccine) as secondVaccine
             FROM vaccine b, department d, country a
@@ -341,7 +341,7 @@
     </select>
 
     <resultMap id="ListCountryHistoricVaccine" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricVaccineRequest">
-        <result column="date1" property="date1"/>
+        <result column="dateCountry" property="dateCountry"/>
         <result column="firstVaccine" property="firstVaccine"/>
         <result column="secondVaccine" property="secondVaccine"/>
     </resultMap>
