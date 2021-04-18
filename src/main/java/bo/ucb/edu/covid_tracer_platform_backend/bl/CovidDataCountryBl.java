@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -165,5 +166,12 @@ public class CovidDataCountryBl {
     public Integer worldTotal(){
         Integer total = covidDataDao.worldTotal().size();
         return total;
+    }
+    public ByteArrayInputStream load(String isoCountry){
+        List<CountryListHistoricRequest> c1 = countryListEveryDay(isoCountry);
+        List<CountryListHistoricEveryDayRequest> c2 = countryListHistoric(isoCountry);
+
+        ByteArrayInputStream in = CSVHelper.covidDataCountryToCSV(c2, c1);
+        return in;
     }
 }
