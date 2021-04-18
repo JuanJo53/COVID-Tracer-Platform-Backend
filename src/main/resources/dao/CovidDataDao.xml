@@ -399,7 +399,7 @@
         <result column="totalrecovered" property="totalrecovered"/>
     </resultMap>
 
-    <select id="covidDataHistoricWorldList" resultMap="covidDataWorldMap">
+    <select id="covidDataCumulativeWorldList" resultMap="covidDataWorldMap">
         SELECT
             SUM(cumulative_confirmed) as confirmed,
             SUM(cumulative_deaths) as deaths,
@@ -413,7 +413,7 @@
         LIMIT #{size} OFFSET #{page}
     </select>
 
-    <select id="covidDataCumulativeWorldList" resultMap="covidDataWorldMap">
+    <select id="covidDataHistoricWorldList" resultMap="covidDataWorldMap">
         SELECT
             SUM(confirmed) as confirmed,
             SUM(deaths) as deaths,
