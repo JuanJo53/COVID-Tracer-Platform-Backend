@@ -334,6 +334,7 @@
             b.iso =#{isoCountry}
             and a.date = #{dateCountry}
             and a.municipality_id is NULL
+            and a.department_id is NOT NULL
             and b.country_id = a.country_id
             and a.status = 1
     </select>
