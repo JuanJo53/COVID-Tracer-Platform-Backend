@@ -2,12 +2,8 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataCountryBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
-<<<<<<< HEAD
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentHistoricRequest;
-=======
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
->>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
 import bo.ucb.edu.covid_tracer_platform_backend.util.TransactionUtil;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
@@ -61,9 +57,6 @@ public class CovidDataCountryApi {
         return new ResponseEntity("Please upload a csv file!", HttpStatus.BAD_REQUEST);
     }
 
-<<<<<<< HEAD
-
-=======
     @GetMapping(path="/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CountryListRequest> listCountry(){
         List<CountryListRequest> data = covidDataCountryBl.listCountry();
@@ -74,5 +67,4 @@ public class CovidDataCountryApi {
         TotalWorldRequest data = covidDataCountryBl.getTotalWorld();
         return data;
     }
->>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 }
