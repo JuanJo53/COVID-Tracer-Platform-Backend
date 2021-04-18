@@ -70,7 +70,7 @@ public class CovidDataDepartmentApi {
 
     @GetMapping(path="/{isoDepartment}/{list}/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CovidDataListDepartmentRequest> covidDataListDepartment(@PathVariable String isoDepartment, @PathVariable String list,
-                                                                        @RequestParam Integer page, @RequestParam Integer size){
+                                                                        @RequestParam String page, @RequestParam String size){
         List<CovidDataListDepartmentRequest> data = covidDataDepartmentBl.covidDataListDepartment(isoDepartment, list, page, size);
         return data;
     }

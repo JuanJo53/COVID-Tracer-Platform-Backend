@@ -85,6 +85,46 @@
         LIMIT #{size} OFFSET #{page}
     </select>
 
+    <select id="covidDataHistoricListByDepartmentDate" resultMap="covidDataMap">
+        SELECT
+            a.covid_data_id as id,
+            a.date as date,
+            a.confirmed as confirmed,
+            a.deaths as deaths,
+            a.recovered as recovered,
+            b.first_vaccine as firstVaccine,
+            b.second_vaccine as secondVaccine
+        FROM covid_data a, vaccine b
+        WHERE
+            a.department_id = #{departmentId}
+          and b.department_id = a.department_id
+          and a.date = b.date
+          and a.municipality_id is NULL
+          and a.status = 1
+          and b.status = 1
+          and a.date between #{ini} and #{end}
+    </select>
+
+    <select id="covidDataCumulativeListByDepartmentDate" resultMap="covidDataMap">
+        SELECT
+            a.covid_data_id as id,
+            a.date as date,
+            a.cumulative_confirmed as confirmed,
+            a.cumulative_deaths as deaths,
+            a.cumulative_recovered as recovered,
+            b.first_vaccine as firstVaccine,
+            b.second_vaccine as secondVaccine
+        FROM covid_data a, vaccine b
+        WHERE
+            a.department_id = #{departmentId}
+          and b.department_id = a.department_id
+          and a.date = b.date
+          and a.municipality_id is NULL
+          and a.status = 1
+          and b.status = 1
+          and a.date between #{ini} and #{end}
+    </select>
+
     <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest">
         <result column="id" property="id"/>
         <result column="date" property="date"/>

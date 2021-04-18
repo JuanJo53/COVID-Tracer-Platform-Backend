@@ -109,16 +109,41 @@ public class CovidDataDepartmentBl {
         return total;
     }
 
-    public List<CovidDataListDepartmentRequest> covidDataListDepartment(String isoDepartment, String list, Integer page, Integer size){
+    public List<CovidDataListDepartmentRequest> covidDataListDepartment(String isoDepartment, String list, String page, String size){
         Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
         List<CovidDataListDepartmentRequest> data = new ArrayList<>();
-        if(list.equals("historic")){
-            data = covidDataDao.covidDataHistoricListByDepartment(departmentId, page, size);
+        if(isNumeric(page) && isNumeric(size)){
+          if(list.equals("historic")){
+              data = covidDataDao.covidDataHistoricListByDepartment(departmentId, Integer.parseInt(page), Integer.parseInt(size));
+          }
+          if(list.equals("cumulative")){
+              data = covidDataDao.covidDataCumulativeListByDepartment(departmentId, Integer.parseInt(page), Integer.parseInt(size));
+          }
         }
-        if(list.equals("cumulative")){
-            data = covidDataDao.covidDataCumulativeListByDepartment(departmentId, page, size);
+        if(!isNumeric(page) && !isNumeric(size)){
+            if(list.equals("historic")){
+                data = covidDataDao.covidDataHistoricListByDepartmentDate(departmentId, page, size);
+            }
+            if(list.equals("cumulative")){
+                data = covidDataDao.covidDataCumulativeListByDepartmentDate(departmentId, page, size);
+            }
         }
+
         return data;
+    }
+
+    public static boolean isNumeric(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
     }
 
 

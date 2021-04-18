@@ -24,6 +24,10 @@ public interface CovidDataDao {
 
     public List<CovidDataListDepartmentRequest> covidDataCumulativeListByDepartment(Integer departmentId, Integer page, Integer size);
 
+    public List<CovidDataListDepartmentRequest> covidDataHistoricListByDepartmentDate(Integer departmentId, String ini, String end);
+
+    public List<CovidDataListDepartmentRequest> covidDataCumulativeListByDepartmentDate(Integer departmentId, String ini, String end);
+
     public List<WorldRequest> covidDataHistoricWorldList(Integer page, Integer size);
 
     public List<WorldRequest> covidDataCumulativeWorldList(Integer page, Integer size);
