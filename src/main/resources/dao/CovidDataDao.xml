@@ -222,8 +222,6 @@
         <result column="longitude" property="longitude"/>
         <result column="latitude" property="latitude"/>
     </resultMap>
-
-<<<<<<< HEAD
     <select id="getDepartmentHistoric" resultMap="DepartmentHisMap">
           SELECT a.date as date1,
 		    d.department as department,
@@ -252,7 +250,6 @@
         <result column="recovered" property="recovered"/>
         <result column="totalrecovered" property="totalrecovered"/>
     </resultMap>
-=======
     <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest">
         SELECT
             SUM(confirmed) as totalConfirmed,
@@ -264,5 +261,4 @@
             and municipality_id is null
             and status = 1
     </select>
->>>>>>> 56cb2af890dadb61e59356e87ce4466fac576d33
 </mapper>
