@@ -12,6 +12,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CSVHelper {
@@ -89,19 +90,26 @@ public class CSVHelper {
         }
     }
 
-    /*public static ByteArrayInputStream tutorialsToCSV(List<DeveloperTutorial> developerTutorialList) {
+    public static ByteArrayInputStream covidDataToCSV(List<DataDepartmentCsvRequest> dataDepartmentCsvRequestList) {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
              CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
-            for (DeveloperTutorial developerTutorial : developerTutorialList) {
+            List<String> headers = Arrays.asList("Fecha", "Casos", "Casos_Acum", "Muertes", "Muertes_Acum", "Recuperados", "Recuperados_Acum", "Vacunados_Prim", "Vacunados_Seg");
+            csvPrinter.printRecord(headers);
+            for (DataDepartmentCsvRequest dataC : dataDepartmentCsvRequestList) {
+                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
                 List<String> data = Arrays.asList(
-                        String.valueOf(developerTutorial.getId()),
-                        developerTutorial.getTitle(),
-                        developerTutorial.getDescription(),
-                        String.valueOf(developerTutorial.isPublished())
+                        date.format(dataC.getDate()),
+                        String.valueOf(dataC.getConfirmed()),
+                        String.valueOf(dataC.getCumulativeConfirmed()),
+                        String.valueOf(dataC.getDeaths()),
+                        String.valueOf(dataC.getCumulativeDeaths()),
+                        String.valueOf(dataC.getRecovered()),
+                        String.valueOf(dataC.getCumulativeRecovered()),
+                        String.valueOf(dataC.getFirstVaccine()),
+                        String.valueOf(dataC.getSecondVaccine())
                 );
-
                 csvPrinter.printRecord(data);
             }
 
@@ -110,7 +118,7 @@ public class CSVHelper {
         } catch (IOException e) {
             throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
         }
-    }*/
+    }
 
     public static List<DataMunicipalityCvsRequest> csvMunDataCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));

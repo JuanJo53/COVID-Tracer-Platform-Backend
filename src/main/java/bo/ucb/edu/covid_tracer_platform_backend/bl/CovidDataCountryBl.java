@@ -4,9 +4,7 @@ import bo.ucb.edu.covid_tracer_platform_backend.dao.CountryDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.CovidDataDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.DataRequestDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.TransactionDao;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataCountryCsvRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
 import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
 import bo.ucb.edu.covid_tracer_platform_backend.model.DataRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
@@ -20,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -108,4 +107,17 @@ public class CovidDataCountryBl {
         return total;
     }
 
+    public List<CountryListHistoricRequest> countryListHistoric(String isoCountry) {
+        List<CountryListHistoricRequest> data = new ArrayList<>();
+        data = covidDataDao.getCountryHistoric(isoCountry);
+
+        return data;
+    }
+
+    public List<CountryListHistoricVaccineRequest> countryListHistoricVaccine(String isoCountry) {
+        List<CountryListHistoricVaccineRequest> data = new ArrayList<>();
+        data = covidDataDao.getCountryHistoricVaccine(isoCountry);
+
+        return data;
+    }
 }

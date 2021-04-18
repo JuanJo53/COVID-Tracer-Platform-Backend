@@ -2,6 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.api;
 
 import bo.ucb.edu.covid_tracer_platform_backend.bl.CovidDataCountryBl;
 import bo.ucb.edu.covid_tracer_platform_backend.bl.TransactionBl;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.TotalWorldRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.Transaction;
@@ -65,6 +66,18 @@ public class CovidDataCountryApi {
     @GetMapping(path="/total", produces = MediaType.APPLICATION_JSON_VALUE)
     public TotalWorldRequest getTotalWorld(){
         TotalWorldRequest data = covidDataCountryBl.getTotalWorld();
+        return data;
+    }
+
+    @GetMapping(path="/{isoCountry}/listhistoric", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CountryListHistoricRequest> countryListHistoric(@PathVariable String isoCountry){
+        List<CountryListHistoricRequest> data = covidDataCountryBl.countryListHistoric(isoCountry);
+        return data;
+    }
+
+    @GetMapping(path="/{isoCountry}/listhistoric/vaccine", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CountryListHistoricVaccineRequest> countryListHistoricVaccine(@PathVariable String isoCountry){
+        List<CountryListHistoricVaccineRequest> data = covidDataCountryBl.countryListHistoricVaccine(isoCountry);
         return data;
     }
 }

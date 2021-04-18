@@ -7,3 +7,14 @@ GET localhost:8080/api/v1/data/country/total
 Accept: application/json
 
 ###
+
+GET http://localhost:8080/api/v1/data/country/BOL/listhistoric
+Accept: application/json
+
+###
+
+
+GET http://localhost:8080/api/v1/data/country/BOL/listhistoric/vaccine
+Accept: application/json
+
+###

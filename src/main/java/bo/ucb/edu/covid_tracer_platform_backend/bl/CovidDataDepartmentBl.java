@@ -2,6 +2,9 @@ package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
 import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.model.*;
 import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
 import org.slf4j.Logger;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -120,13 +124,13 @@ public class CovidDataDepartmentBl {
 
     public List<DepartmentListRequest> listDepartment(String countryISO) {
         List<DepartmentListRequest> data = new ArrayList<>();
-        data = covidDataDao.listDepartament(countryISO);
+        data = covidDataDao.listDepartment(countryISO);
         return data;
     }
 
     public DepartmentListRequest getDepartment(String countryISO, String isoDepartment) {
         DepartmentListRequest data = new DepartmentListRequest();
-        data = covidDataDao.getDepartament(countryISO,isoDepartment);
+        data = covidDataDao.getDepartment(countryISO,isoDepartment);
         return data;
     }
 
@@ -151,5 +155,13 @@ public class CovidDataDepartmentBl {
             }
         }
         return data;
+    }
+
+    public ByteArrayInputStream load(String isoDepartment){
+        Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
+        List<DataDepartmentCsvRequest> list = covidDataDao.getCovidData(departmentId);
+
+        ByteArrayInputStream in = CSVHelper.covidDataToCSV(list);
+        return in;
     }
 }
