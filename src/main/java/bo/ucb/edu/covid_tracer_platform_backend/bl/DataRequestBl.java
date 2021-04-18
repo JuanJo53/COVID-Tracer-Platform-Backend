@@ -28,4 +28,14 @@ public class DataRequestBl {
         List<DataRequestList> list = dataRequestDao.dataRequestDepartmentList(page, size);
         return list;
     }
+
+    public Integer getDataRequestTotalWorld(){
+        Integer total = dataRequestDao.getDataRequestTotalWorld();
+        return total;
+    }
+
+    public Integer getDataRequestTotalDepartment(){
+        Integer total = dataRequestDao.getDataRequestTotalDepartment();
+        return total;
+    }
 }
