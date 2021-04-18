@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/v1/user")
@@ -30,19 +31,26 @@ public class UserApi {
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
                     consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createUser(@RequestBody UserRequest userRequest, HttpServletRequest httpServletRequest){
-        Transaction transaction = TransactionUtil.createTransaction(httpServletRequest);
-        transactionBl.createTransaction(transaction);
-        UserRequest userResponse = userBl.createUser(userRequest, transaction);
-        if(userResponse != null){
-            return new ResponseEntity(userResponse, HttpStatus.OK);
-        } else {
-            return new ResponseEntity("User already exists", HttpStatus.BAD_REQUEST);
+    public HttpStatus createUser(@RequestBody UserRequest userRequest, HttpServletRequest httpServletRequest, BindingResult result){
+        if(!result.hasErrors()){
+            Transaction transaction = TransactionUtil.createTransaction(httpServletRequest);
+            transactionBl.createTransaction(transaction);
+            UserRequest userResponse = userBl.createUser(userRequest, transaction);
+            if(userResponse != null){
+                return  HttpStatus.OK;
+            } else {
+                return HttpStatus.BAD_REQUEST;
+            }
+
+        }else {
+            return HttpStatus.BAD_REQUEST;
         }
+
+
     }
 
     @RequestMapping(method = RequestMethod.PUT,produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpStatus updatePasswordUser(@RequestBody UserPasswordRequest userPasswordRequest, HttpServletRequest request, BindingResult result){
+    public HttpStatus updatePasswordUser(@Valid @RequestBody UserPasswordRequest userPasswordRequest, HttpServletRequest request, BindingResult result){
         if(!result.hasErrors()){
             Transaction transaction = TransactionUtil.createTransaction(request);
             transactionBl.createTransaction(transaction);
