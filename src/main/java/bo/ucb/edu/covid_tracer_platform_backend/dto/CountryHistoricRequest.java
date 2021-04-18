@@ -1,6 +1,8 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dto;
 
+
 public class CountryHistoricRequest {
+
     private String dateCountry;
     private Integer totalconfirmed;
     private Integer totalDeaths;

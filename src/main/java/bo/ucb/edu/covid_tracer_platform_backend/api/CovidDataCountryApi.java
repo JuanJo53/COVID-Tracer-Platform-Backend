@@ -47,10 +47,6 @@ public class CovidDataCountryApi {
                 transactionBl.createTransaction(transaction);
                 covidDataCountryBl.saveData(file,id, transaction);
 
-                /*String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                        .path("/api/csv/download/")
-                        .path(file.getOriginalFilename())
-                        .toUriString();*/
 
                 return new ResponseEntity("Uploaded file successfully!", HttpStatus.OK);
             } catch (Exception e) {

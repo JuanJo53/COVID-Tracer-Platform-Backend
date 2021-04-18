@@ -48,11 +48,6 @@ public class CovidDataDepartmentApi {
                 transactionBl.createTransaction(transaction);
                 covidDataDepartmentBl.saveData(file, isoDepartment, id, transaction);
 
-                /*String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                        .path("/api/csv/download/")
-                        .path(file.getOriginalFilename())
-                        .toUriString();*/
-
                 return new ResponseEntity("Uploaded file successfully!",HttpStatus.OK);
             } catch (Exception e) {
                 LOGGER.error(e.getMessage());
