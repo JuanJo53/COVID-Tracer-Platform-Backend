@@ -104,7 +104,6 @@ public class CovidDataCountryApi {
         Integer total = covidDataCountryBl.worldTotal();
         return total;
     }
-
     @GetMapping(path="/{isoCountry}/totalCases", produces = MediaType.APPLICATION_JSON_VALUE)
     public Integer worldList(@PathVariable String isoCountry) {
         Integer data = covidDataCountryBl.QuantityCasesCountry(isoCountry);
