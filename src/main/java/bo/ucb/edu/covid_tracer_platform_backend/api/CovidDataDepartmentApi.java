@@ -39,7 +39,7 @@ public class CovidDataDepartmentApi {
         this.transactionBl = transactionBl;
     }
     @PostMapping(path = "/{isoDepartment}/admin/{id}")
-    public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String isoDepartment,
+    public HttpStatus uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String isoDepartment,
                                      @PathVariable Integer id, HttpServletRequest request) {
 
         if (CSVHelper.hasCSVFormat(file)) {
@@ -48,13 +48,13 @@ public class CovidDataDepartmentApi {
                 transactionBl.createTransaction(transaction);
                 covidDataDepartmentBl.saveData(file, isoDepartment, id, transaction);
 
-                return new ResponseEntity("Uploaded file successfully!",HttpStatus.OK);
+                return HttpStatus.OK;
             } catch (Exception e) {
                 LOGGER.error(e.getMessage());
-                return new ResponseEntity("Could not upload the file!", HttpStatus.EXPECTATION_FAILED);
+                return HttpStatus.EXPECTATION_FAILED;
             }
         }
-        return new ResponseEntity("Please upload a csv file!", HttpStatus.BAD_REQUEST);
+        return HttpStatus.BAD_REQUEST;
     }
 
     @GetMapping(path="/{isoDepartment}/total", produces = MediaType.APPLICATION_JSON_VALUE)
