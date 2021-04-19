@@ -1,12 +1,12 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.model.*;
-import bo.ucb.edu.covid_tracer_platform_backend.util.csv.CSVHelper;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.*;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CovidDataListDepartmentRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DataDepartmentCsvRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentListRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.model.*;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.util.csv.CSVHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

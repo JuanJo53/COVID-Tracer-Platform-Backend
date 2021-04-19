@@ -1,7 +1,7 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dao;
 
-import bo.ucb.edu.covid_tracer_platform_backend.dto.UserPasswordRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.model.UserM;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.UserPasswordRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.model.UserM;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

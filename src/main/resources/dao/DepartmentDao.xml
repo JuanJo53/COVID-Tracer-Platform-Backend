@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.DepartmentDao">
-    <insert id="createDepartment" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.Department">
+    <insert id="createDepartment" parameterType="bo.ucb.edu.covid_tracer_platform_backend.shared.model.Department">
         INSERT INTO department VALUES (
             null, #{country_id}, #{iso}, #{department}, #{longitude}, #{latitude},
             1, #{transaction.txId}, #{transaction.txHost}, #{transaction.txUserId}, #{transaction.txDate}

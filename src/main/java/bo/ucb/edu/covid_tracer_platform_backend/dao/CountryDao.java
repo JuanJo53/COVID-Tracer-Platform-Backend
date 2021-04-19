@@ -1,9 +1,8 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dao;
 
-import bo.ucb.edu.covid_tracer_platform_backend.model.Country;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.model.Country;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Date;
 import java.util.List;
 
 @Mapper

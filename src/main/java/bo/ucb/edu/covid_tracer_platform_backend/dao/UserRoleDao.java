@@ -1,6 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dao;
 
-import bo.ucb.edu.covid_tracer_platform_backend.model.UserRole;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.model.UserRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

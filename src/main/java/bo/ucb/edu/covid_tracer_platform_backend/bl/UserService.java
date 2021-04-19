@@ -2,7 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.UserDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.UserRoleDao;
-import bo.ucb.edu.covid_tracer_platform_backend.model.UserM;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.model.UserM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

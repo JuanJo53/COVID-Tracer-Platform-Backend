@@ -1,10 +1,10 @@
 package bo.ucb.edu.covid_tracer_platform_backend.dao;
 
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentHistoricRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.*;
-import bo.ucb.edu.covid_tracer_platform_backend.model.CovidData;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentHistoricRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentListRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.MunicipalityListRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.*;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.model.CovidData;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="bo.ucb.edu.covid_tracer_platform_backend.dao.CovidDataDao">
-    <insert id="createCovidData" parameterType="bo.ucb.edu.covid_tracer_platform_backend.model.CovidData">
+    <insert id="createCovidData" parameterType="bo.ucb.edu.covid_tracer_platform_backend.shared.model.CovidData">
         INSERT INTO `covid_data`(`covid_data_id`, `country_id`, `department_id`, `municipality_id`, `confirmed`, `cumulative_confirmed`, `deaths`, `cumulative_deaths`, `recovered`, `cumulative_recovered`, `date`, `status`, `tx_id`, `tx_host`, `tx_user_id`, `tx_date`)
                          VALUES (null,#{countryId},#{departmentId},#{municipalityId},#{confirmed},#{cumulativeConfirmed},#{deaths},#{cumulativeDeaths},#{recovered},#{cumulativeRecovered},#{date},1,#{transaction.txId},#{transaction.txHost},#{transaction.txUserId},#{transaction.txDate})
     </insert>
@@ -125,7 +125,7 @@
           and a.date between #{ini} and #{end}
     </select>
 
-    <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CovidDataListDepartmentRequest">
+    <resultMap id="covidDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CovidDataListDepartmentRequest">
         <result column="id" property="id"/>
         <result column="date" property="date"/>
         <result column="confirmed" property="confirmed"/>
@@ -159,7 +159,7 @@
           GROUP BY b.department;
     </select>
 
-    <resultMap id="DepartamentDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest">
+    <resultMap id="DepartamentDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentListRequest">
         <result column="departmentId" property="departmentId"/>
         <result column="iso" property="iso"/>
         <result column="department" property="department"/>
@@ -193,7 +193,7 @@
         GROUP BY b.country;
     </select>
 
-    <resultMap id="CountryDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListRequest">
+    <resultMap id="CountryDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListRequest">
         <result column="countryId" property="countryId"/>
         <result column="iso" property="iso"/>
         <result column="country" property="country"/>
@@ -205,7 +205,7 @@
     </resultMap>
 
 
-    <select id="getDepartment" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentListRequest">
+    <select id="getDepartment" resultType="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentListRequest">
         SELECT
             b.department_id as departmentId,
             b.iso as iso,
@@ -247,7 +247,7 @@
           and d.status = 1
     </select>
 
-    <resultMap id="MunicipalityDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.MunicipalityListRequest">
+    <resultMap id="MunicipalityDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.MunicipalityListRequest">
         <result column="municipality" property="municipality"/>
         <result column="confirmed" property="confirmed"/>
         <result column="deaths" property="deaths"/>
@@ -274,7 +274,7 @@
             and a.status = 1
     </select>
 
-    <resultMap id="DepartmentHisMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.DepartmentHistoricRequest">
+    <resultMap id="DepartmentHisMap" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentHistoricRequest">
         <result column="date1" property="date1"/>
         <result column="department" property="department"/>
         <result column="confirmed" property="confirmed"/>
@@ -285,7 +285,7 @@
         <result column="totalrecovered" property="totalrecovered"/>
     </resultMap>
 
-    <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.WorldRequest">
+    <select id="getTotalWorld" resultType="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.WorldRequest">
         SELECT
             SUM(cumulative_confirmed) as confirmed,
             SUM(cumulative_deaths) as deaths,
@@ -319,7 +319,7 @@
           and a.status = 1
     </select>
 
-    <resultMap id="departmentCsvDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.DataDepartmentCsvRequest">
+    <resultMap id="departmentCsvDataMap" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DataDepartmentCsvRequest">
         <result column="date" property="date"/>
         <result column="confirmed" property="confirmed"/>
         <result column="cumulativeConfirmed" property="cumulativeConfirmed"/>
@@ -358,13 +358,13 @@
         GROUP BY b.date
     </select>
 
-    <resultMap id="ListCountryHistoricVaccine" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricVaccineRequest">
+    <resultMap id="ListCountryHistoricVaccine" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricVaccineRequest">
         <result column="dateCountry" property="dateCountry"/>
         <result column="firstVaccine" property="firstVaccine"/>
         <result column="secondVaccine" property="secondVaccine"/>
     </resultMap>
 
-    <select id="getCountryHistoric" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryHistoricRequest">
+    <select id="getCountryHistoric" resultType="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryHistoricRequest">
         SELECT
             a.date as dateCountry,
             SUM(a.cumulative_confirmed) as totalconfirmed,
@@ -392,7 +392,7 @@
     </select>
 
 
-    <select id="getCountryHistoricVa" resultType="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricVaccineRequest">
+    <select id="getCountryHistoricVa" resultType="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricVaccineRequest">
         SELECT
             SUM(a.first_vaccine) as firstVaccine,
             SUM(a.second_vaccine) as secondVaccine
@@ -434,7 +434,7 @@
         GROUP BY a.date
     </select>
 
-    <resultMap id="ListCountryHistoric" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricEveryDayRequest">
+    <resultMap id="ListCountryHistoric" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricEveryDayRequest">
         <result column="dateCountry" property="dateCountry"/>
         <result column="confirmed" property="confirmed"/>
         <result column="deaths" property="deaths"/>
@@ -474,7 +474,7 @@
         GROUP BY a.date
     </select>
 
-    <resultMap id="ListCountryCumulative" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricRequest">
+    <resultMap id="ListCountryCumulative" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricRequest">
         <result column="dateCountry" property="dateCountry"/>
         <result column="confirmed" property="confirmed"/>
         <result column="Deaths" property="Deaths"/>
@@ -550,7 +550,7 @@
         ORDER BY date ASC
     </select>
 
-    <resultMap id="covidDataWorldMap" type="bo.ucb.edu.covid_tracer_platform_backend.dto.WorldRequest">
+    <resultMap id="covidDataWorldMap" type="bo.ucb.edu.covid_tracer_platform_backend.shared.dto.WorldRequest">
         <result column="confirmed" property="confirmed"/>
         <result column="deaths" property="deaths"/>
         <result column="date" property="date"/>

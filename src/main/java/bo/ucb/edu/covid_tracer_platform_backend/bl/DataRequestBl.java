@@ -2,7 +2,7 @@ package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
 import bo.ucb.edu.covid_tracer_platform_backend.dao.DataRequestDao;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.TransactionDao;
-import bo.ucb.edu.covid_tracer_platform_backend.dto.DataRequestList;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DataRequestList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
