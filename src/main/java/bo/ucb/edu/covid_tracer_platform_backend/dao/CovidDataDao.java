@@ -24,9 +24,17 @@ public interface CovidDataDao {
 
     public List<CovidDataListDepartmentRequest> covidDataCumulativeListByDepartment(Integer departmentId, Integer page, Integer size);
 
+    public List<CovidDataListDepartmentRequest> covidDataHistoricListByDepartmentDate(Integer departmentId, String ini, String end);
+
+    public List<CovidDataListDepartmentRequest> covidDataCumulativeListByDepartmentDate(Integer departmentId, String ini, String end);
+
     public List<WorldRequest> covidDataHistoricWorldList(Integer page, Integer size);
 
     public List<WorldRequest> covidDataCumulativeWorldList(Integer page, Integer size);
+
+    public List<WorldRequest> covidDataHistoricWorldListDate(String ini, String end);
+
+    public List<WorldRequest> covidDataCumulativeWorldListDate(String ini, String end);
 
     public List<WorldRequest> worldTotal();
 
@@ -48,7 +56,11 @@ public interface CovidDataDao {
 
     public List<CountryListHistoricEveryDayRequest> getCountryListHistoric(String isoCountry,Integer page,Integer size);
 
+    public List<CountryListHistoricEveryDayRequest> getCountryListHistoricDate(String isoCountry,String ini,String end);
+
     public List<CountryListHistoricVaccineRequest> getCountryHistoricVaccine(String isoCountry,Integer page,Integer size);
+
+    public List<CountryListHistoricVaccineRequest> getCountryHistoricVaccineDate(String isoCountry,String ini,String end);
 
     public CountryHistoricRequest getCountryHistoric(String isoCountry,String dateCountry);
 
@@ -57,4 +69,6 @@ public interface CovidDataDao {
     public CountryListHistoricVaccineRequest getCountryHistoricVa(String isoCountry,String dateCountry);
 
     public List<CountryListHistoricRequest> getCountryCumulativeEveryDayList(String isoCountry,Integer page,Integer size);
+
+    public List<CountryListHistoricRequest> getCountryCumulativeEveryDayListDate(String isoCountry,String ini,String end);
 }

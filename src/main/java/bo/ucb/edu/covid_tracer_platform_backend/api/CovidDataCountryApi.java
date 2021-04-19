@@ -38,7 +38,7 @@ public class CovidDataCountryApi {
     }
 
     @PostMapping(path = "/admin/{id}")
-    public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file,
+    public HttpStatus uploadFile(@RequestParam("file") MultipartFile file,
                                      @PathVariable Integer id, HttpServletRequest request) {
 
         if (CSVHelper.hasCSVFormat(file)) {
@@ -48,13 +48,13 @@ public class CovidDataCountryApi {
                 covidDataCountryBl.saveData(file,id, transaction);
 
 
-                return new ResponseEntity("Uploaded file successfully!", HttpStatus.OK);
+                return HttpStatus.OK;
             } catch (Exception e) {
                 LOGGER.error(e.getMessage());
-                return new ResponseEntity("Could not upload the file!", HttpStatus.EXPECTATION_FAILED);
+                return HttpStatus.EXPECTATION_FAILED;
             }
         }
-        return new ResponseEntity("Please upload a csv file!", HttpStatus.BAD_REQUEST);
+        return HttpStatus.BAD_REQUEST;
     }
 
     @GetMapping(path="/list", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -70,7 +70,7 @@ public class CovidDataCountryApi {
 
     @GetMapping(path="/{isoCountry}/historicList", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CountryListHistoricEveryDayRequest> countryListHistoric(@PathVariable String isoCountry,
-                                                                        @RequestParam Integer page, @RequestParam Integer size){
+                                                                        @RequestParam String page, @RequestParam String size){
         List<CountryListHistoricEveryDayRequest> data = covidDataCountryBl.countryListHistoric(isoCountry,page,size);
         return data;
     }
@@ -78,7 +78,7 @@ public class CovidDataCountryApi {
 
     @GetMapping(path="/{isoCountry}/CumulativeEveryDay", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CountryListHistoricRequest> countryListEveryDay(@PathVariable String isoCountry,
-                                                                @RequestParam Integer page, @RequestParam Integer size){
+                                                                @RequestParam String page, @RequestParam String size){
         List<CountryListHistoricRequest> data = covidDataCountryBl.countryListEveryDay(isoCountry,page,size);
         return data;
     }
@@ -90,7 +90,7 @@ public class CovidDataCountryApi {
     }
 
     @GetMapping(path="/{list}/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<WorldRequest> worldList(@PathVariable String list, @RequestParam Integer page, @RequestParam Integer size){
+    public List<WorldRequest> worldList(@PathVariable String list, @RequestParam String page, @RequestParam String size){
         List<WorldRequest> data = covidDataCountryBl.covidDataListWorld(list, page, size);
         return data;
     }
