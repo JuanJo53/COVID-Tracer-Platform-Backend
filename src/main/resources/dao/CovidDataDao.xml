@@ -345,6 +345,19 @@
             LIMIT #{size} OFFSET #{page}
     </select>
 
+    <select id="getCountryHistoricVaccineDate" resultMap="ListCountryHistoricVaccine">
+        SELECT b.date as dateCountry,
+               SUM(b.first_vaccine) as firstVaccine,
+               SUM(b.second_vaccine) as secondVaccine
+        FROM vaccine b, department d, country a
+        WHERE a.iso =#{isoCountry}
+          and d.country_id=a.country_id
+          and b.department_id = d.department_id
+          and a.status = 1
+          and b.date between #{ini} and #{end}
+        GROUP BY b.date
+    </select>
+
     <resultMap id="ListCountryHistoricVaccine" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricVaccineRequest">
         <result column="dateCountry" property="dateCountry"/>
         <result column="firstVaccine" property="firstVaccine"/>
@@ -406,6 +419,21 @@
             LIMIT #{size} OFFSET #{page}
     </select>
 
+    <select id="getCountryListHistoricDate" resultMap="ListCountryHistoric">
+        SELECT a.date as dateCountry,
+               SUM(a.confirmed) as confirmed,
+               SUM(a.deaths) as deaths,
+               SUM(a.recovered) as recovered
+        FROM covid_data a,country c, department d
+        WHERE c.iso = #{isoCountry}
+          and a.municipality_id is NULL
+          and c.country_id=a.country_id
+          and d.department_id=a.department_id
+          and a.status = 1
+          and a.date between #{ini} and #{end}
+        GROUP BY a.date
+    </select>
+
     <resultMap id="ListCountryHistoric" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricEveryDayRequest">
         <result column="dateCountry" property="dateCountry"/>
         <result column="confirmed" property="confirmed"/>
@@ -429,6 +457,21 @@
                 and a.status = 1
             GROUP BY a.date
             LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <select id="getCountryCumulativeEveryDayListDate" resultMap="ListCountryCumulative">
+        SELECT a.date as dateCountry,
+               SUM(a.cumulative_confirmed) as confirmed,
+               SUM(a.cumulative_deaths) as Deaths,
+               SUM(a.cumulative_recovered) as recovered
+        FROM covid_data a,country c, department d
+        WHERE c.iso = #{isoCountry}
+          and a.municipality_id is NULL
+          and c.country_id=a.country_id
+          and d.department_id=a.department_id
+          and a.status = 1
+          and a.date between #{ini} and #{end}
+        GROUP BY a.date
     </select>
 
     <resultMap id="ListCountryCumulative" type="bo.ucb.edu.covid_tracer_platform_backend.dto.CountryListHistoricRequest">
