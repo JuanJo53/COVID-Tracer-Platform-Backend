@@ -40,11 +40,7 @@ public class CovidDataMunicipalityBl {
         this.dataRequestDao = dataRequestDao;
     }
 
-
-
-
-
-
+    // Función para guardar los datos de los municipios de un departamento
     public void saveData(MultipartFile file, String iso, Integer userId, Transaction transaction){
         try{
 
@@ -102,7 +98,7 @@ public class CovidDataMunicipalityBl {
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
     }
-
+    // Función para obtener los datos de los municipios de un departamento
     public List<MunicipalityListRequest> getMunicipality(String countryISO, String departmentISO) {
         return covidDataDao.listMunicipality(countryISO,departmentISO);
     }

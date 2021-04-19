@@ -39,7 +39,7 @@ public class CovidDataDepartmentBl {
         this.covidDataDao = covidDataDao;
         this.transactionDao = transactionDao;
     }
-
+    // Funcion para guardar datos de los departamentos
     public void saveData(MultipartFile file, String isoDepartment, Integer userId, Transaction transaction){
         try{
             Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
@@ -102,13 +102,13 @@ public class CovidDataDepartmentBl {
             throw new RuntimeException("fail to store csv data: " + e.getMessage());
         }
     }
-
+    // Funcion para obtener la cantidad de datos registrados para un departamento
     public Integer getCovidDataTotalByDepartment(String isoDepartment){
         Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
         Integer total = covidDataDao.getCovidDataTotalByDepartment(departmentId);
         return total;
     }
-
+    // Funcion para obtener los datos historicos o acumulativos de un departamento
     public List<CovidDataListDepartmentRequest> covidDataListDepartment(String isoDepartment, String list, String page, String size){
         Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
         List<CovidDataListDepartmentRequest> data = new ArrayList<>();
@@ -131,7 +131,7 @@ public class CovidDataDepartmentBl {
 
         return data;
     }
-
+    // Función para verificar si un string
     public static boolean isNumeric(String cadena) {
 
         boolean resultado;
@@ -146,7 +146,7 @@ public class CovidDataDepartmentBl {
         return resultado;
     }
 
-
+    // Funcion para obtener la lista de departamentos de un país
     public List<DepartmentListRequest> listDepartment(String countryISO) {
         List<DepartmentListRequest> data = new ArrayList<>();
         data = covidDataDao.listDepartment(countryISO);
@@ -181,7 +181,7 @@ public class CovidDataDepartmentBl {
         }
         return data;
     }
-
+    // Funcion para descargar los datos de un departamento en un archivo csv
     public ByteArrayInputStream load(String isoDepartment){
         Integer departmentId = departmentDao.findDepartmentIdByIso(isoDepartment);
         List<DataDepartmentCsvRequest> list = covidDataDao.getCovidData(departmentId);

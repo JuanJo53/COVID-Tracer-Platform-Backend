@@ -30,7 +30,7 @@ public class UserService implements UserDetailsService {
         this.userDao = userDao;
         this.userRoleDao = userRoleDao;
     }
-
+    // Funcion para iniciar sesión con oauth2 y spring security
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserM userM = userDao.findUserByUserName(username);

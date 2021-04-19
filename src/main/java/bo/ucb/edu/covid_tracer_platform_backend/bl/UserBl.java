@@ -34,10 +34,11 @@ public class UserBl {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
-
+    // Función para crear un nuevo usuario
     public UserRequest createUser(UserRequest userRequest, Transaction transaction){
         logger.error(userRequest.getUserName());
         UserM userMValidator = userDao.findUserByUserName(userRequest.getUserName());
+        // Funcion para verificar si el nombre de usuario fue utilizado
         if(userMValidator == null){
            Person person = new Person();
            UserM userM = new UserM();
@@ -68,32 +69,6 @@ public class UserBl {
         }else{
             return null;
         }
-        /*Person person = new Person();
-        UserM userM = new UserM();
-        UserRole userRole = new UserRole();
-
-        person.setFirstName(userRequest.getFirstName());
-        person.setFirstSurname(userRequest.getFirstSurname());
-        person.setSecondSurname(userRequest.getSecondSurname());
-        person.setTransaction(transaction);
-        personDao.createPerson(person);
-        Integer lastPersonId = transactionDao.getLastInsertId();
-
-        userM.setPersonId(lastPersonId);
-        userM.setEmail(userRequest.getEmail());
-        userM.setUserName(userRequest.getUserName());
-        String password = passwordEncoder.encode(userRequest.getPassword());
-        userM.setPassword(password);
-        userM.setTransaction(transaction);
-        userDao.createUser(userM);
-        Integer lastUserId = transactionDao.getLastInsertId();
-
-        userRole.setUserId(lastUserId);
-        userRole.setRoleId(userRequest.getRole());
-        userRole.setTransaction(transaction);
-        userRoleDao.createUserRole(userRole);
-
-        return userRequest;*/
     }
 
     public UserPasswordRequest updatepasswordUser(UserPasswordRequest userPasswordRequest, Transaction transaction) {

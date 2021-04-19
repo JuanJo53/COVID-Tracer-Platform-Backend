@@ -18,7 +18,7 @@ public class CSVHelper {
     static String[] HEADERs = { "Fecha", "Casos", "Casos_Acum", "Muertes", "Muertes_Acum", "Recuperados", "Recuperados_Acum"};
 
     public static Logger LOGGER = LoggerFactory.getLogger(CSVHelper.class);
-
+    // Función para comprobar si un archivo es tipo csv
     public static boolean hasCSVFormat(MultipartFile file) {
         System.out.println(file.getContentType());
         if (TYPE.equals(file.getContentType())
@@ -28,7 +28,7 @@ public class CSVHelper {
 
         return false;
     }
-
+    // Funcion para leer los datos de un csv de un departamento
     public static List<DataDepartmentCsvRequest> csvToDataDepartmentCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
@@ -59,7 +59,7 @@ public class CSVHelper {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
     }
-
+    // Funcion para leer los datos de un csv a nivel mundial
     public static List<DataCountryCsvRequest> csvToDataCountryCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
@@ -87,7 +87,7 @@ public class CSVHelper {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
         }
     }
-
+    // Funcion para generar el archivo csv con los datos de los departamentos
     public static ByteArrayInputStream covidDataToCSV(List<DataDepartmentCsvRequest> dataDepartmentCsvRequestList) {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
@@ -117,7 +117,7 @@ public class CSVHelper {
             throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
         }
     }
-
+    // Funcion para generar el archivo csv con los datos de un país
     public static ByteArrayInputStream covidDataCountryToCSV(List<CountryListHistoricEveryDayRequest> countryListHistoricEveryDayRequests, List<CountryListHistoricRequest> countryListHistoricRequests) {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
@@ -150,7 +150,7 @@ public class CSVHelper {
             throw new RuntimeException("fail to import data to CSV file: " + e.getMessage());
         }
     }
-
+    // Funcion para leer los datos de municipios
     public static List<DataMunicipalityCvsRequest> csvMunDataCsvRequest(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,

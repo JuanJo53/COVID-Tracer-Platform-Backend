@@ -41,8 +41,11 @@ public class CovidDataCountryBl {
         this.transactionDao = transactionDao;
     }
 
+
+    // Funcion para guardar datos de los países
     public void saveData(MultipartFile file, Integer userId, Transaction transaction){
         try{
+            // Enviando el inputStream del csv a CSVHelper
             List<DataCountryCsvRequest> dataDepartmentCsvRequestList = CSVHelper.csvToDataCountryCsvRequest(file.getInputStream());
             List<String> iso = countryDao.getIsoList();
             LOGGER.error(String.valueOf(iso.size()));
@@ -55,6 +58,7 @@ public class CovidDataCountryBl {
                                                      .collect(Collectors.toList());
                 Integer countryId = countryDao.findCountryIdByIso(isoS);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                //Obteniendo la última fecha de datos registrados de un país
                 Date lastDate = covidDataDao.lastDateCountry(countryId);
                 LOGGER.error("Last: "+String.valueOf(lastDate));
                 if(lastDate == null){
@@ -66,6 +70,7 @@ public class CovidDataCountryBl {
                 String pastDate = "2021-03-28";
                 Date pastDateAux = sdf.parse(pastDate);
                 for(DataCountryCsvRequest data: filter){
+                    // Comparando las fechas. Si las fechas del csv soin posteriores a la ultima fecha registrada se registran los datos
                     if(pastDateAux.after(data.getDate()) && lastDate.before(data.getDate())){
                     //if(lastDate.before(data.getDate())){
                         covidData.setCountryId(countryId);
@@ -93,6 +98,7 @@ public class CovidDataCountryBl {
         }
     }
 
+    // Funcion para calcular el toal mundial de contagiados
     public List<CountryListRequest> listCountry(){
         List<CountryListRequest> countries = covidDataDao.listCountry();
         Integer total = 0;
@@ -103,11 +109,12 @@ public class CovidDataCountryBl {
         return countries;
     }
 
+    // Función para obtener los datos totales del mundo
     public WorldRequest getTotalWorld(){
         WorldRequest total = covidDataDao.getTotalWorld();
         return total;
     }
-    // -----------
+    // Función para obtener los datos históricos de un país
     public List<CountryListHistoricEveryDayRequest> countryListHistoric(String isoCountry,String page, String size) {
         List<CountryListHistoricEveryDayRequest> data = new ArrayList<>();
         if(isNumeric(page) && isNumeric(size)){
@@ -132,7 +139,7 @@ public class CovidDataCountryBl {
         countryHistoricRequest.setSecondVaccine(covi.getSecondVaccine());
         return countryHistoricRequest;
     }
-    // -----------
+    // Funcion para obtener los datos acumulados de un país
     public List<CountryListHistoricRequest> countryListEveryDay(String isoCountry,String page,String size) {
         List<CountryListHistoricRequest> data = new ArrayList<>();
         List<CountryListHistoricVaccineRequest> countryListHistoricVaccineRequest = new ArrayList<>();
@@ -161,6 +168,7 @@ public class CovidDataCountryBl {
         return dataFinal;
     }
 
+    // Función que obteniene los datos acumulados o historicos a nivel mundial
     public List<WorldRequest> covidDataListWorld(String list, String page, String size){
         List<WorldRequest> data = new ArrayList<>();
         if(isNumeric(page) && isNumeric(size)){
@@ -183,6 +191,7 @@ public class CovidDataCountryBl {
         return data;
     }
 
+    // Funcion para comprobar si un string se puede tranformar a Integer
     public static boolean isNumeric(String cadena) {
 
         boolean resultado;
@@ -197,14 +206,17 @@ public class CovidDataCountryBl {
         return resultado;
     }
 
+    // Funcion para obtener la cantidad de datos registrados en el mundo
     public Integer worldTotal(){
         Integer total = covidDataDao.worldTotal().size();
         return total;
     }
+    // Funcion para obtener la cantidad de casos registrados en un país
     public Integer QuantityCasesCountry(String isoCountry) {
         Integer quantity = countryDao.quantityCasesCountry(isoCountry).size();
         return quantity;
     }
+    // Funcion para descargar los datos de un país en un archivos csv
     public ByteArrayInputStream load(String isoCountry){
         Integer cant = 1000;
         List<CountryListHistoricRequest> c1 = countryListEveryDay(isoCountry,"0", String.valueOf(cant));

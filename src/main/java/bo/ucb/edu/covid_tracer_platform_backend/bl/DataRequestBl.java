@@ -18,22 +18,22 @@ public class DataRequestBl {
         this.dataRequestDao = dataRequestDao;
         this.transactionDao = transactionDao;
     }
-
+    // Funcion para obtener los datos de la carga de archivos a nivel mundial
     public List<DataRequestList> dataRequestList(Integer page, Integer size){
         List<DataRequestList> list = dataRequestDao.dataRequestWorldList(page, size);
         return list;
     }
-
+    // Funcion para obtener los datos de la carga de archivos a nivel país
     public List<DataRequestList> dataRequestDepartmentList(Integer page, Integer size){
         List<DataRequestList> list = dataRequestDao.dataRequestDepartmentList(page, size);
         return list;
     }
-
+    // Funcion para obtener la cantidad de actualizaciones en el mundo
     public Integer getDataRequestTotalWorld(){
         Integer total = dataRequestDao.getDataRequestTotalWorld();
         return total;
     }
-
+    // Funcion para obtener la cantidad de actualizaciones en el departamento
     public Integer getDataRequestTotalDepartment(){
         Integer total = dataRequestDao.getDataRequestTotalDepartment();
         return total;
