@@ -32,6 +32,10 @@ public interface CovidDataDao {
 
     public List<WorldRequest> covidDataCumulativeWorldList(Integer page, Integer size);
 
+    public List<WorldRequest> covidDataHistoricWorldListDate(String ini, String end);
+
+    public List<WorldRequest> covidDataCumulativeWorldListDate(String ini, String end);
+
     public List<WorldRequest> worldTotal();
 
     public List<CountryListRequest> listCountry();

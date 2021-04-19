@@ -90,7 +90,7 @@ public class CovidDataCountryApi {
     }
 
     @GetMapping(path="/{list}/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<WorldRequest> worldList(@PathVariable String list, @RequestParam Integer page, @RequestParam Integer size){
+    public List<WorldRequest> worldList(@PathVariable String list, @RequestParam String page, @RequestParam String size){
         List<WorldRequest> data = covidDataCountryBl.covidDataListWorld(list, page, size);
         return data;
     }

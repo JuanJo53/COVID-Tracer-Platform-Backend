@@ -147,15 +147,40 @@ public class CovidDataCountryBl {
         return dataFinal;
     }
 
-    public List<WorldRequest> covidDataListWorld(String list, Integer page, Integer size){
+    public List<WorldRequest> covidDataListWorld(String list, String page, String size){
         List<WorldRequest> data = new ArrayList<>();
-        if(list.equals("historic")){
-            data = covidDataDao.covidDataHistoricWorldList(page, size);
+        if(isNumeric(page) && isNumeric(size)){
+            if(list.equals("historic")){
+                data = covidDataDao.covidDataHistoricWorldList(Integer.parseInt(page), Integer.parseInt(size));
+            }
+            if(list.equals("cumulative")){
+                data = covidDataDao.covidDataCumulativeWorldList(Integer.parseInt(page), Integer.parseInt(size));
+            }
         }
-        if(list.equals("cumulative")){
-            data = covidDataDao.covidDataCumulativeWorldList(page, size);
+        if(!isNumeric(page) && !isNumeric(size)){
+            if(list.equals("historic")){
+                data = covidDataDao.covidDataHistoricWorldListDate(page, size);
+            }
+            if(list.equals("cumulative")){
+                data = covidDataDao.covidDataCumulativeWorldListDate(page, size);
+            }
         }
+
         return data;
+    }
+
+    public static boolean isNumeric(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
     }
 
     public Integer worldTotal(){

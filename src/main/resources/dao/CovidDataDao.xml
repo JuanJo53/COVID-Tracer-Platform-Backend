@@ -332,11 +332,6 @@
     </resultMap>
 
 
-
-
-
-
-
     <select id="getCountryHistoricVaccine" resultMap="ListCountryHistoricVaccine">
             SELECT b.date as dateCountry,
                 SUM(b.first_vaccine) as firstVaccine,
@@ -469,6 +464,34 @@
         GROUP BY date
         ORDER BY date ASC
             LIMIT #{size} OFFSET #{page}
+    </select>
+
+    <select id="covidDataCumulativeWorldListDate" resultMap="covidDataWorldMap">
+        SELECT
+            SUM(cumulative_confirmed) as confirmed,
+            SUM(cumulative_deaths) as deaths,
+            date as date
+        FROM covid_data
+        WHERE
+            department_id is null
+            and municipality_id is null
+            and date BETWEEN #{ini} and #{end}
+        GROUP BY date
+        ORDER BY date ASC
+    </select>
+
+    <select id="covidDataHistoricWorldListDate" resultMap="covidDataWorldMap">
+        SELECT
+            SUM(confirmed) as confirmed,
+            SUM(deaths) as deaths,
+            date as date
+        FROM covid_data
+        WHERE
+            department_id is null
+            and municipality_id is null
+            and date BETWEEN #{ini} and #{end}
+        GROUP BY date
+        ORDER BY date ASC
     </select>
 
     <select id="worldTotal" resultMap="covidDataWorldMap">
