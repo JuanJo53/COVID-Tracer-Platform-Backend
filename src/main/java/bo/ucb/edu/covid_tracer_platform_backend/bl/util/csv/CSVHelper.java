@@ -1,4 +1,4 @@
-package bo.ucb.edu.covid_tracer_platform_backend.shared.util.csv;
+package bo.ucb.edu.covid_tracer_platform_backend.bl.util.csv;
 
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.*;
 import org.apache.commons.csv.*;

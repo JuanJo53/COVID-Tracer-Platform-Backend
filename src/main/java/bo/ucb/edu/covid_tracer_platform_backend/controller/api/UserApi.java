@@ -5,7 +5,7 @@ import bo.ucb.edu.covid_tracer_platform_backend.bl.UserBl;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.UserPasswordRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.UserRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.model.Transaction;
-import bo.ucb.edu.covid_tracer_platform_backend.shared.util.TransactionUtil;
+import bo.ucb.edu.covid_tracer_platform_backend.bl.util.TransactionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
