@@ -23,7 +23,13 @@ public class PredictionApi {
 
     @GetMapping(path="/{isoCountry}/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<PredictionDateRequest> predictionCountryList(@PathVariable String isoCountry, @RequestParam String date, @RequestParam Integer type){
-        List<PredictionDateRequest> list = predictionBl.predictionList(isoCountry, date,type);
+        List<PredictionDateRequest> list = predictionBl.predictionCountryList(isoCountry, date,type);
+        return list;
+    }
+
+    @GetMapping(path="/{countryISO}/{departmentISO}/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<PredictionDateRequest> predictionDepartmentList(@PathVariable String countryISO,@PathVariable String departmentISO, @RequestParam String date, @RequestParam Integer type){
+        List<PredictionDateRequest> list = predictionBl.predictionDepartmentList(countryISO,departmentISO, date,type);
         return list;
     }
 

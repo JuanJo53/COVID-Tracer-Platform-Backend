@@ -1,9 +1,9 @@
-package bo.ucb.edu.covid_tracer_platform_backend.shared.util.prediction;
+package bo.ucb.edu.covid_tracer_platform_backend.bl.util.prediction;
 
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricEveryDayRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentHistoricRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.PredictionDateRequest;
 
-import javax.servlet.ServletRequest;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.ParseException;
@@ -11,17 +11,87 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.time.LocalDate;
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class PredictionAR1 {
 
+    public static List<PredictionDateRequest> predictionDepartmentMain(List<DepartmentHistoricRequest> data, String date, Integer type) {
+        // Creo los LocalDate
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        Date fin = null;
+        try {
 
+            fin = formatoDelTexto.parse(date);
+
+        } catch (ParseException ex) {
+
+            ex.printStackTrace();
+
+        } // Usando ChronoUnit, calculo el numero de dias
+        Calendar c = Calendar.getInstance();
+        //sacar la cantidad
+        int con=data.size();
+        LocalDate inicio=null;
+        Date dateInicio = new Date();
+        List<PredictionDateRequest> predictionDateRequests = new ArrayList<>();
+        List<Integer> lists = new ArrayList<>();
+        for (int i=0;i<data.size();i++){
+            DepartmentHistoricRequest departmentdata = new DepartmentHistoricRequest();
+            departmentdata = data.get(i);
+            PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
+
+            predictionDateRequest.setDate(departmentdata.getDate1());
+            predictionDateRequest.setStatus(0);
+
+
+
+            dateInicio=departmentdata.getDate1(); // fecha inicio
+            if (type==0){//Casos
+                if (departmentdata.getConfirmed()>0){
+                    lists.add(departmentdata.getConfirmed());
+                }
+                predictionDateRequest.setCount(departmentdata.getConfirmed());
+            }
+            if (type==1){//Muertos
+                if (departmentdata.getDeaths()>0){
+                    lists.add(departmentdata.getDeaths());
+                }
+
+                predictionDateRequest.setCount(departmentdata.getDeaths());
+            }
+            if (type==2){//Recuperados
+                if (departmentdata.getRecovered()>0){
+                    lists.add(departmentdata.getRecovered());
+                }
+                predictionDateRequest.setCount(departmentdata.getRecovered());
+            }
+            predictionDateRequests.add(predictionDateRequest);
+            c.setTime(departmentdata.getDate1());
+        }
+
+        int milisecondsByDay = 86400000;
+        int dias = (int) ((fin.getTime()-dateInicio.getTime()) / milisecondsByDay);
+        System.out.println("Numero de dias: " + dias); // 365 dias
+        double [][] vector=new double[lists.size()][1];
+        for (int i=0;i<lists.size();i++){
+            vector[i][0]=lists.get(i);
+        }
+        int [] dateF=generarPrediccion(dias,lists.size()-1,vector);
+
+        for(int i=0;i<dateF.length;i++){
+            c.add(Calendar.DATE, 1);
+            Date dt = c.getTime();
+            PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
+            predictionDateRequest.setCount(dateF[i]);
+            predictionDateRequest.setDate(dt);
+            predictionDateRequest.setStatus(1);
+            predictionDateRequests.add(predictionDateRequest);
+        }
+        return predictionDateRequests;
+    }
     public static List<PredictionDateRequest> predictionMain(List<CountryListHistoricEveryDayRequest> data,String date,Integer type){
         // Creo los LocalDate
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
@@ -96,11 +166,7 @@ public class PredictionAR1 {
         }
         return predictionDateRequests;
     }
-    public static LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
-        return Instant.ofEpochMilli(dateToConvert.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
-    }
+
 
     public static void main(String[] args) throws IOException {
         double x=Math.log(32);
@@ -217,6 +283,7 @@ public class PredictionAR1 {
         return vector;
 
     }
+
 
 
 }

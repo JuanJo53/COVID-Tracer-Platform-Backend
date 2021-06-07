@@ -1,13 +1,10 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
-import bo.ucb.edu.covid_tracer_platform_backend.dao.CountryDao;
-import bo.ucb.edu.covid_tracer_platform_backend.dao.CovidDataDao;
-import bo.ucb.edu.covid_tracer_platform_backend.dao.DataRequestDao;
-import bo.ucb.edu.covid_tracer_platform_backend.dao.TransactionDao;
+import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricEveryDayRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentHistoricRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.PredictionDateRequest;
-import bo.ucb.edu.covid_tracer_platform_backend.shared.model.Country;
-import bo.ucb.edu.covid_tracer_platform_backend.shared.util.prediction.PredictionAR1;
+import bo.ucb.edu.covid_tracer_platform_backend.bl.util.prediction.PredictionAR1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +26,16 @@ public class PredictionBl {
 
 
 
-    public List<PredictionDateRequest> predictionList(String isoCountry, String date, Integer type) {
+    public List<PredictionDateRequest> predictionCountryList(String isoCountry, String date, Integer type) {
         List<CountryListHistoricEveryDayRequest> data = new ArrayList<>();
         data = covidDataDao.getCountryListHistoricPredict(isoCountry);
 
         return PredictionAR1.predictionMain(data,date,type);
+    }
+
+    public List<PredictionDateRequest> predictionDepartmentList(String countryISO,String departmentISO, String date, Integer type) {
+        List<DepartmentHistoricRequest> data = new ArrayList<>();
+        data = covidDataDao.getDepartmentHistoric(countryISO,departmentISO);
+        return PredictionAR1.predictionDepartmentMain(data,date,type);
     }
 }

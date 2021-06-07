@@ -1,7 +1,9 @@
 package bo.ucb.edu.covid_tracer_platform_backend.shared.dto;
 
+import java.util.Date;
+
 public class DepartmentHistoricRequest {
-    private String date1;
+    private Date date1;
     private String department;
     private Integer confirmed;
     private Integer totalconfirmed;
@@ -13,11 +15,11 @@ public class DepartmentHistoricRequest {
     public DepartmentHistoricRequest() {
     }
 
-    public String getDate1() {
+    public Date getDate1() {
         return date1;
     }
 
-    public void setDate1(String date1) {
+    public void setDate1(Date date1) {
         this.date1 = date1;
     }
 
