@@ -1,4 +1,4 @@
-package bo.ucb.edu.covid_tracer_platform_backend.shared.util;
+package bo.ucb.edu.covid_tracer_platform_backend.bl.util;
 
 import bo.ucb.edu.covid_tracer_platform_backend.shared.model.Transaction;
 import org.slf4j.Logger;

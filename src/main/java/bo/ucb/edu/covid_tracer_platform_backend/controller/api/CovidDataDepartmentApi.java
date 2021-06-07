@@ -7,8 +7,8 @@ import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentListHistori
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CovidDataListDepartmentRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentListRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.model.Transaction;
-import bo.ucb.edu.covid_tracer_platform_backend.shared.util.TransactionUtil;
-import bo.ucb.edu.covid_tracer_platform_backend.shared.util.csv.CSVHelper;
+import bo.ucb.edu.covid_tracer_platform_backend.bl.util.TransactionUtil;
+import bo.ucb.edu.covid_tracer_platform_backend.bl.util.csv.CSVHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
