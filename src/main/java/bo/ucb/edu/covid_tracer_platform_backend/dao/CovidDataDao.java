@@ -71,4 +71,7 @@ public interface CovidDataDao {
     public List<CountryListHistoricRequest> getCountryCumulativeEveryDayList(String isoCountry,Integer page,Integer size);
 
     public List<CountryListHistoricRequest> getCountryCumulativeEveryDayListDate(String isoCountry,String ini,String end);
+
+    // Predict
+    public List<CountryListHistoricEveryDayRequest> getCountryListHistoricPredict(String isoCountry);
 }

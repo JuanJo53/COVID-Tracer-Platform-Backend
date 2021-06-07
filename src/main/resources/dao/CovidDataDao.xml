@@ -404,6 +404,20 @@
 
 
 
+    <select id="getCountryListHistoricPredict" resultMap="ListCountryHistoric">
+          SELECT a.date as dateCountry,
+                SUM(a.confirmed) as confirmed,
+                SUM(a.deaths) as deaths,
+                SUM(a.recovered) as recovered
+            FROM covid_data a,country c, department d
+            WHERE c.iso = #{isoCountry}
+                and a.municipality_id is NULL
+                and c.country_id=a.country_id
+                and d.department_id=a.department_id
+                and a.status = 1
+            GROUP BY a.date
+    </select>
+
     <select id="getCountryListHistoric" resultMap="ListCountryHistoric">
           SELECT a.date as dateCountry,
                 SUM(a.confirmed) as confirmed,
