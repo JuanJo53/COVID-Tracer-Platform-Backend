@@ -1,5 +1,6 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl;
 
+import bo.ucb.edu.covid_tracer_platform_backend.bl.util.prediction.PredictionGrayUtil;
 import bo.ucb.edu.covid_tracer_platform_backend.dao.*;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricEveryDayRequest;
 import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentHistoricRequest;
@@ -37,5 +38,21 @@ public class PredictionBl {
         List<DepartmentHistoricRequest> data = new ArrayList<>();
         data = covidDataDao.getDepartmentHistoric(countryISO,departmentISO);
         return PredictionAR1.predictionDepartmentMain(data,date);
+    }
+
+    public List<PredictionDateRequest> predictionCountryListGray(String isoCountry, String date) {
+        List<CountryListHistoricEveryDayRequest> data = new ArrayList<>();
+        data = covidDataDao.getCountryListHistoricPredict(isoCountry);
+
+        return PredictionGrayUtil.predictionMain(data,date);
+
+
+    }
+
+    public List<PredictionDateRequest> predictionDepartmentListGray(String countryISO, String departmentISO, String date) {
+        List<DepartmentHistoricRequest> data = new ArrayList<>();
+        data = covidDataDao.getDepartmentHistoric(countryISO,departmentISO);
+        return PredictionGrayUtil.predictionDepartmentMain(data,date);
+
     }
 }

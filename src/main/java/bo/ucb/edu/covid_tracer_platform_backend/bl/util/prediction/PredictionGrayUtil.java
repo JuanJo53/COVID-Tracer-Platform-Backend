@@ -1,7 +1,17 @@
 package bo.ucb.edu.covid_tracer_platform_backend.bl.util.prediction;
 
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.CountryListHistoricEveryDayRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.DepartmentHistoricRequest;
+import bo.ucb.edu.covid_tracer_platform_backend.shared.dto.PredictionDateRequest;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class PredictionGrayUtil {
     private double a0, a1, a2;
@@ -9,6 +19,173 @@ public class PredictionGrayUtil {
     private double error;
 
     public PredictionGrayUtil() {
+    }
+
+    public static List<PredictionDateRequest> predictionMain(List<CountryListHistoricEveryDayRequest> data, String date) {
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        Date fin = null;
+        try {
+
+            fin = formatoDelTexto.parse(date);
+
+        } catch (ParseException ex) {
+
+            ex.printStackTrace();
+
+        }
+        Calendar c = Calendar.getInstance();
+        Date dateInicio = new Date();
+        List<PredictionDateRequest> predictionDateRequests = new ArrayList<>();
+        List<Integer> listsConfirmed = new ArrayList<>();
+        List<Integer> listsDeaths = new ArrayList<>();
+        List<Integer> listsRecovered = new ArrayList<>();
+        for (int i=0;i<data.size();i++){
+            CountryListHistoricEveryDayRequest countrydata = new CountryListHistoricEveryDayRequest();
+            countrydata = data.get(i);
+            PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
+
+            predictionDateRequest.setDate(countrydata.getDateCountry());
+            predictionDateRequest.setStatus(0);
+
+
+
+            dateInicio=countrydata.getDateCountry(); // fecha inicio
+            //Casos
+            if (countrydata.getConfirmed()>0){
+                listsConfirmed.add(countrydata.getConfirmed());
+            }
+            if (countrydata.getDeaths()>0){
+                listsDeaths.add(countrydata.getDeaths());
+            }
+            if (countrydata.getRecovered()>0){
+                listsRecovered.add(countrydata.getRecovered());
+            }
+            predictionDateRequest.setConfirmed(countrydata.getConfirmed());
+            predictionDateRequest.setDeaths(countrydata.getDeaths());
+            predictionDateRequest.setRecovered(countrydata.getRecovered());
+
+            predictionDateRequests.add(predictionDateRequest);
+            c.setTime(countrydata.getDateCountry());
+        }
+        int milisecondsByDay = 86400000;
+        int dias = (int) ((fin.getTime()-dateInicio.getTime()) / milisecondsByDay);
+
+
+        double [] vector=new double[listsConfirmed.size()];
+        double [] vector1=new double[listsDeaths.size()];
+        double [] vector2=new double[listsRecovered.size()];
+        for (int i=0;i<listsConfirmed.size();i++){
+            vector[i]=listsConfirmed.get(i);
+        }
+        for (int i=0;i<listsDeaths.size();i++){
+            vector1[i]=listsDeaths.get(i);
+        }
+        for (int i=0;i<listsRecovered.size();i++){
+            vector2[i]=listsRecovered.get(i);
+        }
+        PredictionGrayUtil gs1 = new PredictionGrayUtil();
+        gs1.build(vector);
+        PredictionGrayUtil gs2 = new PredictionGrayUtil();
+        gs2.build(vector1);
+        PredictionGrayUtil gs3 = new PredictionGrayUtil();
+        gs3.build(vector2);
+        for (int i = 0; i < dias; i++) {
+            c.add(Calendar.DATE, 1);
+            Date dt = c.getTime();
+            PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
+            predictionDateRequest.setConfirmed((int) gs1.nextValue(i));
+            predictionDateRequest.setDeaths((int) gs2.nextValue(i));
+            predictionDateRequest.setRecovered((int) gs3.nextValue(i));
+            predictionDateRequest.setDate(dt);
+            predictionDateRequest.setStatus(1);
+            predictionDateRequests.add(predictionDateRequest);
+        }
+
+        return predictionDateRequests;
+    }
+
+
+    public static List<PredictionDateRequest> predictionDepartmentMain(List<DepartmentHistoricRequest> data, String date) {
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        Date fin = null;
+        try {
+
+            fin = formatoDelTexto.parse(date);
+
+        } catch (ParseException ex) {
+
+            ex.printStackTrace();
+
+        }
+        Calendar c = Calendar.getInstance();
+        Date dateInicio = new Date();
+        List<PredictionDateRequest> predictionDateRequests = new ArrayList<>();
+        List<Integer> listsConfirmed = new ArrayList<>();
+        List<Integer> listsDeaths = new ArrayList<>();
+        List<Integer> listsRecovered = new ArrayList<>();
+        for (int i=0;i<data.size();i++){
+            DepartmentHistoricRequest departmentdata = new DepartmentHistoricRequest();
+            departmentdata = data.get(i);
+            PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
+
+            predictionDateRequest.setDate(departmentdata.getDate1());
+            predictionDateRequest.setStatus(0);
+
+
+
+            dateInicio=departmentdata.getDate1(); // fecha inicio
+            //Casos
+            if (departmentdata.getConfirmed()>0){
+                listsConfirmed.add(departmentdata.getConfirmed());
+            }
+            if (departmentdata.getDeaths()>0){
+                listsDeaths.add(departmentdata.getDeaths());
+            }
+            if (departmentdata.getRecovered()>0){
+                listsRecovered.add(departmentdata.getRecovered());
+            }
+            predictionDateRequest.setConfirmed(departmentdata.getConfirmed());
+            predictionDateRequest.setDeaths(departmentdata.getDeaths());
+            predictionDateRequest.setRecovered(departmentdata.getRecovered());
+
+
+            predictionDateRequests.add(predictionDateRequest);
+            c.setTime(departmentdata.getDate1());
+        }
+        int milisecondsByDay = 86400000;
+        int dias = (int) ((fin.getTime()-dateInicio.getTime()) / milisecondsByDay);
+
+
+        double [] vector=new double[listsConfirmed.size()];
+        double [] vector1=new double[listsDeaths.size()];
+        double [] vector2=new double[listsRecovered.size()];
+        for (int i=0;i<listsConfirmed.size();i++){
+            vector[i]=listsConfirmed.get(i);
+        }
+        for (int i=0;i<listsDeaths.size();i++){
+            vector1[i]=listsDeaths.get(i);
+        }
+        for (int i=0;i<listsRecovered.size();i++){
+            vector2[i]=listsRecovered.get(i);
+        }
+        PredictionGrayUtil gs1 = new PredictionGrayUtil();
+        gs1.build(vector);
+        PredictionGrayUtil gs2 = new PredictionGrayUtil();
+        gs2.build(vector1);
+        PredictionGrayUtil gs3 = new PredictionGrayUtil();
+        gs3.build(vector2);
+        for (int i = 0; i < dias; i++) {
+            c.add(Calendar.DATE, 1);
+            Date dt = c.getTime();
+            PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
+            predictionDateRequest.setConfirmed((int) gs1.nextValue(i));
+            predictionDateRequest.setDeaths((int) gs2.nextValue(i));
+            predictionDateRequest.setRecovered((int) gs3.nextValue(i));
+            predictionDateRequest.setDate(dt);
+            predictionDateRequest.setStatus(1);
+            predictionDateRequests.add(predictionDateRequest);
+        }
+        return predictionDateRequests;
     }
 
     public void build(double[] x0) {
@@ -98,48 +275,5 @@ public class PredictionGrayUtil {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        PredictionGrayUtil gs = new PredictionGrayUtil();
-        double[] y = new double[cantidad("Datosn.txt")];
-        y = datosG("Datosn.txt", y);
-        gs.build(y);
-        for (int i = 0; i < 150; i++) {
-            System.out.println(gs.nextValue(i));
-        }
-        System.out.println(Math.sqrt(gs.getError()));
-    }
 
-    private static int cantidad(String s) throws IOException {
-        FileInputStream fis = new FileInputStream(s);
-        int valor = fis.read();
-        int cont = 0;
-        while ((valor = fis.read()) != -1) {
-            if (valor == '\n') {
-                cont++;
-            }
-        }
-        fis.close();
-        return cont;
-    }
-
-    public static double[] datosG(String archivo, double[] valorr) throws IOException {
-        FileInputStream fis = new FileInputStream(archivo);
-        int valor = fis.read();
-        int cont = 0;
-        String reg = "";
-
-        while (valor != -1) {
-            if (valor != '\n') {
-                reg = reg + (char) valor;
-            } else {
-                valorr[cont] = Double.parseDouble(reg);
-                reg = "";
-                cont++;
-            }
-            valor = fis.read();
-        }
-        fis.close();
-        return valorr;
-
-    }
 }

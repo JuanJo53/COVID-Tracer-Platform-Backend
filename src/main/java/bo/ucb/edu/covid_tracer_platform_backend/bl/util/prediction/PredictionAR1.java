@@ -33,8 +33,6 @@ public class PredictionAR1 {
         } // Usando ChronoUnit, calculo el numero de dias
         Calendar c = Calendar.getInstance();
         //sacar la cantidad
-        int con=data.size();
-        LocalDate inicio=null;
         Date dateInicio = new Date();
         List<PredictionDateRequest> predictionDateRequests = new ArrayList<>();
         List<Integer> listsConfirmed = new ArrayList<>();
