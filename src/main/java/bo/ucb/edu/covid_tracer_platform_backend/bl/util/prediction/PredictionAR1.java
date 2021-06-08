@@ -37,7 +37,9 @@ public class PredictionAR1 {
         LocalDate inicio=null;
         Date dateInicio = new Date();
         List<PredictionDateRequest> predictionDateRequests = new ArrayList<>();
-        List<Integer> lists = new ArrayList<>();
+        List<Integer> listsConfirmed = new ArrayList<>();
+        List<Integer> listsDeaths = new ArrayList<>();
+        List<Integer> listsRecovered = new ArrayList<>();
         for (int i=0;i<data.size();i++){
             DepartmentHistoricRequest departmentdata = new DepartmentHistoricRequest();
             departmentdata = data.get(i);
@@ -49,25 +51,21 @@ public class PredictionAR1 {
 
 
             dateInicio=departmentdata.getDate1(); // fecha inicio
-            if (type==0){//Casos
+            //Casos
                 if (departmentdata.getConfirmed()>0){
-                    lists.add(departmentdata.getConfirmed());
+                    listsConfirmed.add(departmentdata.getConfirmed());
                 }
-                predictionDateRequest.setCount(departmentdata.getConfirmed());
-            }
-            if (type==1){//Muertos
                 if (departmentdata.getDeaths()>0){
-                    lists.add(departmentdata.getDeaths());
+                    listsDeaths.add(departmentdata.getDeaths());
                 }
-
-                predictionDateRequest.setCount(departmentdata.getDeaths());
-            }
-            if (type==2){//Recuperados
                 if (departmentdata.getRecovered()>0){
-                    lists.add(departmentdata.getRecovered());
+                    listsRecovered.add(departmentdata.getRecovered());
                 }
-                predictionDateRequest.setCount(departmentdata.getRecovered());
-            }
+                predictionDateRequest.setConfirmed(departmentdata.getConfirmed());
+                predictionDateRequest.setDeaths(departmentdata.getDeaths());
+                predictionDateRequest.setRecovered(departmentdata.getRecovered());
+
+
             predictionDateRequests.add(predictionDateRequest);
             c.setTime(departmentdata.getDate1());
         }
@@ -75,17 +73,32 @@ public class PredictionAR1 {
         int milisecondsByDay = 86400000;
         int dias = (int) ((fin.getTime()-dateInicio.getTime()) / milisecondsByDay);
         System.out.println("Numero de dias: " + dias); // 365 dias
-        double [][] vector=new double[lists.size()][1];
-        for (int i=0;i<lists.size();i++){
-            vector[i][0]=lists.get(i);
+        double [][] vector=new double[listsConfirmed.size()][1];
+        double [][] vector1=new double[listsDeaths.size()][1];
+        double [][] vector2=new double[listsRecovered.size()][1];
+
+        for (int i=0;i<listsConfirmed.size();i++){
+            vector[i][0]=listsConfirmed.get(i);
         }
-        int [] dateF=generarPrediccion(dias,lists.size()-1,vector);
+        for (int i=0;i<listsDeaths.size();i++){
+            vector1[i][0]=listsDeaths.get(i);
+        }
+        for (int i=0;i<listsRecovered.size();i++){
+            vector2[i][0]=listsRecovered.get(i);
+        }
+        int [] dateF=generarPrediccion(dias,listsConfirmed.size()-1,vector);
+
+        int [] dateF1=generarPrediccion(dias,listsDeaths.size()-1,vector1);
+
+        int [] dateF2=generarPrediccion(dias,listsRecovered.size()-1,vector2);
 
         for(int i=0;i<dateF.length;i++){
             c.add(Calendar.DATE, 1);
             Date dt = c.getTime();
             PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
-            predictionDateRequest.setCount(dateF[i]);
+            predictionDateRequest.setConfirmed(dateF[i]);
+            predictionDateRequest.setDeaths(dateF1[i]);
+            predictionDateRequest.setRecovered(dateF2[i]);
             predictionDateRequest.setDate(dt);
             predictionDateRequest.setStatus(1);
             predictionDateRequests.add(predictionDateRequest);
@@ -111,7 +124,9 @@ public class PredictionAR1 {
         LocalDate inicio=null;
         Date dateInicio = new Date();
         List<PredictionDateRequest> predictionDateRequests = new ArrayList<>();
-        List<Integer> lists = new ArrayList<>();
+        List<Integer> listsConfirmed = new ArrayList<>();
+        List<Integer> listsDeaths = new ArrayList<>();
+        List<Integer> listsRecovered = new ArrayList<>();
         for (int i=0;i<data.size();i++){
             CountryListHistoricEveryDayRequest countrydata = new CountryListHistoricEveryDayRequest();
             countrydata = data.get(i);
@@ -123,25 +138,20 @@ public class PredictionAR1 {
 
 
             dateInicio=countrydata.getDateCountry(); // fecha inicio
-            if (type==0){//Casos
+            //Casos
                 if (countrydata.getConfirmed()>0){
-                    lists.add(countrydata.getConfirmed());
+                    listsConfirmed.add(countrydata.getConfirmed());
                 }
-                predictionDateRequest.setCount(countrydata.getConfirmed());
-            }
-            if (type==1){//Muertos
                 if (countrydata.getDeaths()>0){
-                    lists.add(countrydata.getDeaths());
+                    listsDeaths.add(countrydata.getDeaths());
                 }
-
-                predictionDateRequest.setCount(countrydata.getDeaths());
-            }
-            if (type==2){//Recuperados
                 if (countrydata.getRecovered()>0){
-                    lists.add(countrydata.getRecovered());
+                    listsRecovered.add(countrydata.getRecovered());
                 }
-                predictionDateRequest.setCount(countrydata.getRecovered());
-            }
+                predictionDateRequest.setConfirmed(countrydata.getConfirmed());
+                predictionDateRequest.setDeaths(countrydata.getDeaths());
+                predictionDateRequest.setRecovered(countrydata.getRecovered());
+
             predictionDateRequests.add(predictionDateRequest);
             c.setTime(countrydata.getDateCountry());
         }
@@ -149,17 +159,31 @@ public class PredictionAR1 {
         int milisecondsByDay = 86400000;
         int dias = (int) ((fin.getTime()-dateInicio.getTime()) / milisecondsByDay);
         System.out.println("Numero de dias: " + dias); // 365 dias
-        double [][] vector=new double[lists.size()][1];
-        for (int i=0;i<lists.size();i++){
-            vector[i][0]=lists.get(i);
-        }
-        int [] dateF=generarPrediccion(dias,lists.size()-1,vector);
 
+        double [][] vector=new double[listsConfirmed.size()][1];
+        double [][] vector1=new double[listsDeaths.size()][1];
+        double [][] vector2=new double[listsRecovered.size()][1];
+        for (int i=0;i<listsConfirmed.size();i++){
+            vector[i][0]=listsConfirmed.get(i);
+        }
+        for (int i=0;i<listsDeaths.size();i++){
+            vector1[i][0]=listsDeaths.get(i);
+        }
+        for (int i=0;i<listsRecovered.size();i++){
+            vector2[i][0]=listsRecovered.get(i);
+        }
+        int [] dateF=generarPrediccion(dias,listsConfirmed.size()-1,vector);
+
+        int [] dateF1=generarPrediccion(dias,listsDeaths.size()-1,vector1);
+
+        int [] dateF2=generarPrediccion(dias,listsRecovered.size()-1,vector2);
         for(int i=0;i<dateF.length;i++){
             c.add(Calendar.DATE, 1);
             Date dt = c.getTime();
             PredictionDateRequest predictionDateRequest=new PredictionDateRequest();
-            predictionDateRequest.setCount(dateF[i]);
+            predictionDateRequest.setConfirmed(dateF[i]);
+            predictionDateRequest.setDeaths(dateF1[i]);
+            predictionDateRequest.setRecovered(dateF2[i]);
             predictionDateRequest.setDate(dt);
             predictionDateRequest.setStatus(1);
             predictionDateRequests.add(predictionDateRequest);
