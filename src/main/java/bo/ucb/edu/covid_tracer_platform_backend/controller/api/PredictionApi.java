@@ -21,15 +21,15 @@ public class PredictionApi {
         this.transactionBl = transactionBl;
     }
 
-    @GetMapping(path="/{isoCountry}/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PredictionDateRequest> predictionCountryList(@PathVariable String isoCountry, @RequestParam String date, @RequestParam Integer type){
-        List<PredictionDateRequest> list = predictionBl.predictionCountryList(isoCountry, date,type);
+    @GetMapping(path="/{isoCountry}/country", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<PredictionDateRequest> predictionCountryList(@PathVariable String isoCountry, @RequestParam String date){
+        List<PredictionDateRequest> list = predictionBl.predictionCountryList(isoCountry,date);
         return list;
     }
 
-    @GetMapping(path="/{countryISO}/{departmentISO}/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PredictionDateRequest> predictionDepartmentList(@PathVariable String countryISO,@PathVariable String departmentISO, @RequestParam String date, @RequestParam Integer type){
-        List<PredictionDateRequest> list = predictionBl.predictionDepartmentList(countryISO,departmentISO, date,type);
+    @GetMapping(path="/{countryISO}/{departmentISO}/department", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<PredictionDateRequest> predictionDepartmentList(@PathVariable String countryISO,@PathVariable String departmentISO, @RequestParam String date){
+        List<PredictionDateRequest> list = predictionBl.predictionDepartmentList(countryISO,departmentISO, date);
         return list;
     }
 

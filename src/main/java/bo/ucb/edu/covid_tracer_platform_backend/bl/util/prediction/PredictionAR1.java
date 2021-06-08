@@ -18,7 +18,7 @@ import java.util.List;
 
 public class PredictionAR1 {
 
-    public static List<PredictionDateRequest> predictionDepartmentMain(List<DepartmentHistoricRequest> data, String date, Integer type) {
+    public static List<PredictionDateRequest> predictionDepartmentMain(List<DepartmentHistoricRequest> data, String date) {
         // Creo los LocalDate
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
         Date fin = null;
@@ -105,7 +105,7 @@ public class PredictionAR1 {
         }
         return predictionDateRequests;
     }
-    public static List<PredictionDateRequest> predictionMain(List<CountryListHistoricEveryDayRequest> data,String date,Integer type){
+    public static List<PredictionDateRequest> predictionMain(List<CountryListHistoricEveryDayRequest> data,String date){
         // Creo los LocalDate
         SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
         Date fin = null;

@@ -26,16 +26,16 @@ public class PredictionBl {
 
 
 
-    public List<PredictionDateRequest> predictionCountryList(String isoCountry, String date, Integer type) {
+    public List<PredictionDateRequest> predictionCountryList(String isoCountry, String date) {
         List<CountryListHistoricEveryDayRequest> data = new ArrayList<>();
         data = covidDataDao.getCountryListHistoricPredict(isoCountry);
 
-        return PredictionAR1.predictionMain(data,date,type);
+        return PredictionAR1.predictionMain(data,date);
     }
 
-    public List<PredictionDateRequest> predictionDepartmentList(String countryISO,String departmentISO, String date, Integer type) {
+    public List<PredictionDateRequest> predictionDepartmentList(String countryISO,String departmentISO, String date) {
         List<DepartmentHistoricRequest> data = new ArrayList<>();
         data = covidDataDao.getDepartmentHistoric(countryISO,departmentISO);
-        return PredictionAR1.predictionDepartmentMain(data,date,type);
+        return PredictionAR1.predictionDepartmentMain(data,date);
     }
 }
